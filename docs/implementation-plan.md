@@ -10,7 +10,9 @@
 
 ### MVP
 - Responsive static frontend using React, TypeScript, Vite, Tailwind CSS, and Motion.
-- Core sections: Navigation, Hero, About, Skills, Featured Projects, Experience, Education, Contact, and Footer.
+- Client-side routing (e.g., react-router-dom) for multiple pages.
+- Core pages/sections: Navigation, Hero, About, Skills, Featured Projects, Experience, Education, Contact, and Footer.
+- Project Detail Pages (`/projects/:slug`) and Resume Page (`/resume`).
 - Content managed locally via structured data (JSON/TS files).
 - Smooth entry animations and hover states.
 
@@ -23,8 +25,8 @@
 ## Site Structure
 
 1. **Navigation**
-   - **Purpose**: Allow easy access to different sections.
-   - **Content**: Logo/Name, links to sections (About, Skills, Projects, Experience, Contact).
+   - **Purpose**: Allow easy access to different sections and pages.
+   - **Content**: Logo/Name, links to sections (About, Skills, Projects, Experience, Contact) and pages (Resume).
    - **UI Elements**: Sticky header, hamburger menu for mobile.
    - **Interaction**: Smooth scroll to sections, background blur on scroll.
 
@@ -69,6 +71,16 @@
    - **Purpose**: Secondary navigation and copyright.
    - **Content**: Copyright year, social icons.
 
+10. **Project Detail Pages** (`/projects/:slug`)
+    - **Purpose**: Provide in-depth information about a specific project.
+    - **Content**: Project overview, role, technologies, key features, project images, links (GitHub, Live).
+    - **UI Elements**: Back navigation to Home, detailed layout reusing design system components.
+
+11. **Resume Page** (`/resume`)
+    - **Purpose**: Present a comprehensive professional profile.
+    - **Content**: Profile/Summary, Experience, Organization Experience, Education, Skills, and a Download CV action.
+    - **UI Elements**: Structured, clean layout optimized for reading.
+
 ## Project Structure
 ```text
 src/
@@ -76,11 +88,12 @@ src/
 ├── components/      # Reusable UI components (Button, Card, Badge)
 ├── data/            # Local content (projects.ts, skills.ts, etc.)
 ├── hooks/           # Custom React hooks
+├── pages/           # Page components (Home, Resume, ProjectDetail)
 ├── sections/        # Main page sections (Hero, About, Projects)
 ├── styles/          # Global CSS, Tailwind config
 ├── types/           # TypeScript interfaces
 ├── utils/           # Helper functions
-├── App.tsx          # Main assembly
+├── App.tsx          # Main assembly / Router setup
 └── main.tsx         # Entry point
 ```
 
@@ -89,6 +102,7 @@ Keep content separated from presentation. Example `src/data/projects.ts`:
 ```typescript
 export interface Project {
   id: string;
+  slug: string;
   title: string;
   description: string;
   role: string;
@@ -142,11 +156,12 @@ export interface Project {
 - Phase 3 — Core Layout
 - Phase 4 — Portfolio Sections
 - Phase 5 — Project Showcase
-- Phase 6 — Animation and Interaction
-- Phase 7 — Responsive Refinement
-- Phase 8 — Accessibility, SEO and Performance
-- Phase 9 — QA
-- Phase 10 — Deployment
+- Phase 6 — New Pages Implementation (Project Details & Resume)
+- Phase 7 — Animation and Interaction
+- Phase 8 — Responsive Refinement
+- Phase 9 — Accessibility, SEO and Performance
+- Phase 10 — QA
+- Phase 11 — Deployment
 
 ## Definition of Done
 - All planned sections are implemented and populated with content.

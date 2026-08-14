@@ -41,6 +41,7 @@ Detailed information required for each project.
 ### Project 1: MediaPENS
 
 - **Title**: MediaPENS
+- **Slug**: `mediapens`
 - **Description**: "A campus media platform developed to deliver news, information, and digital content from Politeknik Elektronika Negeri Surabaya to the campus community."
 - **Role**: Backend Developer
 - **Technologies**:
@@ -61,6 +62,7 @@ Detailed information required for each project.
 ### Project 2: ENT Crews Website
 
 - **Title**: ENT Crews Website
+- **Slug**: `ent-crews-website`
 - **Description**: "An organization profile website for EEPIS News and Network Team (ENT), designed to introduce the organization, showcase its activities and creative work, and provide information about its teams and members."
 - **Role**: Webmaster / Backend Developer
 - **Technologies**:
@@ -81,6 +83,7 @@ Detailed information required for each project.
 ### Project 3: WebCut
 
 - **Title**: WebCut
+- **Slug**: `webcut`
 - **Description**: "A web-based video platform that combines video streaming with browser-based video editing, inspired by modern tools such as CapCut. The platform allows users to upload, stream, and perform basic video editing directly in the browser, with FFmpeg handling video processing on the backend."
 - **Role**: Full-Stack Developer
 - **Technologies**:
@@ -102,6 +105,7 @@ Detailed information required for each project.
 ### Project 4: JejakNusa
 
 - **Title**: JejakNusa
+- **Slug**: `jejaknusa`
 - **Description**: "A frontend-only tourism website showcasing destinations across the Indonesian archipelago. Built with a focus on responsive design, visual presentation, and interactive user experiences, JejakNusa highlights the beauty and diversity of Indonesian travel destinations across different devices."
 - **Role**: Frontend Developer / Main Programmer
 - **Technologies**:
@@ -120,6 +124,7 @@ Detailed information required for each project.
 ### Project 5: MemoSpace
 
 - **Title**: MemoSpace
+- **Slug**: `memospace`
 - **Description**: "A mobile organizational notes application built with Flutter to help users manage ideas, tasks, and important information in a structured and efficient way. MemoSpace combines rich text editing, OCR-based text extraction, and reminder notifications to provide a flexible and productivity-focused note-taking experience."
 - **Role**: Mobile Developer / Backend & Feature Developer
 - **Technologies**:
@@ -142,6 +147,7 @@ Detailed information required for each project.
 ### Project 6: Waktu Jaga
 
 - **Title**: Waktu Jaga
+- **Slug**: `waktu-jaga`
 - **Description**: "A horror-comedy 3D animation project created in Blender, following a group of students who secretly enter an abandoned hospital and encounter a mysterious guardian spirit known as 'Pak Jaga'. The project combines an eerie atmosphere with comedic storytelling to create a distinctive contrast between horror and humor."
 - **Role**: 3D Artist / Character Artist
 - **Technologies**:
@@ -214,6 +220,16 @@ Detailed information required for each project.
   - Web Development
   - Robotics
   - 1st Place — Industrial Layout Design Competition 2022, Universitas Muhammadiyah Surabaya
+
+## Resume Page
+
+The Resume Page serves as a dedicated view for the professional profile, accessible via `/resume`.
+- **Profile / Summary**: Reuse the bio from the About section, adapted for a formal resume format.
+- **Experience**: Reuse the existing Experience section content.
+- **Organization Experience**: Highlight ENT roles and other organizational involvement.
+- **Education**: Reuse the Education section content (PENS, SMKN 2).
+- **Skills**: Reuse the Technical Skills and Currently Exploring lists.
+- **Download CV Action**: A prominent button/link to download the PDF version of the resume.
 
 ## Contact
 

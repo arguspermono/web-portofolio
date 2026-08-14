@@ -2,24 +2,26 @@ import { useState } from 'react';
 import { cn } from '../../utils/cn';
 import { Button } from '../ui/Button';
 
+import { Link } from 'react-router-dom';
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'ABOUT', href: '#about' },
-    { name: 'SKILLS', href: '#skills' },
-    { name: 'PROJECTS', href: '#projects' },
-    { name: 'EXPERIENCE', href: '#experience' },
-    { name: 'CONTACT', href: '#contact' },
+    { name: 'ABOUT', href: '/#about' },
+    { name: 'SKILLS', href: '/#skills' },
+    { name: 'PROJECTS', href: '/#projects' },
+    { name: 'EXPERIENCE', href: '/#experience' },
+    { name: 'CONTACT', href: '/#contact' },
   ];
 
   return (
     <header className="sticky top-0 z-50 bg-mecha-light border-b-2 border-mecha-dark">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-display font-extrabold text-xl tracking-widest uppercase flex items-center gap-2 hover:opacity-80 transition-opacity z-50">
+        <Link to="/" className="font-display font-extrabold text-xl tracking-widest uppercase flex items-center gap-2 hover:opacity-80 transition-opacity z-50">
           <div className="w-4 h-4 bg-mecha-red border-2 border-mecha-dark"></div>
           ARYA // SYS
-        </a>
+        </Link>
         
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8 font-mono text-xs font-bold tracking-widest uppercase">
@@ -32,7 +34,9 @@ export function Header() {
               {link.name}
             </a>
           ))}
-          <Button variant="primary" size="sm">RESUME</Button>
+          <Link to="/resume">
+            <Button variant="primary" size="sm">RESUME</Button>
+          </Link>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -65,7 +69,9 @@ export function Header() {
             </a>
           ))}
           <div className="pt-4">
-             <Button variant="primary" size="lg" className="w-full justify-center">DOWNLOAD RESUME</Button>
+             <Link to="/resume" onClick={() => setIsMenuOpen(false)}>
+               <Button variant="primary" size="lg" className="w-full justify-center">RESUME</Button>
+             </Link>
           </div>
         </nav>
       </div>

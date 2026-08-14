@@ -3,6 +3,7 @@ import type { Project } from '../types';
 export const projects: Project[] = [
   {
     id: 'mediapens',
+    slug: 'mediapens',
     title: 'MediaPENS',
     description: 'A campus media platform developed to deliver news, information, and digital content from Politeknik Elektronika Negeri Surabaya to the campus community.',
     role: 'Backend Developer',
@@ -20,6 +21,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ent-crews',
+    slug: 'ent-crews-website',
     title: 'ENT Crews Website',
     description: 'An organization profile website for EEPIS News and Network Team (ENT), designed to introduce the organization, showcase its activities and creative work, and provide information about its teams and members.',
     role: 'Webmaster / Backend Developer',
@@ -37,6 +39,7 @@ export const projects: Project[] = [
   },
   {
     id: 'webcut',
+    slug: 'webcut',
     title: 'WebCut',
     description: 'A web-based video platform that combines video streaming with browser-based video editing, inspired by modern tools such as CapCut. The platform allows users to upload, stream, and perform basic video editing directly in the browser, with FFmpeg handling video processing on the backend.',
     role: 'Full-Stack Developer',
@@ -54,6 +57,7 @@ export const projects: Project[] = [
   },
   {
     id: 'jejaknusa',
+    slug: 'jejaknusa',
     title: 'JejakNusa',
     description: 'A frontend-only tourism website showcasing destinations across the Indonesian archipelago. Built with a focus on responsive design, visual presentation, and interactive user experiences, JejakNusa highlights the beauty and diversity of Indonesian travel destinations across different devices.',
     role: 'Frontend Developer / Main Programmer',
@@ -72,6 +76,7 @@ export const projects: Project[] = [
   },
   {
     id: 'memospace',
+    slug: 'memospace',
     title: 'MemoSpace',
     description: 'A mobile organizational notes application built with Flutter to help users manage ideas, tasks, and important information in a structured and efficient way. MemoSpace combines rich text editing, OCR-based text extraction, and reminder notifications to provide a flexible and productivity-focused note-taking experience.',
     role: 'Mobile Developer / Backend & Feature Developer',
@@ -88,6 +93,7 @@ export const projects: Project[] = [
   },
   {
     id: 'waktu-jaga',
+    slug: 'waktu-jaga',
     title: 'Waktu Jaga',
     description: 'A horror-comedy 3D animation project created in Blender, following a group of students who secretly enter an abandoned hospital and encounter a mysterious guardian spirit known as \'Pak Jaga\'. The project combines an eerie atmosphere with comedic storytelling to create a distinctive contrast between horror and humor.',
     role: '3D Artist / Character Artist',

@@ -1,6 +1,7 @@
 import { Section } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
+import { FadeIn } from '../ui/FadeIn';
 
 export function Hero() {
   return (
@@ -8,35 +9,43 @@ export function Hero() {
       <div className="grid md:grid-cols-12 gap-8 items-center">
         {/* Text Content */}
         <div className="md:col-span-8 space-y-8">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-0.5 bg-mecha-red"></div>
-            <Badge variant="accent">SYS // ONLINE</Badge>
-          </div>
+          <FadeIn delay={0.1}>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-0.5 bg-mecha-red"></div>
+              <Badge variant="accent">SYS // ONLINE</Badge>
+            </div>
+          </FadeIn>
 
-          <h1 className="text-balance">
+          <FadeIn delay={0.2}>
+            <h1 className="text-balance">
             Building Digital Experiences Through Code & Creativity.
-          </h1>
+            </h1>
+          </FadeIn>
 
-          <p className="max-w-2xl text-lg">
+          <FadeIn delay={0.3}>
+            <p className="max-w-2xl text-lg">
             I'm a Multimedia Engineering Technology student with experience in
             web and mobile development, and a growing interest in data science,
             machine learning, and artificial intelligence. I enjoy combining
             technology and creativity to build meaningful digital experiences.
-          </p>
+            </p>
+          </FadeIn>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Button variant="primary" size="lg">
+          <FadeIn delay={0.4}>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Button variant="primary" size="lg">
               <a href="#projects">VIEW MY WORK</a>
             </Button>
             <Button variant="secondary" size="lg">
               <a href="#contact">CONTACT ME</a>
-            </Button>
-          </div>
+              </Button>
+            </div>
+          </FadeIn>
         </div>
 
         {/* Right column — decorative panel */}
         <div className="hidden md:flex md:col-span-4 justify-end">
-          <div className="w-full max-w-[280px] space-y-4">
+          <FadeIn delay={0.5} direction="left" className="w-full max-w-[280px] space-y-4">
             <div className="border-2 border-mecha-dark p-4 bg-white shadow-hard">
               <div className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase mb-2">
                 UNIT // STATUS
@@ -61,7 +70,7 @@ export function Hero() {
               </div>
             </div>
             <div className="h-1 bg-mecha-red"></div>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </Section>

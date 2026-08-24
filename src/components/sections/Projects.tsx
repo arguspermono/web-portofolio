@@ -3,26 +3,27 @@ import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
 import { projects } from '../../data/projects';
 import { Link } from 'react-router-dom';
+import { FadeIn } from '../ui/FadeIn';
 
 const accentColors: Array<'blue' | 'red' | 'yellow'> = ['blue', 'red', 'yellow'];
 
 export function Projects() {
   return (
     <Section id="projects" className="bg-mecha-panel">
-      <div className="space-y-4 mb-12">
+      <FadeIn className="space-y-4 mb-12">
         <Badge variant="accent">05</Badge>
         <h2>Featured Projects</h2>
         <div className="w-12 h-1 bg-mecha-blue"></div>
-      </div>
+      </FadeIn>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
-          <Card
-            key={project.id}
-            hoverEffect
-            accentColor={accentColors[index % accentColors.length]}
-            className="flex flex-col h-full bg-white group cursor-default"
-          >
+          <FadeIn key={project.id} delay={0.1 * (index + 1)}>
+            <Card
+              hoverEffect
+              accentColor={accentColors[index % accentColors.length]}
+              className="flex flex-col h-full bg-white group cursor-default"
+            >
             {/* Image placeholder */}
             <Link to={`/projects/${project.slug}`} className="block aspect-video bg-zinc-200 border-2 border-mecha-dark mb-6 relative overflow-hidden flex items-center justify-center group-hover:border-mecha-blue transition-colors duration-300">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNFNEU0RTciLz48L3N2Zz4=')] opacity-20 mix-blend-multiply group-hover:opacity-40 transition-opacity duration-300"></div>
@@ -84,7 +85,8 @@ export function Projects() {
                 )}
               </div>
             </div>
-          </Card>
+            </Card>
+          </FadeIn>
         ))}
       </div>
     </Section>

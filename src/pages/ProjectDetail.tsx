@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { projects } from '../data/projects';
 import { Section } from '../components/ui/Section';
 import { Badge } from '../components/ui/Badge';
+import { FadeIn } from '../components/ui/FadeIn';
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -14,7 +15,7 @@ export function ProjectDetail() {
   return (
     <Section className="min-h-screen pt-32 pb-24">
       {/* Back Navigation */}
-      <div className="mb-12">
+      <FadeIn direction="none" delay={0} duration={0.25} className="mb-12">
         <Link 
           to="/#projects" 
           className="inline-flex items-center gap-2 font-mono text-sm font-bold tracking-wider hover:text-mecha-blue transition-colors"
@@ -22,30 +23,32 @@ export function ProjectDetail() {
           <span className="transform -translate-x-1 hover:-translate-x-2 transition-transform">←</span>
           BACK TO PROJECTS
         </Link>
-      </div>
+      </FadeIn>
 
       <div className="max-w-4xl mx-auto">
-        <div className="space-y-4 mb-12">
+        <FadeIn delay={0.1} className="space-y-4 mb-12">
           <Badge variant="accent" className="mb-4 inline-block">{project.category}</Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl break-words">{project.title}</h1>
           <div className="w-16 h-1 bg-mecha-red mt-6"></div>
-        </div>
+        </FadeIn>
 
         {/* Hero Image */}
-        <div className="w-full aspect-video bg-zinc-200 border-2 border-mecha-dark mb-12 relative overflow-hidden flex items-center justify-center shadow-hard">
+        <FadeIn delay={0.2} className="w-full aspect-video bg-zinc-200 border-2 border-mecha-dark mb-12 relative overflow-hidden flex items-center justify-center shadow-hard">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNFNEU0RTciLz48L3N2Zz4=')] opacity-20 mix-blend-multiply"></div>
           <div className="font-mono text-xl text-zinc-400 tracking-widest uppercase relative z-10 bg-white px-4 py-2 border-2 border-mecha-dark">
             PROJECT PREVIEW
           </div>
-        </div>
+        </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Main Content Area */}
           <div className="md:col-span-2 space-y-12">
-            <div>
-              <h2 className="text-2xl mb-4">Overview</h2>
-              <p className="text-lg leading-relaxed text-zinc-700">{project.description}</p>
-            </div>
+            <FadeIn delay={0.3}>
+              <div>
+                <h2 className="text-2xl mb-4">Overview</h2>
+                <p className="text-lg leading-relaxed text-zinc-700">{project.description}</p>
+              </div>
+            </FadeIn>
 
             <div>
               <h2 className="text-2xl mb-4">Key Features</h2>

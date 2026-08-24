@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface FadeInProps {
   children: ReactNode;
@@ -16,30 +16,34 @@ export const FadeIn = ({
   className = '',
   direction = 'up',
 }: FadeInProps) => {
+  const prefersReducedMotion = useReducedMotion();
+
   const directions = {
-    up: { y: 24, x: 0 },
-    down: { y: -24, x: 0 },
-    left: { x: 24, y: 0 },
-    right: { x: -24, y: 0 },
+    up: { y: 20, x: 0 },
+    down: { y: -20, x: 0 },
+    left: { x: 20, y: 0 },
+    right: { x: -20, y: 0 },
     none: { x: 0, y: 0 },
   };
 
+  // If user prefers reduced motion, just do a simple opacity fade with no movement
+  const initial = prefersReducedMotion
+    ? { opacity: 0 }
+    : { opacity: 0, ...directions[direction] };
+
+  const animate = prefersReducedMotion
+    ? { opacity: 1 }
+    : { opacity: 1, x: 0, y: 0 };
+
   return (
     <motion.div
-      initial={{ 
-        opacity: 0, 
-        ...directions[direction] 
-      }}
-      whileInView={{ 
-        opacity: 1, 
-        x: 0, 
-        y: 0 
-      }}
-      viewport={{ once: true, margin: '-50px' }}
+      initial={initial}
+      whileInView={animate}
+      viewport={{ once: true, margin: '-40px' }}
       transition={{
-        duration,
-        delay,
-        ease: [0, 0.55, 0.45, 1], // Mechanical snappy easing
+        duration: prefersReducedMotion ? 0.15 : duration,
+        delay: prefersReducedMotion ? 0 : delay,
+        ease: [0, 0.55, 0.45, 1], // Mechanical snappy easing from design system
       }}
       className={className}
     >

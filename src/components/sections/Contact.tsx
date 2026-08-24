@@ -1,6 +1,7 @@
 import { Section } from '../ui/Section';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
+import { FadeIn } from '../ui/FadeIn';
 
 export function Contact() {
   return (
@@ -8,18 +9,20 @@ export function Contact() {
       <div className="grid md:grid-cols-12 gap-12">
         {/* Left label */}
         <div className="md:col-span-5 space-y-4">
-          <Badge variant="warning">05</Badge>
-          <h2>Contact</h2>
-          <div className="w-12 h-1 bg-mecha-red"></div>
-          <p className="text-lg">
-            I'm currently open for internship opportunities and freelance
-            projects. Let's connect!
-          </p>
+          <FadeIn direction="right" delay={0.1}>
+            <Badge variant="warning">05</Badge>
+            <h2 className="mt-4">Contact</h2>
+            <div className="w-12 h-1 bg-mecha-red mt-4 mb-4"></div>
+            <p className="text-lg mt-4">
+              I'm currently open for internship opportunities and freelance
+              projects. Let's connect!
+            </p>
+          </FadeIn>
         </div>
 
         {/* Right — links */}
         <div className="md:col-span-7 flex items-center">
-          <div className="w-full border-2 border-mecha-dark bg-white p-8 shadow-hard space-y-6">
+          <FadeIn direction="left" delay={0.3} className="w-full border-2 border-mecha-dark bg-white p-8 shadow-hard space-y-6">
             <div className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase mb-4">
               TRANSMISSION CHANNELS
             </div>
@@ -76,7 +79,7 @@ export function Contact() {
                 SEND MESSAGE
               </Button>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </Section>

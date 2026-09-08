@@ -40,7 +40,7 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
 
             <div className="space-y-4">
               <a
-                href="mailto:todo@example.com"
+                href={`mailto:${import.meta.env.VITE_EMAIL}`}
                 className={`flex items-center justify-between border-b pb-4 group ${isDark ? 'border-mecha-dark3' : 'border-mecha-light1'}`}
               >
                 <div>
@@ -48,14 +48,14 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
                     EMAIL
                   </div>
                   <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
-                    todo@example.com
+                    {import.meta.env.VITE_EMAIL}
                   </div>
                 </div>
                 <span className={`group-hover:translate-x-1 transition-all ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>→</span>
               </a>
 
               <a
-                href="#"
+                href={`${import.meta.env.VITE_GITHUB}`}
                 className={`flex items-center justify-between border-b pb-4 group ${isDark ? 'border-mecha-dark3' : 'border-mecha-light1'}`}
               >
                 <div>
@@ -63,14 +63,14 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
                     GITHUB
                   </div>
                   <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
-                    github.com/arguspermono
+                    {import.meta.env.VITE_GITHUB}
                   </div>
                 </div>
                 <span className={`group-hover:translate-x-1 transition-all ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>→</span>
               </a>
 
               <a
-                href="#"
+                href={`${import.meta.env.VITE_LINKEDIN}`}
                 className={`flex items-center justify-between border-b pb-4 group ${isDark ? 'border-mecha-dark3' : 'border-mecha-light1'}`}
               >
                 <div>
@@ -78,7 +78,7 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
                     LINKEDIN
                   </div>
                   <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
-                    linkedin.com/in/[TODO]
+                    {import.meta.env.VITE_LINKEDIN}
                   </div>
                 </div>
                 <span className={`group-hover:translate-x-1 transition-all ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>→</span>

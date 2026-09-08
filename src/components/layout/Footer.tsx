@@ -1,4 +1,4 @@
-
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export function Footer() {
   return (
@@ -19,19 +19,23 @@ export function Footer() {
           </div>
           
           <div className="md:text-right space-y-4">
-            <div className="flex gap-4 md:justify-end font-mono text-sm font-bold tracking-wider text-mecha-dark3">
-              <a href="#" className="hover:text-mecha-white transition-colors">GITHUB</a>
-              <span>//</span>
-              <a href="#" className="hover:text-mecha-white transition-colors">LINKEDIN</a>
-              <span>//</span>
-              <a href="#" className="hover:text-mecha-white transition-colors">EMAIL</a>
+            <div className="flex gap-4 md:justify-end font-mono text-sm font-bold tracking-wider text-mecha-light1">
+              <a href={import.meta.env.VITE_GITHUB} className="hover:text-mecha-white transition-colors text-2xl">
+                <FaGithub />
+              </a>
+              <a href={import.meta.env.VITE_LINKEDIN} className="hover:text-mecha-white transition-colors text-2xl">
+                <FaLinkedin />
+              </a>
+              <a href={import.meta.env.VITE_EMAIL} className="hover:text-mecha-white transition-colors text-2xl">
+                <FaEnvelope />
+              </a>
             </div>
           </div>
         </div>
         
-        <div className="mt-12 pt-6 border-t border-mecha-dark3 flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs text-mecha-dark3 tracking-widest uppercase">
+        <div className="mt-12 pt-6 border-t border-mecha-dark3 flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs text-mecha-light1 tracking-widest uppercase">
           <div>&copy; {new Date().getFullYear()} ARYA. ALL RIGHTS RESERVED.</div>
-          <div>STATUS: ONLINE // SYS.READY</div>
+          {/* <div>STATUS: ONLINE // SYS.READY</div> */}
         </div>
       </div>
     </footer>

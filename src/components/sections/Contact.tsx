@@ -1,19 +1,29 @@
 import { Section } from '../ui/Section';
-import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { FadeIn } from '../ui/FadeIn';
+import { SectionHeader } from '../ui/SectionHeader';
+import type { SectionComponentProps } from '../../types';
 
-export function Contact() {
+export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentProps) {
+  const isDark = theme === 'dark';
+  const numberStr = sectionIndex.toString().padStart(2, '0');
+
   return (
-    <Section id="contact" borderBottom={false}>
-      <div className="grid md:grid-cols-12 gap-12">
-        {/* Left label */}
+    <Section 
+      id="contact" 
+      borderBottom={false} 
+      className={isDark ? "bg-mecha-black text-mecha-white relative overflow-hidden" : "bg-mecha-light2 relative overflow-hidden"}
+    >
+      {isDark && (
+        <div className="absolute top-0 right-0 w-64 h-64 border-l border-b border-mecha-dark3 opacity-20 pointer-events-none"></div>
+      )}
+
+      <SectionHeader number={numberStr} label="CONTACT" title="Let's connect." dark={isDark} />
+      <div className="grid md:grid-cols-12 gap-12 relative z-10">
+        {/* Left text */}
         <div className="md:col-span-5 space-y-4">
           <FadeIn direction="right" delay={0.1}>
-            <Badge variant="warning">05</Badge>
-            <h2 className="mt-4">Contact</h2>
-            <div className="w-12 h-1 bg-mecha-red mt-4 mb-4"></div>
-            <p className="text-lg mt-4">
+            <p className={`text-lg mt-4 ${isDark ? 'text-mecha-light1' : 'text-mecha-dark2'}`}>
               I'm currently open for internship opportunities and freelance
               projects. Let's connect!
             </p>
@@ -22,55 +32,56 @@ export function Contact() {
 
         {/* Right — links */}
         <div className="md:col-span-7 flex items-center">
-          <FadeIn direction="left" delay={0.3} className="w-full border-2 border-mecha-dark bg-white p-8 shadow-hard space-y-6">
-            <div className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase mb-4">
+          <FadeIn direction="left" delay={0.3} className={`w-full border p-8 relative space-y-6 ${isDark ? 'border-mecha-dark3 bg-mecha-dark1' : 'border-mecha-light1 bg-mecha-white'}`}>
+            <div className={`absolute top-0 right-0 w-2 h-2 border-l border-b ${isDark ? 'border-mecha-dark3 bg-mecha-dark2' : 'border-mecha-light1 bg-mecha-light2'}`}></div>
+            <div className={`font-mono text-[10px] tracking-widest uppercase mb-4 ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
               TRANSMISSION CHANNELS
             </div>
 
             <div className="space-y-4">
               <a
                 href="mailto:todo@example.com"
-                className="flex items-center justify-between border-b-2 border-zinc-200 pb-4 group"
+                className={`flex items-center justify-between border-b pb-4 group ${isDark ? 'border-mecha-dark3' : 'border-mecha-light1'}`}
               >
                 <div>
-                  <div className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase">
+                  <div className={`font-mono text-[10px] tracking-widest uppercase ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
                     EMAIL
                   </div>
-                  <div className="font-bold text-sm group-hover:text-mecha-blue transition-colors">
+                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
                     todo@example.com
                   </div>
                 </div>
-                <span className="text-zinc-400 group-hover:text-mecha-blue group-hover:translate-x-1 transition-all">→</span>
+                <span className={`group-hover:translate-x-1 transition-all ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>→</span>
               </a>
 
               <a
                 href="#"
-                className="flex items-center justify-between border-b-2 border-zinc-200 pb-4 group"
+                className={`flex items-center justify-between border-b pb-4 group ${isDark ? 'border-mecha-dark3' : 'border-mecha-light1'}`}
               >
                 <div>
-                  <div className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase">
+                  <div className={`font-mono text-[10px] tracking-widest uppercase ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
                     GITHUB
                   </div>
-                  <div className="font-bold text-sm group-hover:text-mecha-blue transition-colors">
+                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
                     github.com/arguspermono
                   </div>
                 </div>
-                <span className="text-zinc-400 group-hover:text-mecha-blue group-hover:translate-x-1 transition-all">→</span>
+                <span className={`group-hover:translate-x-1 transition-all ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>→</span>
               </a>
 
               <a
                 href="#"
-                className="flex items-center justify-between border-b-2 border-zinc-200 pb-4 group"
+                className={`flex items-center justify-between border-b pb-4 group ${isDark ? 'border-mecha-dark3' : 'border-mecha-light1'}`}
               >
                 <div>
-                  <div className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase">
+                  <div className={`font-mono text-[10px] tracking-widest uppercase ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
                     LINKEDIN
                   </div>
-                  <div className="font-bold text-sm group-hover:text-mecha-blue transition-colors">
+                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
                     linkedin.com/in/[TODO]
                   </div>
                 </div>
-                <span className="text-zinc-400 group-hover:text-mecha-blue group-hover:translate-x-1 transition-all">→</span>
+                <span className={`group-hover:translate-x-1 transition-all ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>→</span>
               </a>
             </div>
 

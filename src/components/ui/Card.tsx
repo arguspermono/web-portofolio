@@ -3,37 +3,29 @@ import { cn } from '../../utils/cn';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hoverEffect?: boolean;
-  accentColor?: 'blue' | 'red' | 'yellow' | 'none';
 }
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, hoverEffect = false, accentColor = 'blue', children, ...props }, ref) => {
+  ({ className, hoverEffect = false, children, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(
-          'relative bg-mecha-panel p-6 sm:p-8 border-2 border-mecha-dark transition-all duration-200',
-          hoverEffect && 'hover:-translate-y-1 hover:-translate-x-1 hover:shadow-hard',
+          'relative bg-mecha-white p-6 sm:p-8 border border-mecha-light1 transition-colors duration-300 group',
+          hoverEffect && 'hover:border-mecha-dark2',
           className
         )}
         {...props}
       >
-        {/* Mecha Accent Bar */}
-        {accentColor !== 'none' && (
-          <div className={cn(
-            'absolute top-0 left-0 w-full h-2 border-b-2 border-mecha-dark',
-            {
-              'bg-mecha-blue': accentColor === 'blue',
-              'bg-mecha-red': accentColor === 'red',
-              'bg-mecha-yellow': accentColor === 'yellow',
-            }
-          )} />
-        )}
+        {/* Technical Corner Cut Detail (Subtle) */}
+        <div className="absolute top-0 right-0 w-4 h-4 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-8px] right-[-8px] w-4 h-4 border border-mecha-light1 transform rotate-45 group-hover:border-mecha-dark2 transition-colors duration-300"></div>
+        </div>
         
-        {/* Technical Corner Detail */}
-        <div className="absolute top-0 right-0 w-4 h-4 border-l-2 border-b-2 border-mecha-dark bg-mecha-light z-10 hidden sm:block" style={{ clipPath: 'polygon(100% 0, 0 0, 100% 100%)' }}></div>
+        {/* Tiny grid dot accent */}
+        <div className="absolute bottom-2 right-2 w-1 h-1 bg-mecha-light1 group-hover:bg-mecha-dark2 transition-colors duration-300"></div>
 
-        <div className={cn(accentColor !== 'none' && 'mt-4')}>
+        <div>
           {children}
         </div>
       </div>

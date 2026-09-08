@@ -1,61 +1,69 @@
 # Design System
 
 ## Visual Direction
-**Theme**: Technical, Mechanical, Structured, Futuristic, Professional.
-**Concept**: "Gundam-inspired Technical Interface".
-The design uses a clean, light-themed foundation inspired by mecha design. It relies on stark contrast, sharp edges, structured panels, and intentional grid alignments to convey a mechanical and highly technical feel. It actively avoids generic "AI" aesthetics like glassmorphism, soft glows, and excessive rounding.
+**Theme**: Editorial, Technical, Minimalist, Structured, Professional.
+**Concept**: "Editorial Technology Interface" inspired by Gundam Official website.
+The design uses a clean, mostly monochrome foundation. It relies on stark contrast, sharp edges, structured grids, and intentional typography to convey a highly technical and editorial feel. It actively avoids generic "AI" aesthetics, thick borders, heavy colors, glassmorphism, and neon.
 
-## Color System
-- **Background (Base)**: `#FAFAFA` (Zinc 50) - Clean, stark white/light grey for main surfaces.
-- **Background (Panel/Surface)**: `#F4F4F5` (Zinc 100) or `#FFFFFF` (White) - For structured cards and overlapping panels.
-- **Dark Contrast**: `#18181B` (Zinc 900) - For heavy contrast, footers, headers, or robust mechanical borders.
-- **Accent (Blue)**: `#2563EB` (Blue 600) - Primary technical accent.
-- **Accent (Red)**: `#DC2626` (Red 600) - Secondary accent for warnings, badges, or key highlights.
-- **Accent (Yellow)**: `#EAB308` (Yellow 500) - Tertiary accent for technical labels or subtle mechanical details.
-- **Text (Primary)**: `#18181B` (Zinc 900) - Deep charcoal for maximum readability on light backgrounds.
-- **Text (Secondary)**: `#52525B` (Zinc 600) - For metadata, technical specs, or supporting text.
-- **Border/Divider**: `#E4E4E7` (Zinc 200) or `#18181B` (Zinc 900) depending on the desired visual weight.
+## Color System (Minimal)
+- **Primary (Dark)**: `#0B0B0E` - Main text and dark elements.
+- **Primary (Light)**: `#FFFFFF` - Main background and light panels.
+- **Neutrals (Dark)**: `#111317`, `#1A1D23`, `#2A2D34` - Dark backgrounds and elements.
+- **Neutrals (Light)**: `#E5E5E7`, `#F5F5F5` - Light backgrounds and subtle borders.
+- **Accent**: Use only when strictly necessary (minimal). Allowed: `#FFFFFF` with very subtle gray variations. **Avoid red, blue, yellow, or any strong color as accent.**
 
 ## Typography
-- **Primary Font**: `Inter` - Structured, clean, highly legible.
-- **Display Font**: `Space Grotesk` or `Outfit` - Geometric and technical feel.
+- **Primary Font**: `Inter` - Clean, readable, minimal body copy.
+- **Display Font**: `Outfit` - Modern, clean, technical font for headings.
+- **Headings**: Bold, uppercase, wide tracking.
+- **Hierarchy**: Use size, weight, and spacing for hierarchy. Avoid decorative or playful fonts.
 
-### Font Hierarchy
-- **H1 (Hero)**: Display Font, Bold, uppercase, tracking-wider, 4rem (Desktop).
-- **H2 (Section Title)**: Display Font, Bold, uppercase, tracking-wide, 2.5rem (Desktop).
-- **H3 (Project/Role Title)**: Display Font, SemiBold, 1.5rem.
-- **Body**: Primary Font, Regular, 1rem (16px), 1.5 line height.
-- **Small/Detail**: Primary Font, Mono or Medium, 0.75rem - 0.875rem, often uppercase for technical labels.
+## Layout & UI Character
+- Grid-based and structured layout.
+- Strong section separation using space, lines, and hierarchy (not thick borders).
+- Asymmetrical compositions are allowed.
+- Use lines, numbers, labels, and geometric accents.
+- Clean navigation with minimal styling.
+- Cards and sections should feel like panels or modules.
 
-## Spacing System
-- Intentional, grid-based spacing. Use standard Tailwind scales.
-- **Section Padding**: `py-24` (Desktop) / `py-16` (Mobile)
-- **Component Gap**: `gap-4` or `gap-8`
-- **Inner Padding (Cards)**: `p-6` or `p-8`
+## Mecha / Gundam Subtle Elements
+- Use very subtle mechanical / technical elements only.
+- Examples: thin lines, corner cuts, panel lines, small labels, grid lines, dots, markers, numbers.
+- Keep it minimal and integrated with layout (not decorative).
+- Do not add Gundam logos, characters, or copyrighted assets.
 
-## Borders and Geometry
-- **Border Radius**: Sharp edges. Use `rounded-none` or minimally `rounded-sm` (2px-4px). Absolutely no rounded-full or 2xl.
-- **Borders**: Strong, solid borders. Cards and buttons should have definitive outlines (`border-2 border-zinc-900`).
-- **Shadows**: Hard, solid shadows offset from the element (e.g., `shadow-[4px_4px_0px_#18181B]`), evoking physical, mechanical panels.
+## Example Elements
+- Section label (e.g., `// PROJECTS`)
+- Small numbers (`01, 02, 03`)
+- Thin divider lines
+- Corner cuts
+- Dots, grid, tick marks
+- Minimal arrows
+- Module / panel look
+- Monochrome icons
 
-## UI Elements
+## Avoid
+- Thick Borders
+- Heavy Colors
+- Rounded Cards
+- Gradients
+- Glassmorphism
+- Neon
+- Glow
+- Floating Blobs
+- Particles
+- Cyberpunk Style
+- HUD Overload
+- Unnecessary 3D
+- Visual Clutter 
 
-### Buttons
-- **Primary Button**: Solid Zinc 900 background, white text, sharp corners. Hover: translates slightly with a hard shadow reveal, or border color shift to an accent (Red/Blue).
-- **Secondary Button**: Transparent background, solid Zinc 900 border, dark text.
+## Section Variation
+- **Light/Dark Alternating**: Allow sections to alternate between light (`bg-mecha-white`, `bg-mecha-light2`) and dark (`bg-mecha-black`, `bg-mecha-dark1`) backgrounds to create intentional visual breaks.
+- **Dark Sections**: Should feel like deliberate content modules. Text should be legible (`text-mecha-white`, `text-mecha-light1`). Borders should be subtle (`border-mecha-dark3`).
+- **Section Transitions**: Transitions between sections should be clean and intentional. Remove unnecessary thick vertical borders around the main container.
 
-### Navigation
-- Structured, panel-like top bar. Solid borders, clear demarcation. No blur/glassmorphism.
-
-### Project Cards
-- Mechanical panels: Stark borders (`border-2 border-zinc-900`), sharp corners.
-- Often feature a small colored accent bar (e.g., a 4px red or blue top border) to evoke mecha decals.
-- Clear structural division between image and text.
-
-### Tags/Badges
-- Rectangular (`rounded-none` or `rounded-sm`).
-- Solid background with high-contrast text, or bordered with a technical mono-spaced label.
-
-## Animation Principles
-- **Timing Function**: Snappy, mechanical easing (e.g., `cubic-bezier(0, 0.55, 0.45, 1)` or linear steps).
-- **Movement**: Hard cuts, sudden slides, or quick opacity reveals rather than slow, ethereal fades. 
+## Certifications Section
+- **Purpose**: Showcase learning achievements.
+- **Layout**: Clean responsive grid. Desktop (multiple cards), Tablet (reduced columns), Mobile (single column).
+- **Cards**: Image-focused layout. Title and organization below the image. Date as secondary metadata. Subtle 1px borders, subtle hover interaction. Avoid large rounded cards, excessive shadows, and glow.
+- **Visuals**: Use a dark/charcoal background (`bg-mecha-black`) to create a strong visual contrast with surrounding light sections, treating it as a major portfolio module similar to the "FEATURED" module from the reference.

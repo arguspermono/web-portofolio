@@ -11,16 +11,16 @@ export function Header() {
     { name: 'ABOUT', href: '/#about' },
     { name: 'SKILLS', href: '/#skills' },
     { name: 'PROJECTS', href: '/#projects' },
+    { name: 'CERTIFICATIONS', href: '/#certifications' },
     { name: 'EXPERIENCE', href: '/#experience' },
     { name: 'CONTACT', href: '/#contact' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-mecha-light border-b-2 border-mecha-dark">
+    <header className="sticky top-0 z-50 bg-mecha-white border-b border-mecha-light1 print:hidden">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="font-display font-extrabold text-xl tracking-widest uppercase flex items-center gap-2 hover:opacity-80 transition-opacity z-50">
-          <div className="w-4 h-4 bg-mecha-red border-2 border-mecha-dark"></div>
-          ARYA // SYS
+        <Link to="/" className="font-display font-extrabold text-xl tracking-widest uppercase flex items-center gap-2 hover:opacity-80 transition-opacity z-50 text-mecha-black">
+          ARYA BAGUS
         </Link>
         
         {/* Desktop Nav */}
@@ -29,7 +29,7 @@ export function Header() {
             <a 
               key={link.name} 
               href={link.href} 
-              className="hover:text-mecha-blue transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-0.5 after:bg-mecha-blue hover:after:w-full after:transition-all after:duration-300"
+              className="text-mecha-dark2 hover:text-mecha-black transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-0.5 after:bg-mecha-black hover:after:w-full after:transition-all after:duration-300"
             >
               {link.name}
             </a>
@@ -45,15 +45,15 @@ export function Header() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle Menu"
         >
-          <div className={cn("h-0.5 w-full bg-mecha-dark transition-all duration-300", isMenuOpen ? "rotate-45 translate-y-2" : "")}></div>
-          <div className={cn("h-0.5 w-full bg-mecha-dark transition-all duration-300", isMenuOpen ? "opacity-0" : "")}></div>
-          <div className={cn("h-0.5 w-full bg-mecha-dark transition-all duration-300", isMenuOpen ? "-rotate-45 -translate-y-2" : "")}></div>
+          <div className={cn("h-0.5 w-full bg-mecha-black transition-all duration-300", isMenuOpen ? "rotate-45 translate-y-2" : "")}></div>
+          <div className={cn("h-0.5 w-full bg-mecha-black transition-all duration-300", isMenuOpen ? "opacity-0" : "")}></div>
+          <div className={cn("h-0.5 w-full bg-mecha-black transition-all duration-300", isMenuOpen ? "-rotate-45 -translate-y-2" : "")}></div>
         </button>
       </div>
 
       {/* Mobile Nav Overlay */}
       <div className={cn(
-        "fixed inset-0 bg-mecha-light z-40 transition-transform duration-300 ease-in-out flex flex-col pt-24 px-6 md:hidden",
+        "fixed inset-0 bg-mecha-white z-40 transition-transform duration-300 ease-in-out flex flex-col pt-24 px-6 md:hidden",
         isMenuOpen ? "translate-x-0" : "translate-x-full"
       )}>
         <nav className="flex flex-col space-y-6 font-display font-bold text-2xl uppercase">
@@ -62,9 +62,9 @@ export function Header() {
               key={link.name} 
               href={link.href} 
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-4 hover:text-mecha-blue transition-colors border-b-2 border-mecha-dark pb-4"
+              className="flex items-center gap-4 text-mecha-black hover:text-mecha-dark2 transition-colors border-b border-mecha-light1 pb-4"
             >
-              <span className="text-sm font-mono text-mecha-red">0{index + 1}</span>
+              <span className="text-sm font-mono text-mecha-dark3">0{index + 1}</span>
               {link.name}
             </a>
           ))}

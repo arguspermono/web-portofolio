@@ -1,18 +1,24 @@
 import { Section } from '../ui/Section';
-import { Badge } from '../ui/Badge';
+import { SectionHeader } from '../ui/SectionHeader';
 import { FadeIn } from '../ui/FadeIn';
+import type { SectionComponentProps } from '../../types';
 
-export function About() {
+export function About({ theme = 'light', sectionIndex = 1 }: SectionComponentProps) {
+  const isDark = theme === 'dark';
+  const numberStr = sectionIndex.toString().padStart(2, '0');
+
   return (
-    <Section id="about">
-      <div className="grid md:grid-cols-12 gap-12">
+    <Section 
+      id="about"
+      className={isDark ? "bg-mecha-black text-mecha-white border-b border-mecha-dark3 relative overflow-hidden" : ""}
+    >
+      {isDark && (
+        <div className="absolute top-0 right-0 w-64 h-64 border-l border-b border-mecha-dark3 opacity-20 pointer-events-none"></div>
+      )}
+      <div className="grid md:grid-cols-12 gap-12 relative z-10">
         {/* Section label */}
         <div className="md:col-span-4">
-          <FadeIn direction="right" delay={0.1} className="sticky top-24 space-y-4">
-            <Badge variant="warning">01</Badge>
-            <h2>About</h2>
-            <div className="w-12 h-1 bg-mecha-red"></div>
-          </FadeIn>
+          <SectionHeader number={numberStr} label="ABOUT ME" title="Who am I." className="sticky top-24" dark={isDark} />
         </div>
 
         {/* Content */}

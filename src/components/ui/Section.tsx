@@ -7,13 +7,13 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
 }
 
 export const Section = forwardRef<HTMLElement, SectionProps>(
-  ({ className, container = true, borderBottom = true, children, ...props }, ref) => {
+  ({ className, container = true, borderBottom = false, children, ...props }, ref) => {
     return (
       <section
         ref={ref}
         className={cn(
           'py-16 md:py-24',
-          borderBottom && 'border-b-2 border-mecha-dark',
+          borderBottom && 'border-b border-mecha-light1',
           className
         )}
         {...props}

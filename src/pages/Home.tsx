@@ -2,6 +2,7 @@ import { Hero } from '../components/sections/Hero';
 import { About } from '../components/sections/About';
 import { Skills } from '../components/sections/Skills';
 import { Projects } from '../components/sections/Projects';
+import { Certifications } from '../components/sections/Certifications';
 import { Experience } from '../components/sections/Experience';
 import { Education } from '../components/sections/Education';
 import { Contact } from '../components/sections/Contact';
@@ -24,12 +25,13 @@ export function Home() {
   return (
     <>
       <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Education />
-      <Contact />
+      {[About, Experience, Education, Skills, Projects, Certifications, Contact].map((Component, index) => (
+        <Component 
+          key={index} 
+          theme={index % 2 === 0 ? 'light' : 'dark'} 
+          sectionIndex={index + 1} 
+        />
+      ))}
     </>
   );
 }

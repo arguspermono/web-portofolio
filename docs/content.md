@@ -195,6 +195,33 @@ Detailed information required for each project.
   - Collaborate with the team in developing a microservice-based architecture for the campus media website and organization profile.
   - Coordinate with team members and provide regular weekly progress updates.
 
+## Certifications
+
+- **Title**: Google Data Analytics Professional Certificate
+- **Organization**: Google
+- **Date**: May 2024
+- **Image**: (Placeholder)
+
+- **Title**: IBM Data Science Professional Certificate
+- **Organization**: IBM
+- **Date**: Apr 2024
+- **Image**: (Placeholder)
+
+- **Title**: Machine Learning Specialization
+- **Organization**: DeepLearning.AI
+- **Date**: Mar 2024
+- **Image**: (Placeholder)
+
+- **Title**: Meta Front-End Developer Professional Certificate
+- **Organization**: Meta
+- **Date**: Feb 2024
+- **Image**: (Placeholder)
+
+- **Title**: Belajar Dasar AI
+- **Organization**: Dicoding Indonesia
+- **Date**: Jan 2024
+- **Image**: (Placeholder)
+
 ## Education
 
 ### Bachelor of Applied Science in Multimedia Engineering Technology

@@ -13,18 +13,14 @@ export default {
       },
       colors: {
         mecha: {
-          blue: '#2563EB',
-          red: '#DC2626',
-          yellow: '#EAB308',
-          dark: '#18181B',
-          light: '#FAFAFA',
-          panel: '#FFFFFF',
-          border: '#E4E4E7'
+          black: '#0B0B0E',
+          white: '#FFFFFF',
+          dark1: '#111317',
+          dark2: '#1A1D23',
+          dark3: '#2A2D34',
+          light1: '#E5E5E7',
+          light2: '#F5F5F5',
         }
-      },
-      boxShadow: {
-        'hard': '4px 4px 0px 0px #18181B',
-        'hard-hover': '2px 2px 0px 0px #18181B',
       }
     },
   },

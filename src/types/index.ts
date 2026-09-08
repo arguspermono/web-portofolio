@@ -34,3 +34,8 @@ export interface Education {
   endDate: string;
   details: string[];
 }
+
+export interface SectionComponentProps {
+  theme?: 'light' | 'dark';
+  sectionIndex?: number;
+}

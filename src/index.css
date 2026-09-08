@@ -10,15 +10,15 @@
   }
   
   body {
-    @apply text-mecha-dark bg-mecha-light font-sans antialiased selection:bg-mecha-blue selection:text-white;
+    @apply text-mecha-black bg-mecha-white font-sans antialiased selection:bg-mecha-light1 selection:text-mecha-black;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-mecha-dark uppercase tracking-wide;
+    @apply font-display text-mecha-black uppercase tracking-wide;
   }
 
   h1 {
-    @apply text-4xl md:text-6xl font-extrabold; 
+    @apply text-4xl md:text-6xl font-extrabold tracking-tight; 
   }
   
   h2 {
@@ -30,11 +30,11 @@
   }
 
   p {
-    @apply text-zinc-600 text-base leading-relaxed;
+    @apply text-mecha-dark2 text-base leading-relaxed;
   }
   
   small {
-    @apply text-xs font-mono font-medium tracking-wider text-zinc-500 uppercase;
+    @apply text-xs font-mono font-medium tracking-wider text-mecha-dark3 uppercase;
   }
 }
 

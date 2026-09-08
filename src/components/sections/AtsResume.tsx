@@ -5,7 +5,12 @@ import { certifications } from '../../data/certifications';
 
 export function AtsResume() {
   return (
-    <div className="font-sans text-black bg-white max-w-[800px] mx-auto text-sm leading-normal p-8">
+    <div className="font-sans font-medium text-black bg-white max-w-[800px] mx-auto text-sm leading-normal p-8">
+      <style type="text/css" media="print">
+        {`
+          @page { size: auto;  margin: 0mm; }
+        `}
+      </style>
       {/* HEADER */}
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold uppercase tracking-wider mb-2">Arya Bagus</h1>

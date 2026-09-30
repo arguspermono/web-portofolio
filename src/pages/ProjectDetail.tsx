@@ -33,11 +33,21 @@ export function ProjectDetail() {
         </FadeIn>
 
         {/* Hero Image */}
-        <FadeIn delay={0.2} className="w-full aspect-video bg-zinc-200 border-2 border-mecha-dark mb-12 relative overflow-hidden flex items-center justify-center shadow-hard">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNFNEU0RTciLz48L3N2Zz4=')] opacity-20 mix-blend-multiply"></div>
-          <div className="font-mono text-xl text-zinc-400 tracking-widest uppercase relative z-10 bg-white px-4 py-2 border-2 border-mecha-dark">
-            PROJECT PREVIEW
-          </div>
+        <FadeIn delay={0.2} className="w-full aspect-video bg-zinc-200 border-2 border-mecha-dark mb-12 relative overflow-hidden flex items-center justify-center shadow-hard group">
+          {project.imageUrl ? (
+            <img 
+              src={project.imageUrl} 
+              alt={project.title} 
+              className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+            />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNFNEU0RTciLz48L3N2Zz4=')] opacity-20 mix-blend-multiply"></div>
+              <div className="font-mono text-xl text-zinc-400 tracking-widest uppercase relative z-10 bg-white px-4 py-2 border-2 border-mecha-dark">
+                PROJECT PREVIEW
+              </div>
+            </>
+          )}
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -89,7 +99,7 @@ export function ProjectDetail() {
                   href={project.liveUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-4 border-2 border-mecha-dark bg-mecha-blue text-white text-center hover:-translate-y-1 hover:-translate-x-1 hover:shadow-hard transition-all flex items-center justify-center gap-2 group"
+                  className="p-4 border-2 border-mecha-dark bg-mecha-blue text-center hover:-translate-y-1 hover:-translate-x-1 hover:shadow-hard transition-all flex items-center justify-center gap-2 group"
                 >
                   VIEW LIVE PROJECT
                   <span className="group-hover:translate-x-1 transition-transform">→</span>

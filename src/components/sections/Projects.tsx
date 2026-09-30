@@ -48,11 +48,21 @@ export function Projects({ theme = 'light', sectionIndex = 3 }: SectionComponent
               className={`flex flex-col h-full group cursor-default border ${isDark ? 'bg-mecha-dark1 border-mecha-dark3' : 'bg-mecha-white border-mecha-light1'}`}
             >
             {/* Image placeholder */}
-            <Link to={`/projects/${project.slug}`} className={`aspect-video border mb-6 relative overflow-hidden flex items-center justify-center transition-colors duration-300 ${isDark ? 'bg-mecha-dark2 border-mecha-dark3' : 'bg-mecha-light2 border-mecha-light1'}`}>
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNFNUU1RTciLz48L3N2Zz4=')] opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-              <div className={`font-mono text-[10px] tracking-[0.2em] uppercase relative z-10 px-2 py-1 border transition-all duration-300 ${isDark ? 'bg-mecha-dark1 text-mecha-light1 border-mecha-dark3' : 'text-mecha-dark2 bg-mecha-white border-mecha-light1'}`}>
-                {project.category}
-              </div>
+            <Link to={`/projects/${project.slug}`} className={`aspect-video border mb-6 relative overflow-hidden flex items-center justify-center transition-colors duration-300 group/image ${isDark ? 'bg-mecha-dark2 border-mecha-dark3' : 'bg-mecha-light2 border-mecha-light1'}`}>
+              {project.imageUrl ? (
+                <img 
+                  src={project.imageUrl} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover grayscale opacity-80 group-hover/image:grayscale-0 group-hover/image:opacity-100 transition-all duration-300"
+                />
+              ) : (
+                <>
+                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNFNUU1RTciLz48L3N2Zz4=')] opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                  <div className={`font-mono text-[10px] tracking-[0.2em] uppercase relative z-10 px-2 py-1 border transition-all duration-300 ${isDark ? 'bg-mecha-dark1 text-mecha-light1 border-mecha-dark3' : 'text-mecha-dark2 bg-mecha-white border-mecha-light1'}`}>
+                    {project.category}
+                  </div>
+                </>
+              )}
             </Link>
 
             {/* Content */}

@@ -95,19 +95,11 @@ export function Hero() {
               <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-mecha-black opacity-30" />
               <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-mecha-black opacity-30" />
 
-              <div className="
-                font-mono
-                text-[10px]
-                text-mecha-dark3
-                tracking-[0.2em]
-                text-center
-                space-y-3
-                opacity-50
-              ">
-                <div className="w-12 h-px bg-mecha-dark3 mx-auto" />
-                <div>IMAGE.PENDING</div>
-                <div className="w-12 h-px bg-mecha-dark3 mx-auto" />
-              </div>
+              <img 
+                src="/assets/img/profile/bagus-2.jpeg"
+                alt="Arya Bagus"
+                className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+              />
 
             </div>
 

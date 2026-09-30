@@ -45,7 +45,11 @@ export function Certifications({ theme = 'dark', sectionIndex = 6 }: SectionComp
               {/* Image Container */}
               <div className={`aspect-[4/3] border mb-4 relative overflow-hidden flex items-center justify-center ${isDark ? 'bg-mecha-dark2 border-mecha-dark3' : 'bg-mecha-light2 border-mecha-light1'}`}>
                 {cert.imageUrl ? (
-                  <img src={cert.imageUrl} alt={cert.title} className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" />
+                  <iframe 
+                    src={cert.imageUrl}
+                    title={cert.title} 
+                    className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" 
+                  />
                 ) : (
                   <div className={`font-mono text-[10px] tracking-widest ${isDark ? 'text-mecha-dark3' : 'text-mecha-dark3'}`}>IMG.UNAVAILABLE</div>
                 )}

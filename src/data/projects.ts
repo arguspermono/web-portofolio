@@ -9,7 +9,7 @@ export const projects: Project[] = [
     role: 'Backend Developer',
     technologies: ['Vue.js', 'Tailwind CSS', 'Laravel', 'PHP', 'MySQL', 'Git'],
     category: 'Web Development',
-    imageUrl: '',
+    imageUrl: '/assets/img/projects/mediapens/mediapens-1.png',
     githubUrl: 'https://github.com/Webmaster-ENT/backend-mediapens',
     liveUrl: 'https://media.ent.pens.ac.id/',
     keyFeatures: [
@@ -27,7 +27,7 @@ export const projects: Project[] = [
     role: 'Webmaster / Backend Developer',
     technologies: ['React.js', 'Tailwind CSS', 'Laravel', 'PHP', 'MySQL', 'Git'],
     category: 'Web Development',
-    imageUrl: '',
+    imageUrl: '/assets/img/projects/entcrews/entcrews-1.png',
     githubUrl: 'https://github.com/Webmaster-ENT/ent-web-laravel',
     liveUrl: 'https://ent.pens.ac.id/',
     keyFeatures: [
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     role: 'Full-Stack Developer',
     technologies: ['Laravel Blade', 'Tailwind CSS', 'DaisyUI', 'Laravel', 'PHP', 'FFmpeg', 'Git'],
     category: 'Multimedia / Video Platform',
-    imageUrl: '',
+    imageUrl: '/assets/img/projects/webcut/webcut-1.png',
     githubUrl: 'https://github.com/arguspermono/web-webcut',
     keyFeatures: [
       'Video upload and streaming functionality.',
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     role: 'Frontend Developer / Main Programmer',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
     category: 'Web Development / Tourism',
-    imageUrl: '',
+    imageUrl: '/assets/img/projects/jejaknusa/jejaknusa-1.png',
     githubUrl: 'https://github.com/arguspermono/frontend-web-jejaknusa',
     liveUrl: 'https://arguspermono.github.io/frontend-web-jejaknusa',
     keyFeatures: [
@@ -82,7 +82,9 @@ export const projects: Project[] = [
     role: 'Mobile Developer / Backend & Feature Developer',
     technologies: ['Flutter', 'Dart', 'SQLite', 'Google ML Kit', 'Flutter Quill', 'Local Notifications'],
     category: 'Mobile Development / Productivity',
-    imageUrl: '',
+    imageUrl: '/assets/img/projects/memospace/memospace-1.jpeg',
+    githubUrl: 'https://github.com/arguspermono/mobile-memospace',
+    liveUrl: 'https://drive.google.com/drive/folders/1PYicmwHc0WzkiS4oNRK1h5dnIIWhCo8z?usp=drive_link',
     keyFeatures: [
       'Create and organize notes with a rich text editor.',
       'Extract text from images using OCR with Google ML Kit.',
@@ -99,7 +101,7 @@ export const projects: Project[] = [
     role: '3D Artist / Character Artist',
     technologies: ['Blender', 'Mixamo'],
     category: '3D / Animation / Multimedia',
-    imageUrl: '',
+    imageUrl: '/assets/img/projects/waktujaga/waktujaga-1.png',
     liveUrl: 'https://youtu.be/kMyN6wCc6BM?si=cT_9r6DOmQgaaoct',
     keyFeatures: [
       'Designed and developed Dodi, one of the main characters, including his distinctive red-haired appearance.',
@@ -107,6 +109,36 @@ export const projects: Project[] = [
       'Applied 3D modeling and character design techniques using Blender.',
       'Contributed to cinematic scene composition and visual storytelling.',
       'Explored the combination of horror atmosphere and comedic storytelling through 3D animation.'
+    ]
+  },
+  {
+    id: 'craftlab-simulation',
+    slug: 'craftlab-simulation',
+    title: 'CraftLab Simulation',
+    description: '',
+    role: '',
+    technologies: ['Unity', 'Blender'],
+    category: 'VR',
+    imageUrl: '/assets/img/projects/../..-1.png',
+    liveUrl: '',
+    keyFeatures: [
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
+      
+    ]
+  },
+  {
+    id: 'ent-galleries',
+    slug: 'ent-galleries',
+    title: 'ENT Galleries',
+    description: '',
+    role: '',
+    technologies: ['PHP', 'Laravel', 'MySQL', 'Git', 'Tailwind CSS', 'DaisyUI', 'Bootstrap', 'JavaScript'],
+    category: 'Web Development',
+    imageUrl: '/assets/img/projects/entgalleries/entgalleries-1.png',
+    liveUrl: '',
+    keyFeatures: [
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
+      
     ]
   }
 ];

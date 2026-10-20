@@ -93,7 +93,7 @@ export function AtsResume() {
           <ul className="list-disc list-outside ml-4 space-y-[2px]">
             {certifications.map((cert) => (
               <li key={cert.id} className="pl-1">
-                <span className="font-bold">{cert.title}</span> - {cert.issuer} ({cert.date})
+                <span className="font-bold">{cert.title}</span> - {cert.organization} ({cert.date})
               </li>
             ))}
           </ul>

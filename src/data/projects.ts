@@ -119,8 +119,11 @@ export const projects: Project[] = [
     role: '',
     technologies: ['Unity', 'Blender'],
     category: 'VR',
-    imageUrl: '/assets/img/projects/../..-1.png',
-    liveUrl: '',
+    imageUrl: '/assets/img/projects/craftlab/craftlab-1.png',
+    liveUrl: [
+      'https://daniswara99.met.student.pens.ac.id/vr/index.html',
+      'https://arguspermono.github.io/vr-craftlab-simulator/'
+    ],
     keyFeatures: [
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
       

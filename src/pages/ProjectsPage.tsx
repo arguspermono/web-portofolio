@@ -1,0 +1,324 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FadeIn } from '../components/ui/FadeIn';
+import { Badge } from '../components/ui/Badge';
+import { ModulePanelHeader } from '../components/ui/ModulePanelHeader';
+import { projects } from '../data/projects';
+import type { Project } from '../types';
+import { cn } from '../utils/cn';
+import { FaExternalLinkAlt, FaGithub, FaEye, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
+export function ProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+
+  const categories = ['ALL', ...Array.from(new Set(projects.map((p) => p.category.toUpperCase())))];
+
+  const filteredProjects = selectedCategory === 'ALL'
+    ? projects
+    : projects.filter((p) => p.category.toUpperCase() === selectedCategory);
+
+  // Keyboard navigation for preview modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!activeModalProject) return;
+      if (e.key === 'Escape') {
+        setActiveModalProject(null);
+      } else if (e.key === 'ArrowRight') {
+        navigateModal(1);
+      } else if (e.key === 'ArrowLeft') {
+        navigateModal(-1);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeModalProject, filteredProjects]);
+
+  const navigateModal = (direction: number) => {
+    if (!activeModalProject) return;
+    const currentIndex = filteredProjects.findIndex((p) => p.id === activeModalProject.id);
+    if (currentIndex === -1) return;
+    const nextIndex = (currentIndex + direction + filteredProjects.length) % filteredProjects.length;
+    setActiveModalProject(filteredProjects[nextIndex]);
+  };
+
+  return (
+    <div className="bg-mecha-black text-mecha-white min-h-screen flex flex-col">
+      {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
+      <ModulePanelHeader
+        moduleNumber="MODULE.002 //"
+        title="PROJECTS"
+        description="SELECTED PRODUCTION PROJECTS IN WEB PLATFORMS, MOBILE SOFTWARE, 3D MULTIMEDIA, AND EXPERIMENTAL SYSTEMS."
+        theme="dark"
+      />
+
+      {/* ── 2. CATEGORY FILTER ───────────────────────────────── */}
+      <div className="border-b border-mecha-dark3 bg-mecha-dark1 px-6 md:px-12 py-3.5 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-1.5">
+          {categories.map((cat) => {
+            const isActive = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={cn(
+                  'px-3 py-1.5 font-mono text-xs tracking-wider uppercase transition-colors border',
+                  isActive
+                    ? 'bg-mecha-white text-mecha-black border-mecha-white font-bold'
+                    : 'bg-transparent text-neutral-400 border-neutral-800 hover:border-neutral-500 hover:text-white'
+                )}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="font-mono text-xs tracking-wider text-neutral-400 uppercase">
+          {filteredProjects.length} PROJECTS
+        </div>
+      </div>
+
+      {/* ── 3. PROJECTS GRID ─────────────────────────────────── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 divide-y md:divide-y-0 border-b border-mecha-dark3 bg-mecha-black">
+        {filteredProjects.map((project) => {
+          const isMobile = project.category.toLowerCase().includes('mobile') || project.slug === 'memospace';
+
+          return (
+            <FadeIn
+              key={project.id}
+              className="border-b md:border-r border-mecha-dark3 flex flex-col justify-between group hover:bg-mecha-dark1/40 transition-colors"
+            >
+              <div>
+                {/* Image Showcase — Adaptive for Mobile vs Web */}
+                <div
+                  onClick={() => setActiveModalProject(project)}
+                  className="h-64 sm:h-72 w-full bg-mecha-dark2 relative overflow-hidden block border-b border-mecha-dark3 cursor-pointer"
+                >
+                  {project.imageUrl ? (
+                    <div className="w-full h-full flex items-center justify-center p-3">
+                      {isMobile ? (
+                        /* Mobile Mockup: full height, centered, zero cropping */
+                        <img
+                          src={project.imageUrl}
+                          alt={project.title}
+                          className="h-full w-auto max-w-full object-contain mx-auto shadow-md border border-neutral-700/60"
+                        />
+                      ) : (
+                        /* Landscape: full width */
+                        <img
+                          src={project.imageUrl}
+                          alt={project.title}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center font-mono text-xs text-neutral-500 uppercase tracking-widest">
+                      PREVIEW UNAVAILABLE
+                    </div>
+                  )}
+
+                  {/* Corner Accent */}
+                  <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-neutral-600 z-10" />
+
+                  {/* Category Pill */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="font-mono text-[10px] tracking-widest uppercase bg-mecha-black/90 text-neutral-300 border border-neutral-700 px-2 py-0.5">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* Interactive Quick Preview Overlay */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="px-4 py-2 bg-mecha-white text-mecha-black font-mono text-xs tracking-widest uppercase font-bold flex items-center gap-2">
+                      <FaEye />
+                      QUICK PREVIEW
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card Body */}
+                <div className="p-6 md:p-8">
+                  <div className="font-mono text-xs tracking-wider text-neutral-400 uppercase mb-2">
+                    ROLE: {project.role}
+                  </div>
+
+                  <Link to={`/projects/${project.slug}`}>
+                    <h3 className="font-display font-bold text-xl md:text-2xl tracking-wide uppercase text-white group-hover:text-neutral-300 transition-colors mb-3 leading-snug">
+                      {project.title}
+                    </h3>
+                  </Link>
+
+                  <p className="font-sans text-neutral-300 text-sm leading-relaxed mb-6 font-normal line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    {project.technologies.slice(0, 5).map((tech) => (
+                      <Badge key={tech} className="bg-mecha-dark1 text-neutral-300 border-neutral-800 text-[11px]">
+                        {tech}
+                      </Badge>
+                    ))}
+                    {project.technologies.length > 5 && (
+                      <span className="font-mono text-[10px] text-neutral-400 self-center">
+                        +{project.technologies.length - 5} MORE
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Footer */}
+              <div className="p-6 pt-4 border-t border-mecha-dark3 flex items-center justify-between font-mono text-xs tracking-wider uppercase bg-mecha-dark1/30">
+                <Link
+                  to={`/projects/${project.slug}`}
+                  className="text-white hover:text-neutral-300 font-semibold transition-colors flex items-center gap-1.5"
+                >
+                  <span>SPECIFICATION</span>
+                  <span>→</span>
+                </Link>
+
+                <div className="flex items-center gap-4 text-neutral-400">
+                  <button
+                    onClick={() => setActiveModalProject(project)}
+                    className="hover:text-white transition-colors flex items-center gap-1"
+                    title="Quick Preview"
+                  >
+                    <FaEye />
+                  </button>
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors"
+                      title="GitHub"
+                    >
+                      <FaGithub className="text-base" />
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a
+                      href={typeof project.liveUrl === 'string' ? project.liveUrl : project.liveUrl[0]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors"
+                      title="Live System"
+                    >
+                      <FaExternalLinkAlt className="text-sm" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </FadeIn>
+          );
+        })}
+      </div>
+
+      {/* ── 4. INTERACTIVE PROJECT PREVIEW MODAL ──────────────── */}
+      {activeModalProject && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 md:p-10 animate-fadeIn"
+          onClick={() => setActiveModalProject(null)}
+        >
+          <div
+            className="bg-mecha-black text-mecha-white border border-neutral-700 w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="p-4 md:p-6 border-b border-mecha-dark3 bg-mecha-dark1 flex items-center justify-between">
+              <div>
+                <div className="font-mono text-xs tracking-widest text-neutral-400 uppercase">
+                  {activeModalProject.category} // ROLE: {activeModalProject.role}
+                </div>
+                <h3 className="font-display font-bold text-xl md:text-2xl tracking-tight uppercase text-white mt-1">
+                  {activeModalProject.title}
+                </h3>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Link
+                  to={`/projects/${activeModalProject.slug}`}
+                  className="px-3.5 py-1.5 border border-white bg-white text-black font-mono text-xs tracking-wider uppercase font-bold hover:bg-neutral-200 transition-colors"
+                >
+                  FULL CASE STUDY →
+                </Link>
+
+                <button
+                  onClick={() => setActiveModalProject(null)}
+                  className="p-2 border border-neutral-700 bg-mecha-dark2 hover:bg-neutral-800 transition-colors"
+                  aria-label="Close Preview"
+                >
+                  <FaTimes className="text-base" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Image Viewport */}
+            <div className="bg-neutral-950 p-4 md:p-6 flex items-center justify-center max-h-[480px] overflow-hidden border-b border-mecha-dark3">
+              {activeModalProject.imageUrl ? (
+                (activeModalProject.category.toLowerCase().includes('mobile') || activeModalProject.slug === 'memospace') ? (
+                  <img
+                    src={activeModalProject.imageUrl}
+                    alt={activeModalProject.title}
+                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto shadow-2xl border border-neutral-700"
+                  />
+                ) : (
+                  <img
+                    src={activeModalProject.imageUrl}
+                    alt={activeModalProject.title}
+                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto"
+                  />
+                )
+              ) : (
+                <div className="font-mono text-xs text-neutral-500 uppercase tracking-widest py-16">
+                  PREVIEW NOT AVAILABLE
+                </div>
+              )}
+            </div>
+
+            {/* Modal Details */}
+            <div className="p-6 overflow-y-auto space-y-4">
+              <p className="font-sans text-neutral-300 text-sm md:text-base leading-relaxed">
+                {activeModalProject.description}
+              </p>
+
+              <div className="flex flex-wrap gap-1.5 pt-2">
+                {activeModalProject.technologies.map((tech) => (
+                  <Badge key={tech} className="bg-mecha-dark2 text-neutral-300 border-neutral-700 text-xs">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Modal Navigation Footer */}
+            <div className="p-3 md:p-4 border-t border-mecha-dark3 bg-mecha-dark1 flex items-center justify-between font-mono text-xs tracking-wider uppercase">
+              <button
+                onClick={() => navigateModal(-1)}
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-700 hover:border-white transition-colors"
+              >
+                <FaChevronLeft className="text-[10px]" />
+                <span>PREVIOUS</span>
+              </button>
+
+              <span className="text-neutral-500 hidden sm:inline">
+                USE ARROW KEYS [← / →] TO BROWSE • ESC TO EXIT
+              </span>
+
+              <button
+                onClick={() => navigateModal(1)}
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-700 hover:border-white transition-colors"
+              >
+                <span>NEXT</span>
+                <FaChevronRight className="text-[10px]" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

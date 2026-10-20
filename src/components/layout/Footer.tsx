@@ -1,41 +1,72 @@
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
     <footer className="bg-mecha-black text-mecha-white border-t border-mecha-dark3 relative overflow-hidden mt-auto print:hidden">
-      {/* Decorative mechanical elements */}
-      <div className="absolute top-0 right-0 w-32 h-32 border-l border-b border-mecha-dark3 opacity-20 pointer-events-none"></div>
-      
-      <div className="container mx-auto px-6 py-12 max-w-7xl relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 items-end">
-          <div className="space-y-4">
-            <div className="font-display font-extrabold text-2xl tracking-widest uppercase flex items-center gap-2">
-              <div className="w-4 h-4 bg-mecha-white border border-mecha-dark3"></div>
-              ARYA BAGUS
-            </div>
-            <p className="text-mecha-light1 font-mono text-sm max-w-md opacity-80">
-              Building Digital Experiences Through Code & Creativity.
+      {/* Decorative corner notch */}
+      <div className="absolute top-0 right-0 w-24 h-24 border-l border-b border-mecha-dark3 opacity-30 pointer-events-none" />
+
+      <div className="px-6 md:px-12 py-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-3">
+            <Link to="/" className="flex items-center gap-3 group">
+              <img
+                src="/assets/img/argus-logo.jpg"
+                alt="ARGUS logo"
+                className="w-9 h-9 object-cover border border-neutral-700 group-hover:border-white transition-colors"
+              />
+              <div>
+                <div className="font-display font-extrabold text-base tracking-[0.25em] uppercase text-white leading-none">
+                  ARGUS
+                </div>
+                <div className="font-mono text-[9px] tracking-[0.2em] text-neutral-400 uppercase mt-1">
+                  ARYA BAGUS // MULTIMEDIA TECH
+                </div>
+              </div>
+            </Link>
+            <p className="font-mono text-xs text-neutral-300 tracking-wider uppercase">
+              BUILDING DIGITAL EXPERIENCES THROUGH CODE &amp; CREATIVITY.
             </p>
           </div>
-          
-          <div className="md:text-right space-y-4">
-            <div className="flex gap-4 md:justify-end font-mono text-sm font-bold tracking-wider text-mecha-light1">
-              <a href={import.meta.env.VITE_GITHUB} className="hover:text-mecha-white transition-colors text-2xl">
+
+          <div className="flex flex-col md:items-end gap-3">
+            <div className="flex gap-5 text-neutral-400">
+              <a
+                href={import.meta.env.VITE_GITHUB || 'https://github.com/arguspermono'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors text-lg"
+                title="GitHub"
+              >
                 <FaGithub />
               </a>
-              <a href={import.meta.env.VITE_LINKEDIN} className="hover:text-mecha-white transition-colors text-2xl">
+              <a
+                href={import.meta.env.VITE_LINKEDIN || 'https://www.linkedin.com/in/arya-bagus/'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors text-lg"
+                title="LinkedIn"
+              >
                 <FaLinkedin />
               </a>
-              <a href={import.meta.env.VITE_EMAIL} className="hover:text-mecha-white transition-colors text-2xl">
+              <a
+                href={`mailto:${import.meta.env.VITE_EMAIL || 'aryabaguspermono@gmail.com'}`}
+                className="hover:text-white transition-colors text-lg"
+                title="Email"
+              >
                 <FaEnvelope />
               </a>
             </div>
+            <div className="font-mono text-[9px] tracking-[0.2em] text-neutral-400 uppercase">
+              BASE // SURABAYA, ID • EST. 2026
+            </div>
           </div>
         </div>
-        
-        <div className="mt-12 pt-6 border-t border-mecha-dark3 flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs text-mecha-light1 tracking-widest uppercase">
-          <div>&copy; {new Date().getFullYear()} ARYA. ALL RIGHTS RESERVED.</div>
-          {/* <div>STATUS: ONLINE // SYS.READY</div> */}
+
+        <div className="mt-8 pt-6 border-t border-mecha-dark3 flex flex-col md:flex-row justify-between items-center gap-3 font-mono text-[10px] text-neutral-400 tracking-[0.2em] uppercase">
+          <div>&copy; {new Date().getFullYear()} ARYA BAGUS PERMONO. ALL RIGHTS RESERVED.</div>
+          <div>SYSTEM ARCHITECTURE // GUNDAM EDITORIAL UI</div>
         </div>
       </div>
     </footer>

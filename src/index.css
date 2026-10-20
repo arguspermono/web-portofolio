@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,38 +8,79 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
-    @apply text-mecha-black bg-mecha-white font-sans antialiased selection:bg-mecha-light1 selection:text-mecha-black;
+    @apply text-mecha-black bg-mecha-white font-sans antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
 
+  /* Headings: always uppercase, Outfit, wide tracking */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-mecha-black uppercase tracking-wide;
+    @apply font-display text-mecha-black uppercase;
+    letter-spacing: 0.04em;
   }
 
   h1 {
-    @apply text-4xl md:text-6xl font-extrabold tracking-tight; 
+    @apply text-5xl md:text-7xl lg:text-8xl font-extrabold leading-none tracking-tight;
   }
-  
+
   h2 {
-    @apply text-3xl md:text-4xl font-bold; 
+    @apply text-3xl md:text-4xl font-extrabold tracking-tight;
   }
 
   h3 {
-    @apply text-xl md:text-2xl font-bold; 
+    @apply text-xl md:text-2xl font-bold;
   }
 
+  /* Body prose: Inter, not uppercase, relaxed */
   p {
-    @apply text-mecha-dark2 text-base leading-relaxed;
+    @apply text-base leading-relaxed;
+    font-family: theme('fontFamily.sans');
+    text-transform: none;
+    letter-spacing: 0;
   }
-  
-  small {
-    @apply text-xs font-mono font-medium tracking-wider text-mecha-dark3 uppercase;
+
+  /* Mono labels */
+  small, .label {
+    @apply text-[10px] font-mono tracking-[0.25em] uppercase text-mecha-dark3;
+  }
+
+  /* No rounded anything */
+  *, *::before, *::after {
+    border-radius: 0 !important;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-mecha-black text-mecha-white;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Panel line corners — top-right clip */
+  .corner-tr::after {
+    content: '';
+    @apply absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-light1;
+  }
+  .corner-tr-dark::after {
+    content: '';
+    @apply absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-dark3;
+  }
+
+  /* Module label style */
+  .module-label {
+    @apply font-mono text-[10px] tracking-[0.25em] uppercase text-mecha-dark3;
+  }
+
+  /* Panel header full-width divider */
+  .panel-divider {
+    @apply border-t border-mecha-light1 w-full;
+  }
+  .panel-divider-dark {
+    @apply border-t border-mecha-dark3 w-full;
   }
 }

@@ -1,7 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Header } from './components/layout/Header';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Sidebar } from './components/layout/Sidebar';
 import { Footer } from './components/layout/Footer';
-import { Home } from './pages/Home';
+import { AboutPage } from './pages/AboutPage';
+import { ProjectsPage } from './pages/ProjectsPage';
+import { CertificatesPage } from './pages/CertificatesPage';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { Resume } from './pages/Resume';
 import { useEffect } from 'react';
@@ -18,15 +20,22 @@ function ScrollToTop() {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-mecha-light text-mecha-dark flex flex-col font-sans">
+      <Sidebar />
+
+      <div className="min-h-screen bg-mecha-white text-mecha-black flex flex-col font-sans pt-14 lg:pt-0 lg:pl-64 xl:pl-72">
         <ScrollToTop />
-        <Header />
-        
+
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<AboutPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="/certificates" element={<CertificatesPage />} />
+            {/* Backward-compatibility redirect */}
+            <Route path="/achievements" element={<Navigate to="/certificates" replace />} />
             <Route path="/resume" element={<Resume />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
 

@@ -1,46 +1,62 @@
-import { About } from '../components/sections/About';
-import { Experience } from '../components/sections/Experience';
-import { Education } from '../components/sections/Education';
-import { Skills } from '../components/sections/Skills';
-import { Certifications } from '../components/sections/Certifications';
 import { AtsResume } from '../components/sections/AtsResume';
-import { Section } from '../components/ui/Section';
-import { FadeIn } from '../components/ui/FadeIn';
+import { ModulePanelHeader } from '../components/ui/ModulePanelHeader';
+import { Button } from '../components/ui/Button';
+import { FaPrint, FaDownload } from 'react-icons/fa';
 
 export function Resume() {
-  return (
-    <>
-      <div className="pt-24 pb-12 print:hidden">
-        {/* Resume Header */}
-        <Section className="pb-0 pt-12">
-          <FadeIn delay={0.1} className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 border-b-2 border-mecha-dark pb-8">
-            <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4">Curriculum Vitae</h1>
-              <p className="text-lg text-zinc-600 font-mono tracking-wide">Professional Profile & Experience</p>
-            </div>
-            
-            <button 
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-2 p-4 border-2 border-mecha-dark hover:bg-none bg-mecha-white hover:bg-black text-black hover:text-white font-mono text-sm font-bold tracking-wider hover:text-gray hover:shadow-hard transition-all group"
-            >
-              <span>DOWNLOAD PDF (ATS)</span>
-            </button>
-          </FadeIn>
-        </Section>
+  const handlePrint = () => {
+    window.print();
+  };
 
-        {/* Reuse existing components */}
-        {[About, Experience, Education, Skills, Certifications].map((Component, index) => (
-          <Component 
-            key={index} 
-            theme={index % 2 === 0 ? 'light' : 'dark'} 
-            sectionIndex={index + 1} 
-          />
-        ))}
+  return (
+    <div className="bg-mecha-black text-mecha-white min-h-screen flex flex-col">
+      {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
+      <div className="print:hidden">
+        <ModulePanelHeader
+          moduleNumber="MODULE.004 //"
+          title="RESUME"
+          description="OFFICIAL CURRICULUM VITAE PREPARED FOR ATS (APPLICANT TRACKING SYSTEMS), INDUSTRY AUDIT, AND FORMAL PRINT DOCUMENTATION."
+          theme="dark"
+          statusTag="STATUS // VERIFIED"
+        >
+          <div className="flex flex-wrap gap-3">
+            <Button
+              variant="primary"
+              size="md"
+              onClick={handlePrint}
+              className="flex items-center gap-2 font-mono text-xs tracking-widest uppercase font-semibold"
+            >
+              <FaPrint className="text-xs" />
+              <span>PRINT / SAVE PDF</span>
+            </Button>
+          </div>
+        </ModulePanelHeader>
+
+        {/* Action instruction strip */}
+        <div className="border-b border-mecha-dark3 bg-mecha-dark1 px-6 md:px-10 py-3.5 flex items-center justify-between font-mono text-[10px] tracking-[0.25em] text-neutral-400 uppercase">
+          <span>DOCUMENT SPEC // A4 PORTRAIT FORMAT</span>
+          <span>ATS COMPLIANCE // 100%</span>
+        </div>
       </div>
 
+      {/* ── 2. RESUME PREVIEW CANVAS ─────────────────────────── */}
+      <div className="print:hidden p-4 sm:p-8 md:p-12 bg-mecha-dark2 flex justify-center flex-grow">
+        <div className="w-full max-w-[215mm] bg-white text-black border border-mecha-dark3 p-4 sm:p-8 relative">
+          {/* Subtle Corner Markers */}
+          <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-neutral-400 pointer-events-none" />
+          <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-neutral-400 pointer-events-none" />
+          <div className="absolute bottom-2 left-2 w-3 h-2 border-b border-l border-neutral-400 pointer-events-none" />
+          <div className="absolute bottom-2 right-2 w-3 h-2 border-b border-r border-neutral-400 pointer-events-none" />
+
+          {/* Render ATS Resume */}
+          <AtsResume />
+        </div>
+      </div>
+
+      {/* ── 3. PRINT ONLY VIEW ───────────────────────────────── */}
       <div className="hidden print:block w-full bg-white print:bg-white text-black min-h-screen">
         <AtsResume />
       </div>
-    </>
+    </div>
   );
 }

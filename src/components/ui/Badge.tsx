@@ -11,11 +11,11 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       <div
         ref={ref}
         className={cn(
-          'inline-flex items-center px-2 py-1 text-[10px] sm:text-xs font-mono font-medium tracking-widest uppercase border rounded-none',
+          'inline-flex items-center px-2.5 py-1 text-[10px] sm:text-xs font-mono font-medium tracking-widest uppercase border rounded-none',
           {
-            'bg-mecha-light2 text-mecha-dark3 border-mecha-light1': variant === 'default',
-            'bg-mecha-black text-mecha-white border-mecha-black': variant === 'accent',
-            'bg-mecha-light1 text-mecha-black border-mecha-black': variant === 'warning',
+            'bg-mecha-light2 text-neutral-800 border-mecha-light1': variant === 'default',
+            'bg-mecha-black text-mecha-white border-mecha-black font-semibold': variant === 'accent',
+            'bg-mecha-light1 text-mecha-black border-mecha-black font-semibold': variant === 'warning',
           },
           className
         )}

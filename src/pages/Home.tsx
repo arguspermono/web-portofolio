@@ -1,37 +1,6 @@
-import { Hero } from '../components/sections/Hero';
-import { About } from '../components/sections/About';
-import { Skills } from '../components/sections/Skills';
-import { Projects } from '../components/sections/Projects';
-import { Certifications } from '../components/sections/Certifications';
-import { Experience } from '../components/sections/Experience';
-import { Education } from '../components/sections/Education';
-import { Contact } from '../components/sections/Contact';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { AboutPage } from './AboutPage';
 
+// Home delegates directly to the primary AboutPage dossier
 export function Home() {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, [location.hash]);
-
-  return (
-    <>
-      <Hero />
-      {[About, Experience, Education, Skills, Projects, Certifications, Contact].map((Component, index) => (
-        <Component 
-          key={index} 
-          theme={index % 2 === 0 ? 'light' : 'dark'} 
-          sectionIndex={index + 1} 
-        />
-      ))}
-    </>
-  );
+  return <AboutPage />;
 }

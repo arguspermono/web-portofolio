@@ -1,125 +1,174 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { projects } from '../data/projects';
-import { Section } from '../components/ui/Section';
 import { Badge } from '../components/ui/Badge';
 import { FadeIn } from '../components/ui/FadeIn';
+import { FaGithub, FaExternalLinkAlt, FaArrowLeft } from 'react-icons/fa';
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const project = projects.find(p => p.slug === slug);
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/projects" replace />;
   }
 
+  const isMobileProject = project.category.toLowerCase().includes('mobile') || project.slug === 'memospace';
+
   return (
-    <Section className="min-h-screen pt-32 pb-24">
-      {/* Back Navigation */}
-      <FadeIn direction="none" delay={0} duration={0.25} className="mb-12">
-        <Link 
-          to="/#projects" 
-          className="inline-flex items-center gap-2 font-mono text-sm font-bold tracking-wider hover:text-mecha-blue transition-colors"
+    <div className="bg-mecha-white text-mecha-black min-h-screen flex flex-col">
+      {/* ── Navigation Strip ─────────────────────────────────── */}
+      <div className="border-b border-mecha-light1 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-xs tracking-wider uppercase bg-mecha-light2">
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-2 font-bold hover:text-neutral-600 transition-colors"
         >
-          <span className="transform -translate-x-1 hover:-translate-x-2 transition-transform">←</span>
-          BACK TO PROJECTS
+          <FaArrowLeft className="text-[10px]" />
+          <span>BACK TO PROJECTS</span>
         </Link>
-      </FadeIn>
+        <span className="text-neutral-500 hidden sm:inline">
+          {project.category}
+        </span>
+      </div>
 
-      <div className="max-w-4xl mx-auto">
-        <FadeIn delay={0.1} className="space-y-4 mb-12">
-          <Badge variant="accent" className="mb-4 inline-block">{project.category}</Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl break-words">{project.title}</h1>
-          <div className="w-16 h-1 bg-mecha-red mt-6"></div>
-        </FadeIn>
-
-        {/* Hero Image */}
-        <FadeIn delay={0.2} className="w-full aspect-video bg-zinc-200 border-2 border-mecha-dark mb-12 relative overflow-hidden flex items-center justify-center shadow-hard group">
-          {project.imageUrl ? (
-            <img 
-              src={project.imageUrl} 
-              alt={project.title} 
-              className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-            />
-          ) : (
-            <>
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNFNEU0RTciLz48L3N2Zz4=')] opacity-20 mix-blend-multiply"></div>
-              <div className="font-mono text-xl text-zinc-400 tracking-widest uppercase relative z-10 bg-white px-4 py-2 border-2 border-mecha-dark">
-                PROJECT PREVIEW
-              </div>
-            </>
-          )}
-        </FadeIn>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Main Content Area */}
-          <div className="md:col-span-2 space-y-12">
-            <FadeIn delay={0.3}>
-              <div>
-                <h2 className="text-2xl mb-4">Overview</h2>
-                <p className="text-lg leading-relaxed text-zinc-700">{project.description}</p>
-              </div>
-            </FadeIn>
-
-            <div>
-              <h2 className="text-2xl mb-4">Key Features</h2>
-              <ul className="space-y-4">
-                {project.keyFeatures.map((feature, i) => (
-                  <li key={i} className="flex gap-4">
-                    <span className="text-mecha-blue font-mono font-bold mt-1">{(i + 1).toString().padStart(2, '0')}</span>
-                    <span className="text-zinc-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* ── Title Banner ─────────────────────────────────────── */}
+      <div className="border-b border-mecha-light1 px-6 sm:px-10 md:px-14 py-8 md:py-12 bg-mecha-white">
+        <FadeIn delay={0.1}>
+          <div className="font-mono text-xs tracking-widest text-neutral-500 uppercase mb-2">
+            PROJECT SPECIFICATION
           </div>
 
-          {/* Sidebar Area */}
-          <div className="space-y-8">
-            <div className="p-6 bg-white border-2 border-mecha-dark relative shadow-hard">
-              {/* Corner tech detail */}
-              <div className="absolute top-0 right-0 w-4 h-4 border-l-2 border-b-2 border-mecha-dark bg-mecha-panel" style={{ clipPath: 'polygon(100% 0, 0 0, 100% 100%)' }}></div>
-              
-              <h3 className="font-mono text-sm tracking-widest text-zinc-400 mb-2 uppercase">Role</h3>
-              <p className="font-bold">{project.role}</p>
+          <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight text-mecha-black uppercase leading-tight">
+            {project.title}
+          </h1>
 
-              <div className="w-full h-px bg-zinc-200 my-6"></div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Badge className="bg-mecha-black text-mecha-white border-mecha-black">
+              {project.category}
+            </Badge>
+            <Badge className="bg-mecha-light2 text-neutral-800 border-mecha-light1">
+              ROLE: {project.role}
+            </Badge>
+          </div>
+        </FadeIn>
+      </div>
 
-              <h3 className="font-mono text-sm tracking-widest text-zinc-400 mb-4 uppercase">Technologies</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map(tech => (
-                  <Badge key={tech} variant="default">{tech}</Badge>
-                ))}
-              </div>
+      {/* ── Adaptive Media Showcase (Full Mobile & Landscape Support) ── */}
+      <div className="border-b border-mecha-light1 bg-mecha-dark1 p-4 sm:p-8 md:p-12 flex justify-center">
+        <div className="w-full max-w-5xl border border-neutral-700 bg-mecha-black relative overflow-hidden flex items-center justify-center min-h-[350px] max-h-[700px] p-4 sm:p-8">
+          {project.imageUrl ? (
+            isMobileProject ? (
+              /* Mobile Screen: portrait full display, zero cropping */
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="max-h-[580px] w-auto max-w-full object-contain mx-auto shadow-2xl border border-neutral-700"
+              />
+            ) : (
+              /* Landscape Project: full display */
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="max-h-[550px] w-auto max-w-full object-contain mx-auto"
+              />
+            )
+          ) : (
+            <div className="font-mono text-xs tracking-widest text-neutral-400 uppercase">
+              PREVIEW IMAGE NOT AVAILABLE
             </div>
+          )}
 
-            {/* Links Block */}
-            <div className="flex flex-col gap-4 font-mono text-sm font-bold tracking-wider">
-              {project.liveUrl && (
-                <a 
-                  href={project.liveUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="p-4 border-2 border-mecha-dark bg-mecha-blue text-center hover:-translate-y-1 hover:-translate-x-1 hover:shadow-hard transition-all flex items-center justify-center gap-2 group"
-                >
-                  VIEW LIVE PROJECT
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </a>
-              )}
-              {project.githubUrl && (
-                <a 
-                  href={project.githubUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="p-4 border-2 border-mecha-dark bg-white text-mecha-dark text-center hover:-translate-y-1 hover:-translate-x-1 hover:shadow-hard transition-all flex items-center justify-center gap-2 group"
-                >
-                  SOURCE CODE
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </a>
-              )}
+          {/* Corner Notch */}
+          <div className="absolute top-0 right-0 w-4 h-4 border-l border-b border-neutral-500" />
+        </div>
+      </div>
+
+      {/* ── Specification Details Grid ───────────────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-mecha-light1 flex-grow">
+        {/* Left: Overview & Key Features */}
+        <div className="lg:col-span-8 p-6 sm:p-10 md:p-12 border-b lg:border-b-0 lg:border-r border-mecha-light1 space-y-8">
+          <div>
+            <h2 className="font-display font-bold text-xl md:text-2xl tracking-wide text-mecha-black uppercase mb-3">
+              OVERVIEW
+            </h2>
+            <p className="font-sans text-neutral-800 text-base md:text-lg leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+
+          <div className="border-t border-mecha-light1 pt-8">
+            <h2 className="font-display font-bold text-xl md:text-2xl tracking-wide text-mecha-black uppercase mb-4">
+              KEY FEATURES
+            </h2>
+            <div className="divide-y divide-mecha-light1 border border-mecha-light1">
+              {project.keyFeatures.map((feature, i) => (
+                <div key={i} className="p-4 flex items-start gap-3">
+                  <span className="font-mono text-xs font-bold text-neutral-400 mt-0.5">
+                    {String(i + 1).padStart(2, '0')}.
+                  </span>
+                  <span className="font-sans text-neutral-800 text-sm md:text-base leading-relaxed">
+                    {feature}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+
+        {/* Right: Technical Stack & Actions */}
+        <div className="lg:col-span-4 p-6 sm:p-10 bg-mecha-light2/30 flex flex-col justify-between space-y-6">
+          <div className="space-y-6">
+            <div className="border border-mecha-light1 bg-mecha-white p-6">
+              <h3 className="font-mono text-xs tracking-widest text-neutral-500 uppercase mb-4 pb-2 border-b border-mecha-light1">
+                TECHNOLOGIES &amp; TOOLS
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {project.technologies.map((tech) => (
+                  <Badge key={tech} className="bg-mecha-light2 text-neutral-800 border-mecha-light1">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Direct Action Links */}
+            <div className="space-y-3">
+              {project.liveUrl && (
+                <a
+                  href={typeof project.liveUrl === 'string' ? project.liveUrl : project.liveUrl[0]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between w-full px-5 py-3.5 bg-mecha-black text-mecha-white font-mono text-xs tracking-widest uppercase hover:bg-neutral-800 transition-colors font-semibold"
+                >
+                  <span className="flex items-center gap-2">
+                    <FaExternalLinkAlt className="text-xs" />
+                    <span>LAUNCH SYSTEM</span>
+                  </span>
+                  <span>↗</span>
+                </a>
+              )}
+
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between w-full px-5 py-3.5 border border-mecha-black text-mecha-black font-mono text-xs tracking-widest uppercase hover:bg-mecha-light2 transition-colors font-semibold"
+                >
+                  <span className="flex items-center gap-2">
+                    <FaGithub className="text-sm" />
+                    <span>GITHUB REPOSITORY</span>
+                  </span>
+                  <span>↗</span>
+                </a>
+              )}
+            </div>
+          </div>
+
+          <div className="font-mono text-xs text-neutral-500 uppercase">
+            CATEGORY // {project.category}
+          </div>
+        </div>
       </div>
-    </Section>
+    </div>
   );
 }

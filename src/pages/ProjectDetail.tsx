@@ -3,10 +3,12 @@ import { projects } from '../data/projects';
 import { Badge } from '../components/ui/Badge';
 import { FadeIn } from '../components/ui/FadeIn';
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft } from 'react-icons/fa';
+import { useTheme } from '../context/ThemeContext';
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
+  const { tokens } = useTheme();
 
   if (!project) {
     return <Navigate to="/projects" replace />;
@@ -15,12 +17,19 @@ export function ProjectDetail() {
   const isMobileProject = project.category.toLowerCase().includes('mobile') || project.slug === 'memospace';
 
   return (
-    <div className="bg-mecha-white text-mecha-black min-h-screen flex flex-col">
+    <div className="blueprint-surface text-mecha-black min-h-screen flex flex-col">
       {/* ── Navigation Strip ─────────────────────────────────── */}
-      <div className="border-b border-mecha-light1 px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-xs tracking-wider uppercase bg-mecha-light2">
+      <div
+        className="border-b px-6 md:px-12 py-3.5 flex items-center justify-between font-mono text-xs tracking-wider uppercase transition-colors"
+        style={{
+          backgroundColor: tokens.contentSubtleBg,
+          borderBottomColor: tokens.contentBorder,
+        }}
+      >
         <Link
           to="/projects"
-          className="inline-flex items-center gap-2 font-bold hover:text-neutral-600 transition-colors"
+          className="inline-flex items-center gap-2 font-bold transition-colors"
+          style={{ color: tokens.contentPrimary }}
         >
           <FaArrowLeft className="text-[10px]" />
           <span>BACK TO PROJECTS</span>
@@ -31,20 +40,33 @@ export function ProjectDetail() {
       </div>
 
       {/* ── Title Banner ─────────────────────────────────────── */}
-      <div className="border-b border-mecha-light1 px-6 sm:px-10 md:px-14 py-8 md:py-12 bg-mecha-white">
+      <div
+        className="border-b px-6 sm:px-10 md:px-14 py-8 md:py-12 bg-mecha-white"
+        style={{ borderBottomColor: tokens.contentBorder }}
+      >
         <FadeIn delay={0.1}>
-          <div className="font-mono text-xs tracking-widest text-neutral-500 uppercase mb-2">
+          <div
+            className="font-mono text-xs tracking-widest uppercase mb-2 font-bold"
+            style={{ color: tokens.contentPrimary }}
+          >
             PROJECT SPECIFICATION
           </div>
 
-          <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight text-mecha-black uppercase leading-tight">
+          <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight theme-accent-text uppercase leading-tight">
             {project.title}
           </h1>
 
           <div className="mt-4 flex flex-wrap gap-2">
-            <Badge className="bg-mecha-black text-mecha-white border-mecha-black">
+            <span
+              className="inline-flex items-center px-2.5 py-1 text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase border shadow-sm"
+              style={{
+                backgroundColor: tokens.contentPrimary,
+                borderColor: tokens.contentPrimary,
+                color: '#FFFFFF',
+              }}
+            >
               {project.category}
-            </Badge>
+            </span>
             <Badge className="bg-mecha-light2 text-neutral-800 border-mecha-light1">
               ROLE: {project.role}
             </Badge>
@@ -87,7 +109,7 @@ export function ProjectDetail() {
         {/* Left: Overview & Key Features */}
         <div className="lg:col-span-8 p-6 sm:p-10 md:p-12 border-b lg:border-b-0 lg:border-r border-mecha-light1 space-y-8">
           <div>
-            <h2 className="font-display font-bold text-xl md:text-2xl tracking-wide text-mecha-black uppercase mb-3">
+            <h2 className="font-display font-bold text-xl md:text-2xl tracking-wide theme-accent-text uppercase mb-3">
               OVERVIEW
             </h2>
             <p className="font-sans text-neutral-800 text-base md:text-lg leading-relaxed">
@@ -96,7 +118,7 @@ export function ProjectDetail() {
           </div>
 
           <div className="border-t border-mecha-light1 pt-8">
-            <h2 className="font-display font-bold text-xl md:text-2xl tracking-wide text-mecha-black uppercase mb-4">
+            <h2 className="font-display font-bold text-xl md:text-2xl tracking-wide theme-accent-text uppercase mb-4">
               KEY FEATURES
             </h2>
             <div className="divide-y divide-mecha-light1 border border-mecha-light1">
@@ -137,7 +159,11 @@ export function ProjectDetail() {
                   href={typeof project.liveUrl === 'string' ? project.liveUrl : project.liveUrl[0]}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between w-full px-5 py-3.5 bg-mecha-black text-mecha-white font-mono text-xs tracking-widest uppercase hover:bg-neutral-800 transition-colors font-semibold"
+                  className="flex items-center justify-between w-full px-5 py-3.5 text-white font-mono text-xs tracking-widest uppercase transition-opacity hover:opacity-90 font-bold border shadow-sm"
+                  style={{
+                    backgroundColor: tokens.contentPrimary,
+                    borderColor: tokens.contentPrimary,
+                  }}
                 >
                   <span className="flex items-center gap-2">
                     <FaExternalLinkAlt className="text-xs" />
@@ -152,7 +178,11 @@ export function ProjectDetail() {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between w-full px-5 py-3.5 border border-mecha-black text-mecha-black font-mono text-xs tracking-widest uppercase hover:bg-mecha-light2 transition-colors font-semibold"
+                  className="flex items-center justify-between w-full px-5 py-3.5 border font-mono text-xs tracking-widest uppercase transition-colors font-bold hover:bg-neutral-50"
+                  style={{
+                    borderColor: tokens.contentPrimary,
+                    color: tokens.contentPrimary,
+                  }}
                 >
                   <span className="flex items-center gap-2">
                     <FaGithub className="text-sm" />

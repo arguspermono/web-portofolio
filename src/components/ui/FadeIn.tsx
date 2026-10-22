@@ -7,6 +7,7 @@ interface FadeInProps {
   duration?: number;
   className?: string;
   direction?: 'up' | 'down' | 'left' | 'right' | 'none';
+  onClick?: () => void;
 }
 
 export const FadeIn = ({
@@ -15,6 +16,7 @@ export const FadeIn = ({
   duration = 0.4,
   className = '',
   direction = 'up',
+  onClick,
 }: FadeInProps) => {
   const prefersReducedMotion = useReducedMotion();
 
@@ -46,6 +48,7 @@ export const FadeIn = ({
         ease: [0, 0.55, 0.45, 1], // Mechanical snappy easing from design system
       }}
       className={className}
+      onClick={onClick}
     >
       {children}
     </motion.div>

@@ -43,17 +43,17 @@ export function ProjectsPage() {
   };
 
   return (
-    <div className="bg-mecha-black text-mecha-white min-h-screen flex flex-col">
+    <div className="blueprint-surface text-mecha-black min-h-screen flex flex-col">
       {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
       <ModulePanelHeader
         moduleNumber="MODULE.002 //"
         title="PROJECTS"
         description="SELECTED PRODUCTION PROJECTS IN WEB PLATFORMS, MOBILE SOFTWARE, 3D MULTIMEDIA, AND EXPERIMENTAL SYSTEMS."
-        theme="dark"
+        theme="light"
       />
 
       {/* ── 2. CATEGORY FILTER ───────────────────────────────── */}
-      <div className="border-b border-mecha-dark3 bg-mecha-dark1 px-6 md:px-12 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div className="border-b border-mecha-light1 bg-mecha-light2 px-6 md:px-12 py-3.5 flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-1.5">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat;
@@ -64,8 +64,8 @@ export function ProjectsPage() {
                 className={cn(
                   'px-3 py-1.5 font-mono text-xs tracking-wider uppercase transition-colors border',
                   isActive
-                    ? 'bg-mecha-white text-mecha-black border-mecha-white font-bold'
-                    : 'bg-transparent text-neutral-400 border-neutral-800 hover:border-neutral-500 hover:text-white'
+                    ? 'theme-accent-bg font-bold'
+                    : 'bg-white text-neutral-700 border-mecha-light1 theme-accent-hover'
                 )}
               >
                 {cat}
@@ -74,26 +74,26 @@ export function ProjectsPage() {
           })}
         </div>
 
-        <div className="font-mono text-xs tracking-wider text-neutral-400 uppercase">
+        <div className="font-mono text-xs tracking-wider text-neutral-500 uppercase">
           {filteredProjects.length} PROJECTS
         </div>
       </div>
 
       {/* ── 3. PROJECTS GRID ─────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 divide-y md:divide-y-0 border-b border-mecha-dark3 bg-mecha-black">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 divide-y md:divide-y-0 border-b border-mecha-light1 bg-transparent">
         {filteredProjects.map((project) => {
           const isMobile = project.category.toLowerCase().includes('mobile') || project.slug === 'memospace';
 
           return (
             <FadeIn
               key={project.id}
-              className="border-b md:border-r border-mecha-dark3 flex flex-col justify-between group hover:bg-mecha-dark1/40 transition-colors"
+              className="neo-card m-4 flex flex-col justify-between group transition-colors"
             >
               <div>
                 {/* Image Showcase — Adaptive for Mobile vs Web */}
                 <div
                   onClick={() => setActiveModalProject(project)}
-                  className="h-64 sm:h-72 w-full bg-mecha-dark2 relative overflow-hidden block border-b border-mecha-dark3 cursor-pointer"
+                  className="h-64 sm:h-72 w-full bg-mecha-light2 relative overflow-hidden block border-b border-mecha-light1 cursor-pointer"
                 >
                   {project.imageUrl ? (
                     <div className="w-full h-full flex items-center justify-center p-3">
@@ -102,7 +102,7 @@ export function ProjectsPage() {
                         <img
                           src={project.imageUrl}
                           alt={project.title}
-                          className="h-full w-auto max-w-full object-contain mx-auto shadow-md border border-neutral-700/60"
+                          className="h-full w-auto max-w-full object-contain mx-auto shadow-md border border-neutral-300"
                         />
                       ) : (
                         /* Landscape: full width */
@@ -114,17 +114,17 @@ export function ProjectsPage() {
                       )}
                     </div>
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center font-mono text-xs text-neutral-500 uppercase tracking-widest">
+                    <div className="w-full h-full flex items-center justify-center font-mono text-xs text-neutral-400 uppercase tracking-widest">
                       PREVIEW UNAVAILABLE
                     </div>
                   )}
 
                   {/* Corner Accent */}
-                  <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-neutral-600 z-10" />
+                  <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-neutral-400 z-10" />
 
                   {/* Category Pill */}
                   <div className="absolute top-3 left-3 z-10">
-                    <span className="font-mono text-[10px] tracking-widest uppercase bg-mecha-black/90 text-neutral-300 border border-neutral-700 px-2 py-0.5">
+                    <span className="font-mono text-[10px] tracking-widest uppercase bg-white/95 text-neutral-800 border border-neutral-300 px-2 py-0.5 shadow-sm">
                       {project.category}
                     </span>
                   </div>
@@ -140,29 +140,29 @@ export function ProjectsPage() {
 
                 {/* Card Body */}
                 <div className="p-6 md:p-8">
-                  <div className="font-mono text-xs tracking-wider text-neutral-400 uppercase mb-2">
+                  <div className="font-mono text-xs tracking-wider text-neutral-500 uppercase mb-2">
                     ROLE: {project.role}
                   </div>
 
                   <Link to={`/projects/${project.slug}`}>
-                    <h3 className="font-display font-bold text-xl md:text-2xl tracking-wide uppercase text-white group-hover:text-neutral-300 transition-colors mb-3 leading-snug">
+                    <h3 className="font-display font-bold text-xl md:text-2xl tracking-wide uppercase theme-accent-text group-hover:text-[var(--content-highlight)] transition-colors mb-3 leading-snug">
                       {project.title}
                     </h3>
                   </Link>
 
-                  <p className="font-sans text-neutral-300 text-sm leading-relaxed mb-6 font-normal line-clamp-3">
+                  <p className="font-sans text-neutral-600 text-sm leading-relaxed mb-6 font-normal line-clamp-3">
                     {project.description}
                   </p>
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {project.technologies.slice(0, 5).map((tech) => (
-                      <Badge key={tech} className="bg-mecha-dark1 text-neutral-300 border-neutral-800 text-[11px]">
+                      <Badge key={tech} className="bg-mecha-light2 text-neutral-800 border-mecha-light1 text-[11px]">
                         {tech}
                       </Badge>
                     ))}
                     {project.technologies.length > 5 && (
-                      <span className="font-mono text-[10px] text-neutral-400 self-center">
+                      <span className="font-mono text-[10px] text-neutral-500 self-center">
                         +{project.technologies.length - 5} MORE
                       </span>
                     )}
@@ -171,19 +171,19 @@ export function ProjectsPage() {
               </div>
 
               {/* Action Footer */}
-              <div className="p-6 pt-4 border-t border-mecha-dark3 flex items-center justify-between font-mono text-xs tracking-wider uppercase bg-mecha-dark1/30">
+              <div className="p-6 pt-4 border-t border-mecha-light1 flex items-center justify-between font-mono text-xs tracking-wider uppercase bg-mecha-light2/30">
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="text-white hover:text-neutral-300 font-semibold transition-colors flex items-center gap-1.5"
+                  className="text-mecha-black hover:text-neutral-600 font-semibold transition-colors flex items-center gap-1.5"
                 >
                   <span>SPECIFICATION</span>
                   <span>→</span>
                 </Link>
 
-                <div className="flex items-center gap-4 text-neutral-400">
+                <div className="flex items-center gap-4 text-neutral-500">
                   <button
                     onClick={() => setActiveModalProject(project)}
-                    className="hover:text-white transition-colors flex items-center gap-1"
+                    className="hover:text-black transition-colors flex items-center gap-1"
                     title="Quick Preview"
                   >
                     <FaEye />
@@ -193,7 +193,7 @@ export function ProjectsPage() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-white transition-colors"
+                      className="hover:text-black transition-colors"
                       title="GitHub"
                     >
                       <FaGithub className="text-base" />
@@ -204,7 +204,7 @@ export function ProjectsPage() {
                       href={typeof project.liveUrl === 'string' ? project.liveUrl : project.liveUrl[0]}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-white transition-colors"
+                      className="hover:text-black transition-colors"
                       title="Live System"
                     >
                       <FaExternalLinkAlt className="text-sm" />
@@ -220,20 +220,20 @@ export function ProjectsPage() {
       {/* ── 4. INTERACTIVE PROJECT PREVIEW MODAL ──────────────── */}
       {activeModalProject && (
         <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 md:p-10 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 md:p-10 animate-fadeIn"
           onClick={() => setActiveModalProject(null)}
         >
           <div
-            className="bg-mecha-black text-mecha-white border border-neutral-700 w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl relative"
+            className="neo-dialog bg-white text-black w-full max-w-4xl max-h-[92vh] flex flex-col relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="p-4 md:p-6 border-b border-mecha-dark3 bg-mecha-dark1 flex items-center justify-between">
+            <div className="p-4 md:p-6 border-b border-neutral-200 bg-neutral-50 flex items-center justify-between">
               <div>
-                <div className="font-mono text-xs tracking-widest text-neutral-400 uppercase">
+                <div className="font-mono text-xs tracking-widest text-neutral-500 uppercase">
                   {activeModalProject.category} // ROLE: {activeModalProject.role}
                 </div>
-                <h3 className="font-display font-bold text-xl md:text-2xl tracking-tight uppercase text-white mt-1">
+                <h3 className="font-display font-bold text-xl md:text-2xl tracking-tight uppercase text-black mt-1">
                   {activeModalProject.title}
                 </h3>
               </div>
@@ -241,14 +241,14 @@ export function ProjectsPage() {
               <div className="flex items-center gap-3">
                 <Link
                   to={`/projects/${activeModalProject.slug}`}
-                  className="px-3.5 py-1.5 border border-white bg-white text-black font-mono text-xs tracking-wider uppercase font-bold hover:bg-neutral-200 transition-colors"
+                  className="px-3.5 py-1.5 border border-black bg-black text-white font-mono text-xs tracking-wider uppercase font-bold hover:bg-neutral-800 transition-colors"
                 >
                   FULL CASE STUDY →
                 </Link>
 
                 <button
                   onClick={() => setActiveModalProject(null)}
-                  className="p-2 border border-neutral-700 bg-mecha-dark2 hover:bg-neutral-800 transition-colors"
+                  className="p-2 border border-neutral-300 bg-white hover:bg-neutral-100 transition-colors text-black"
                   aria-label="Close Preview"
                 >
                   <FaTimes className="text-base" />
@@ -257,23 +257,23 @@ export function ProjectsPage() {
             </div>
 
             {/* Modal Image Viewport */}
-            <div className="bg-neutral-950 p-4 md:p-6 flex items-center justify-center max-h-[480px] overflow-hidden border-b border-mecha-dark3">
+            <div className="bg-neutral-100 p-4 md:p-6 flex items-center justify-center max-h-[480px] overflow-hidden border-b border-neutral-200">
               {activeModalProject.imageUrl ? (
                 (activeModalProject.category.toLowerCase().includes('mobile') || activeModalProject.slug === 'memospace') ? (
                   <img
                     src={activeModalProject.imageUrl}
                     alt={activeModalProject.title}
-                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto shadow-2xl border border-neutral-700"
+                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto shadow-xl border border-neutral-300"
                   />
                 ) : (
                   <img
                     src={activeModalProject.imageUrl}
                     alt={activeModalProject.title}
-                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto"
+                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto shadow-md"
                   />
                 )
               ) : (
-                <div className="font-mono text-xs text-neutral-500 uppercase tracking-widest py-16">
+                <div className="font-mono text-xs text-neutral-400 uppercase tracking-widest py-16">
                   PREVIEW NOT AVAILABLE
                 </div>
               )}
@@ -281,13 +281,13 @@ export function ProjectsPage() {
 
             {/* Modal Details */}
             <div className="p-6 overflow-y-auto space-y-4">
-              <p className="font-sans text-neutral-300 text-sm md:text-base leading-relaxed">
+              <p className="font-sans text-neutral-700 text-sm md:text-base leading-relaxed">
                 {activeModalProject.description}
               </p>
 
               <div className="flex flex-wrap gap-1.5 pt-2">
                 {activeModalProject.technologies.map((tech) => (
-                  <Badge key={tech} className="bg-mecha-dark2 text-neutral-300 border-neutral-700 text-xs">
+                  <Badge key={tech} className="bg-neutral-100 text-neutral-800 border-neutral-200 text-xs">
                     {tech}
                   </Badge>
                 ))}
@@ -295,10 +295,10 @@ export function ProjectsPage() {
             </div>
 
             {/* Modal Navigation Footer */}
-            <div className="p-3 md:p-4 border-t border-mecha-dark3 bg-mecha-dark1 flex items-center justify-between font-mono text-xs tracking-wider uppercase">
+            <div className="p-3 md:p-4 border-t border-neutral-200 bg-neutral-50 flex items-center justify-between font-mono text-xs tracking-wider uppercase">
               <button
                 onClick={() => navigateModal(-1)}
-                className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-700 hover:border-white transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-300 bg-white hover:border-black hover:text-black transition-colors"
               >
                 <FaChevronLeft className="text-[10px]" />
                 <span>PREVIOUS</span>
@@ -310,7 +310,7 @@ export function ProjectsPage() {
 
               <button
                 onClick={() => navigateModal(1)}
-                className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-700 hover:border-white transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-300 bg-white hover:border-black hover:text-black transition-colors"
               >
                 <span>NEXT</span>
                 <FaChevronRight className="text-[10px]" />

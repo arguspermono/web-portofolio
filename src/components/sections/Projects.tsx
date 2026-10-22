@@ -133,7 +133,7 @@ export function Projects({ sectionIndex: _i = 2 }: SectionComponentProps) {
                 )}
                 {project.liveUrl && (
                   <a
-                    href={project.liveUrl}
+                    href={typeof project.liveUrl === 'string' ? project.liveUrl : project.liveUrl[0]}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1 hover:text-white transition-colors group/link"

@@ -8,7 +8,7 @@ export interface Project {
   category: string;
   imageUrl: string;
   githubUrl?: string;
-  liveUrl?: string;
+  liveUrl?: string | string[];
   keyFeatures: string[];
 }
 

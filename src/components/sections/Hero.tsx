@@ -71,7 +71,7 @@ export function Hero() {
 
           <FadeIn delay={0.5} className="w-full h-full">
             <img
-              src="/assets/img/profile/bagus-2.jpeg"
+              src="/assets/img/profile/bagus-1.png"
               alt="Arya Bagus"
               className="w-full h-full object-cover object-top grayscale opacity-85"
               style={{ minHeight: '400px' }}

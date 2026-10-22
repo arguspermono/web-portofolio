@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { ArgusLogo } from '../ui/ArgusLogo';
 
 export function Footer() {
   return (
@@ -10,22 +11,10 @@ export function Footer() {
       <div className="px-6 md:px-12 py-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-3">
-            <Link to="/" className="flex items-center gap-3 group">
-              <img
-                src="/assets/img/argus-logo.jpg"
-                alt="ARGUS logo"
-                className="w-9 h-9 object-cover border border-neutral-700 group-hover:border-white transition-colors"
-              />
-              <div>
-                <div className="font-display font-extrabold text-base tracking-[0.25em] uppercase text-white leading-none">
-                  ARGUS
-                </div>
-                <div className="font-mono text-[9px] tracking-[0.2em] text-neutral-400 uppercase mt-1">
-                  ARYA BAGUS // MULTIMEDIA TECH
-                </div>
-              </div>
+            <Link to="/">
+              <ArgusLogo size="md" />
             </Link>
-            <p className="font-mono text-xs text-neutral-300 tracking-wider uppercase">
+            <p className="font-mono text-xs text-neutral-400 tracking-wider uppercase">
               BUILDING DIGITAL EXPERIENCES THROUGH CODE &amp; CREATIVITY.
             </p>
           </div>

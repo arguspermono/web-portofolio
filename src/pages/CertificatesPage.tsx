@@ -44,7 +44,7 @@ export function CertificatesPage() {
   };
 
   return (
-    <div className="bg-mecha-white text-mecha-black min-h-screen flex flex-col">
+    <div className="blueprint-surface text-mecha-black min-h-screen flex flex-col">
       {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
       <ModulePanelHeader
         moduleNumber="MODULE.003 //"
@@ -66,8 +66,8 @@ export function CertificatesPage() {
                 className={cn(
                   'px-3 py-1.5 font-mono text-xs tracking-wider uppercase transition-colors border',
                   isActive
-                    ? 'bg-mecha-black text-mecha-white border-mecha-black font-bold'
-                    : 'bg-white text-neutral-700 border-mecha-light1 hover:border-neutral-400 hover:text-black'
+                    ? 'theme-accent-bg font-bold'
+                    : 'bg-white text-neutral-700 border-mecha-light1 theme-accent-hover'
                 )}
               >
                 {org}
@@ -84,22 +84,19 @@ export function CertificatesPage() {
             placeholder="SEARCH CERTIFICATES..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white border border-mecha-light1 pl-9 pr-4 py-2 font-mono text-xs tracking-wider uppercase text-mecha-black placeholder-neutral-400 focus:outline-none focus:border-mecha-black transition-colors"
+            className="w-full bg-white border border-mecha-light1 pl-9 pr-4 py-2 font-mono text-xs tracking-wider uppercase text-mecha-black placeholder-neutral-400 focus:outline-none theme-focus-accent transition-colors"
           />
         </div>
       </div>
 
       {/* ── 3. CERTIFICATES GRID ─────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 divide-y md:divide-y-0 border-b border-mecha-light1 bg-mecha-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 divide-y md:divide-y-0 border-b border-mecha-light1 bg-transparent">
         {filteredCerts.map((cert) => (
           <FadeIn
             key={cert.id}
-            className="border-b md:border-r border-mecha-light1 p-6 sm:p-8 flex flex-col justify-between hover:bg-mecha-light2/50 transition-colors group relative cursor-pointer"
+            className="neo-card m-4 p-6 sm:p-8 flex flex-col justify-between transition-colors group relative cursor-pointer"
             onClick={() => setActiveModalCert(cert)}
           >
-            {/* Top Corner Accent */}
-            <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-light1" />
-
             <div>
               <div className="flex items-center justify-between font-mono text-xs tracking-wider text-neutral-500 uppercase pb-2 mb-3 border-b border-mecha-light1">
                 <span>{cert.organization}</span>
@@ -109,7 +106,7 @@ export function CertificatesPage() {
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-lg sm:text-xl tracking-tight text-mecha-black uppercase mb-3 leading-snug group-hover:text-neutral-600 transition-colors">
+              <h3 className="font-display font-bold text-lg sm:text-xl tracking-tight theme-accent-text uppercase mb-3 leading-snug group-hover:text-[var(--content-highlight)] transition-colors">
                 {cert.title}
               </h3>
 
@@ -142,7 +139,7 @@ export function CertificatesPage() {
           onClick={() => setActiveModalCert(null)}
         >
           <div
-            className="bg-mecha-white text-mecha-black border border-mecha-black w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl relative"
+            className="neo-dialog bg-mecha-white text-mecha-black w-full max-w-4xl max-h-[92vh] flex flex-col relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

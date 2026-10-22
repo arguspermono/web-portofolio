@@ -1,5 +1,2 @@
+export * from './types/index';
 
-export interface SectionComponentProps {
-  theme?: 'light' | 'dark';
-  sectionIndex?: number;
-}

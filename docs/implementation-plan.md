@@ -1,12 +1,13 @@
 # Implementation Plan
 
-## Checklist for Clean Minimalism, Certificates Renaming & Interactive Previews
+## Interactivity & Initials Logo Implementation
 
-### Plan of Execution:
+### Implementation Roadmap:
+- [x] Analyze reference websites (`rafifnuha.my.id` and `rzainurtanto.github.io`)
 - [x] Update documentation (`docs/prd.md`, `docs/design-system.md`, `docs/implementation-plan.md`)
-- [ ] Rename Module 03 to **CERTIFICATES** (`/certificates`) across Router, Sidebar, and Page components
-- [ ] Implement Interactive Certificate Preview Modal in `CertificatesPage.tsx`
-- [ ] Implement Interactive Project Quick-Preview Modal in `ProjectsPage.tsx`
-- [ ] Redesign `AboutPage.tsx` to eliminate redundant stacked headers and add interactive Experience/Education tab switcher
-- [ ] Clean and simplify `ModulePanelHeader.tsx`
-- [ ] Update `Sidebar.tsx` navigation labels and routes
+- [ ] Create `InitialsLogo.tsx` for initials "AB" with proper, high-craft typography
+- [ ] Update `Sidebar.tsx` and `Footer.tsx` with the new "AB" initials logo
+- [ ] Implement Top Scroll Progress Bar component (`ScrollProgress.tsx`)
+- [ ] Implement Dynamic Typewriter Ticker component in `AboutPage.tsx`
+- [ ] Implement Ambient Audio/Lo-Fi Sound Player with animated equalizer bars in `Sidebar.tsx`
+- [ ] Refine project cards in `ProjectsPage.tsx` with structured metadata grid (Role, Year, Category) and interactive buttons inspired by `rafifnuha.my.id`

@@ -1,4 +1,5 @@
 import { cn } from '../../utils/cn';
+import { useTheme } from '../../context/ThemeContext';
 
 interface ModulePanelHeaderProps {
   moduleNumber: string; // e.g. "MODULE.001 //"
@@ -16,6 +17,7 @@ export function ModulePanelHeader({
   children,
 }: ModulePanelHeaderProps) {
   const isDark = theme === 'dark';
+  const { tokens } = useTheme();
 
   return (
     <div
@@ -48,14 +50,16 @@ export function ModulePanelHeader({
             <span
               className={cn(
                 'w-2 h-2 inline-block',
-                isDark ? 'bg-mecha-white' : 'bg-mecha-black'
+                isDark ? 'bg-mecha-white' : ''
               )}
+              style={!isDark ? { backgroundColor: tokens.contentPrimary } : undefined}
             />
             <span
               className={cn(
                 'font-mono text-xs md:text-sm tracking-[0.22em] uppercase font-medium',
                 isDark ? 'text-neutral-400' : 'text-neutral-500'
               )}
+              style={!isDark ? { color: tokens.contentPrimary } : undefined}
             >
               {moduleNumber}
             </span>
@@ -66,6 +70,7 @@ export function ModulePanelHeader({
               'font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-[0.06em] uppercase m-0 leading-none select-none',
               isDark ? 'text-mecha-white' : 'text-mecha-black'
             )}
+            style={!isDark ? { color: tokens.contentPrimary } : undefined}
           >
             {title}
           </h1>
@@ -84,6 +89,7 @@ export function ModulePanelHeader({
                 'font-mono text-xs md:text-sm leading-relaxed tracking-wider uppercase font-medium m-0',
                 isDark ? 'text-neutral-300' : 'text-neutral-700'
               )}
+              style={!isDark ? { color: tokens.contentPrimary } : undefined}
             >
               {description}
             </p>

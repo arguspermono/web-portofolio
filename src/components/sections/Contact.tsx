@@ -3,10 +3,12 @@ import { Button } from '../ui/Button';
 import { FadeIn } from '../ui/FadeIn';
 import { SectionHeader } from '../ui/SectionHeader';
 import type { SectionComponentProps } from '../../types';
+import { useTheme } from '../../context/ThemeContext';
 
 export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentProps) {
   const isDark = theme === 'dark';
   const numberStr = sectionIndex.toString().padStart(2, '0');
+  const { tokens } = useTheme();
 
   return (
     <Section 
@@ -47,7 +49,7 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
                   <div className={`font-mono text-[10px] tracking-widest uppercase ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
                     EMAIL
                   </div>
-                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
+                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'theme-accent-text group-hover:text-mecha-dark2'}`} style={!isDark ? { color: tokens.contentPrimary } : undefined}>
                     {import.meta.env.VITE_EMAIL}
                   </div>
                 </div>
@@ -62,7 +64,7 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
                   <div className={`font-mono text-[10px] tracking-widest uppercase ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
                     GITHUB
                   </div>
-                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
+                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'theme-accent-text group-hover:text-mecha-dark2'}`} style={!isDark ? { color: tokens.contentPrimary } : undefined}>
                     {import.meta.env.VITE_GITHUB}
                   </div>
                 </div>
@@ -77,7 +79,7 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
                   <div className={`font-mono text-[10px] tracking-widest uppercase ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
                     LINKEDIN
                   </div>
-                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'text-mecha-black group-hover:text-mecha-dark2'}`}>
+                  <div className={`font-bold text-sm transition-colors ${isDark ? 'text-mecha-white group-hover:text-mecha-light1' : 'theme-accent-text group-hover:text-mecha-dark2'}`} style={!isDark ? { color: tokens.contentPrimary } : undefined}>
                     {import.meta.env.VITE_LINKEDIN}
                   </div>
                 </div>

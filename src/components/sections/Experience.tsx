@@ -3,10 +3,12 @@ import { experiences } from '../../data/experience';
 import { FadeIn } from '../ui/FadeIn';
 import { SectionHeader } from '../ui/SectionHeader';
 import type { SectionComponentProps } from '../../types';
+import { useTheme } from '../../context/ThemeContext';
 
 export function Experience({ theme = 'dark', sectionIndex = 4 }: SectionComponentProps) {
   const isDark = theme === 'dark';
   const numberStr = sectionIndex.toString().padStart(2, '0');
+  const { tokens } = useTheme();
 
   return (
     <Section 
@@ -39,7 +41,7 @@ export function Experience({ theme = 'dark', sectionIndex = 4 }: SectionComponen
 
             {/* Right — Role + Details */}
             <div className="md:col-span-8">
-              <h3 className={`text-lg md:text-xl font-bold tracking-tight mb-1 ${isDark ? 'text-white' : 'text-mecha-black'}`}>
+              <h3 className={`text-lg md:text-xl font-bold tracking-tight mb-1 ${isDark ? 'text-white' : 'theme-accent-text'}`} style={!isDark ? { color: tokens.contentPrimary } : undefined}>
                 {exp.role}
               </h3>
               <div className={`font-mono text-xs tracking-widest mb-6 ${isDark ? 'text-mecha-light1' : 'text-mecha-dark2'}`}>

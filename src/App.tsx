@@ -1,13 +1,15 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Sidebar } from './components/layout/Sidebar';
 import { Footer } from './components/layout/Footer';
+import { ScrollProgress } from './components/ui/ScrollProgress';
 import { AboutPage } from './pages/AboutPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { CertificatesPage } from './pages/CertificatesPage';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { Resume } from './pages/Resume';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { ThemeToggle } from './components/ui/ThemeToggle';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -17,15 +19,41 @@ function ScrollToTop() {
   return null;
 }
 
+function ContentHeader() {
+  const { tokens } = useTheme();
+
+  return (
+    <header
+      className="hidden lg:flex h-14 shrink-0 items-center justify-end px-6 xl:px-10 border-b print:hidden"
+      style={{
+        backgroundColor: tokens.contentBg,
+        borderBottomColor: tokens.accent + '55',
+      }}
+      aria-label="Theme controls"
+    >
+      <ThemeToggle />
+    </header>
+  );
+}
+
 function App() {
   return (
-    <Router>
+    <ThemeProvider>
+      <Router>
+        {/* ── Top Scroll Reading Progress Indicator ── */}
+        <ScrollProgress />
+
+      {/* ── Fixed Sidebar ── */}
       <Sidebar />
 
-      <div className="min-h-screen bg-mecha-white text-mecha-black flex flex-col font-sans pt-14 lg:pt-0 lg:pl-64 xl:pl-72">
+      <div
+        className="min-h-screen bg-[var(--content-bg)] text-mecha-black flex flex-col font-sans pt-14 lg:pt-0 lg:pl-64 xl:pl-72"
+        style={{ backgroundColor: 'var(--content-bg)' }}
+      >
         <ScrollToTop />
+        <ContentHeader />
 
-        <main className="flex-grow">
+        <main className="blueprint-surface flex-grow">
           <Routes>
             <Route path="/" element={<AboutPage />} />
             <Route path="/about" element={<AboutPage />} />
@@ -42,6 +70,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

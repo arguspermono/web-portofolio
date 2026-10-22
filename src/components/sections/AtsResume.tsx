@@ -1,4 +1,3 @@
-import React from 'react';
 import { experiences, education } from '../../data/experience';
 import { skills } from '../../data/skills';
 import { certifications } from '../../data/certifications';

@@ -96,6 +96,7 @@ export function CertificatesPage() {
             key={cert.id}
             className="neo-card m-4 p-6 sm:p-8 flex flex-col justify-between transition-colors group relative cursor-pointer"
             onClick={() => setActiveModalCert(cert)}
+            ariaLabel={`Open certificate preview for ${cert.title}`}
           >
             <div>
               <div className="flex items-center justify-between font-mono text-xs tracking-wider text-neutral-500 uppercase pb-2 mb-3 border-b border-mecha-light1">
@@ -166,7 +167,7 @@ export function CertificatesPage() {
 
                 <button
                   onClick={() => setActiveModalCert(null)}
-                  className="p-2 border border-mecha-light1 bg-white hover:bg-neutral-100 transition-colors"
+                  className="flex min-h-10 min-w-10 items-center justify-center border border-mecha-light1 bg-white hover:bg-neutral-100 transition-colors"
                   aria-label="Close Preview"
                 >
                   <FaTimes className="text-base" />
@@ -195,7 +196,7 @@ export function CertificatesPage() {
             <div className="p-3 md:p-4 border-t border-mecha-light1 bg-mecha-white flex items-center justify-between font-mono text-xs tracking-wider uppercase">
               <button
                 onClick={() => navigateModal(-1)}
-                className="flex items-center gap-1.5 px-3 py-1.5 border border-mecha-light1 hover:border-black transition-colors"
+                className="flex min-h-10 items-center gap-1.5 px-3 py-1.5 border border-mecha-light1 hover:border-black transition-colors"
               >
                 <FaChevronLeft className="text-[10px]" />
                 <span>PREVIOUS</span>
@@ -207,7 +208,7 @@ export function CertificatesPage() {
 
               <button
                 onClick={() => navigateModal(1)}
-                className="flex items-center gap-1.5 px-3 py-1.5 border border-mecha-light1 hover:border-black transition-colors"
+                className="flex min-h-10 items-center gap-1.5 px-3 py-1.5 border border-mecha-light1 hover:border-black transition-colors"
               >
                 <span>NEXT</span>
                 <FaChevronRight className="text-[10px]" />

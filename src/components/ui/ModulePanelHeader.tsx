@@ -32,7 +32,7 @@ export function ModulePanelHeader({
         {/* ── Left Title Box with Chamfer Notch ── */}
         <div
           className={cn(
-            'lg:col-span-7 xl:col-span-8 p-6 md:p-10 flex flex-col justify-center relative border-b lg:border-b-0 lg:border-r',
+            'ascii-spotlight lg:col-span-7 xl:col-span-8 p-6 md:p-10 flex flex-col justify-center relative border-b lg:border-b-0 lg:border-r',
             isDark
               ? 'border-mecha-dark3 bg-mecha-black'
               : 'border-mecha-light1 bg-mecha-white'
@@ -79,7 +79,7 @@ export function ModulePanelHeader({
         {/* ── Right Description Box ── */}
         <div
           className={cn(
-            'lg:col-span-5 xl:col-span-4 p-6 md:p-8 flex flex-col justify-center',
+            'ascii-spotlight lg:col-span-5 xl:col-span-4 p-6 md:p-8 flex flex-col justify-center',
             isDark ? 'bg-mecha-dark1' : 'bg-mecha-light2'
           )}
         >

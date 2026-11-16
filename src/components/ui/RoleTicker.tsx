@@ -43,17 +43,17 @@ export function RoleTicker() {
 
   return (
     <div
-      className="inline-flex items-center gap-2 border px-3 py-1 font-mono text-[11px] sm:text-xs tracking-wider uppercase text-white"
+      className="inline-flex max-w-full items-center gap-1 border px-2 py-1 font-mono text-[9px] tracking-wider uppercase text-white sm:gap-2 sm:px-3 sm:text-xs"
       style={{
         backgroundColor: tokens.contentPrimary,
         borderColor: tokens.contentPrimary,
       }}
     >
-      <span className="font-bold" style={{ color: tokens.accentHighlight }}>&gt;</span>
+      <span className="font-bold" style={{ color: '#FFCB3D' }}>&gt;</span>
       <span className="font-semibold">{displayText}</span>
       <span
         className="inline-block w-2 h-3.5 animate-pulse"
-        style={{ backgroundColor: tokens.accent }}
+        style={{ backgroundColor: '#FFCB3D' }}
       />
     </div>
   );

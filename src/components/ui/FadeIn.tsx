@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 
 interface FadeInProps {
   children: ReactNode;
@@ -8,49 +7,36 @@ interface FadeInProps {
   className?: string;
   direction?: 'up' | 'down' | 'left' | 'right' | 'none';
   onClick?: () => void;
+  ariaLabel?: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 export const FadeIn = ({
   children,
-  delay = 0,
-  duration = 0.4,
   className = '',
-  direction = 'up',
   onClick,
+  ariaLabel,
+  onMouseEnter,
+  onMouseLeave,
 }: FadeInProps) => {
-  const prefersReducedMotion = useReducedMotion();
-
-  const directions = {
-    up: { y: 20, x: 0 },
-    down: { y: -20, x: 0 },
-    left: { x: 20, y: 0 },
-    right: { x: -20, y: 0 },
-    none: { x: 0, y: 0 },
-  };
-
-  // If user prefers reduced motion, just do a simple opacity fade with no movement
-  const initial = prefersReducedMotion
-    ? { opacity: 0 }
-    : { opacity: 0, ...directions[direction] };
-
-  const animate = prefersReducedMotion
-    ? { opacity: 1 }
-    : { opacity: 1, x: 0, y: 0 };
-
   return (
-    <motion.div
-      initial={initial}
-      whileInView={animate}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{
-        duration: prefersReducedMotion ? 0.15 : duration,
-        delay: prefersReducedMotion ? 0 : delay,
-        ease: [0, 0.55, 0.45, 1], // Mechanical snappy easing from design system
-      }}
-      className={className}
+    <div
+      className={`${className}${onClick ? ' focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--content-primary)]' : ''}`}
       onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      aria-label={ariaLabel}
+      onKeyDown={onClick ? (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onClick();
+        }
+      } : undefined}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };

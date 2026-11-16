@@ -1,7 +1,8 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { projects } from '../data/projects';
+import { getProjectPreviewImages, projects } from '../data/projects';
 import { Badge } from '../components/ui/Badge';
 import { FadeIn } from '../components/ui/FadeIn';
+import { ProjectPreviewGallery } from '../components/ui/ProjectPreviewGallery';
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 
@@ -78,21 +79,14 @@ export function ProjectDetail() {
       <div className="border-b border-mecha-light1 bg-mecha-dark1 p-4 sm:p-8 md:p-12 flex justify-center">
         <div className="w-full max-w-5xl border border-neutral-700 bg-mecha-black relative overflow-hidden flex items-center justify-center min-h-[350px] max-h-[700px] p-4 sm:p-8">
           {project.imageUrl ? (
-            isMobileProject ? (
-              /* Mobile Screen: portrait full display, zero cropping */
-              <img
-                src={project.imageUrl}
-                alt={project.title}
-                className="max-h-[580px] w-auto max-w-full object-contain mx-auto shadow-2xl border border-neutral-700"
-              />
-            ) : (
-              /* Landscape Project: full display */
-              <img
-                src={project.imageUrl}
-                alt={project.title}
-                className="max-h-[550px] w-auto max-w-full object-contain mx-auto"
-              />
-            )
+            <ProjectPreviewGallery
+              images={getProjectPreviewImages(project)}
+              title={project.title}
+              fit="contain"
+              autoAdvanceOnHover={false}
+              className={isMobileProject ? 'h-[580px] max-h-[60vh] w-full' : 'h-[550px] max-h-[60vh] w-full'}
+              imageClassName={isMobileProject ? 'mx-auto shadow-2xl' : 'mx-auto'}
+            />
           ) : (
             <div className="font-mono text-xs tracking-widest text-neutral-400 uppercase">
               PREVIEW IMAGE NOT AVAILABLE

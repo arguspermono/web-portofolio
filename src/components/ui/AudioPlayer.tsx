@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils/cn';
 
-export function AudioPlayer() {
+interface AudioPlayerProps {
+  compact?: boolean;
+}
+
+export function AudioPlayer({ compact = false }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
@@ -92,13 +96,14 @@ export function AudioPlayer() {
     <button
       onClick={toggleSound}
       className={cn(
-        'group flex items-center gap-2 px-2.5 py-1.5 border transition-all text-xs font-mono uppercase tracking-wider select-none',
+        'group flex items-center gap-2 border transition-all text-xs font-mono uppercase tracking-wider select-none',
+        compact ? 'h-9 w-9 justify-center p-0' : 'h-12 px-2.5 py-1.5',
         isPlaying
           ? 'border-white bg-white text-black'
           : 'border-neutral-800 bg-neutral-900/60 text-neutral-400 hover:border-neutral-600 hover:text-white'
       )}
       title={isPlaying ? 'Click to pause ambient sound' : 'Click to play ambient lo-fi sound'}
-      aria-label="Ambient sound player"
+      aria-label={isPlaying ? 'Pause ambient sound' : 'Play ambient sound'}
     >
       {/* 3-Bar Equalizer Waveform */}
       <div className="flex items-end gap-[3px] h-3 w-3">
@@ -122,9 +127,11 @@ export function AudioPlayer() {
         />
       </div>
 
-      <span className="text-[10px] font-semibold tracking-widest">
-        {isPlaying ? 'AUDIO ON' : 'LO-FI AMBIENT'}
-      </span>
+      {!compact && (
+        <span className="text-[10px] font-semibold tracking-widest">
+          {isPlaying ? 'AUDIO ON' : 'LO-FI AMBIENT'}
+        </span>
+      )}
     </button>
   );
 }

@@ -1,12 +1,14 @@
 import { Badge } from '../ui/Badge';
-import { projects } from '../../data/projects';
+import { getProjectPreviewImages, projects } from '../../data/projects';
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../ui/FadeIn';
-import { useRef } from 'react';
+import { ProjectPreviewGallery } from '../ui/ProjectPreviewGallery';
+import { useRef, useState } from 'react';
 import type { SectionComponentProps } from '../../types';
 
 export function Projects({ sectionIndex: _i = 2 }: SectionComponentProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -59,7 +61,9 @@ export function Projects({ sectionIndex: _i = 2 }: SectionComponentProps) {
           <FadeIn
             key={project.id}
             delay={0.1 * (index + 1)}
-            className="flex-none w-[85vw] sm:w-[400px] lg:w-[440px] snap-start border-r border-mecha-dark3 last:border-r-0 flex flex-col"
+            className="flex-none w-[85vw] sm:w-[400px] lg:w-[440px] snap-start m-3 rounded-2xl border border-mecha-dark3 bg-mecha-black overflow-hidden flex flex-col"
+            onMouseEnter={() => setHoveredProjectId(project.id)}
+            onMouseLeave={() => setHoveredProjectId(null)}
           >
             {/* Card image */}
             <Link
@@ -67,10 +71,12 @@ export function Projects({ sectionIndex: _i = 2 }: SectionComponentProps) {
               className="aspect-video bg-mecha-dark2 border-b border-mecha-dark3 relative overflow-hidden group block"
             >
               {project.imageUrl ? (
-                <img
-                  src={project.imageUrl}
-                  alt={project.title}
-                  className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                <ProjectPreviewGallery
+                  images={getProjectPreviewImages(project)}
+                  title={project.title}
+                  showIndicators={false}
+                  isHovered={hoveredProjectId === project.id}
+                  imageClassName="grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">

@@ -32,7 +32,6 @@ export function ProfilePhotoDeck() {
       {profilePhotos.map((src, index) => {
         const stackPosition = (index - activePhoto + profilePhotos.length) % profilePhotos.length;
         const offset = cardOffsets[stackPosition];
-        const filterId = `profile-photo-invert-${index}`;
         const maskId = `profile-photo-mask-${index}`;
         const patternId = `profile-photo-dots-${index}`;
 
@@ -40,6 +39,7 @@ export function ProfilePhotoDeck() {
           <span
             key={src}
             className="absolute inset-0 block overflow-hidden rounded-[14px] border-2 border-black bg-white shadow-[-4px_4px_0_#d4d4d8,-8px_8px_0_#a1a1aa] transition-[transform,opacity] duration-300 ease-out"
+            data-stack-position={stackPosition}
             style={{
               zIndex: profilePhotos.length - stackPosition,
               transform: `translate(${offset.x}px, ${offset.y}px) rotate(${offset.rotation}deg)`,
@@ -64,24 +64,12 @@ export function ProfilePhotoDeck() {
               aria-hidden="true"
             >
               <defs>
-                <filter id={filterId} colorInterpolationFilters="sRGB">
-                  <feColorMatrix
-                    type="matrix"
-                    values="
-                      -0.2126 -0.7152 -0.0722 0 1
-                      -0.2126 -0.7152 -0.0722 0 1
-                      -0.2126 -0.7152 -0.0722 0 1
-                      0 0 0 1 0
-                    "
-                  />
-                </filter>
-                <mask id={maskId}>
+                <mask id={maskId} className="profile-photo-alpha-mask">
                   <image
                     href={src}
                     width="300"
                     height="375"
-                    preserveAspectRatio="xMidYMin slice"
-                    filter={`url(#${filterId})`}
+                    preserveAspectRatio="xMidYMin meet"
                   />
                 </mask>
                 <pattern id={patternId} width="3.2" height="3.2" patternUnits="userSpaceOnUse">

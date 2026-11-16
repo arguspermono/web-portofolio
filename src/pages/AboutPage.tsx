@@ -26,7 +26,7 @@ export function AboutPage() {
       {/* ── 1. UNIFIED CLEAN HERO & DOSSIER HEADER ─────────────── */}
       <section className="grid grid-cols-1 lg:grid-cols-12 border-b border-mecha-light1">
         {/* Left Column: Introduction & Identity */}
-        <div className="lg:col-span-7 xl:col-span-8 p-6 sm:p-10 md:p-14 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-mecha-light1 bg-mecha-white">
+        <FadeIn className="ascii-spotlight min-w-0 lg:col-span-7 xl:col-span-8 p-6 sm:p-10 md:p-14 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-mecha-light1 bg-white/90">
           <div>
             {/* Minimalist Module Indicator */}
             <div className="flex items-center gap-2.5 mb-4">
@@ -76,11 +76,11 @@ export function AboutPage() {
               <FaMapMarkerAlt className="theme-accent-text" /> BASE: SURABAYA, ID
             </span>
           </div>
-        </div>
+        </FadeIn>
 
         {/* Right Column: Interactive Portrait Photo Stack */}
-        <div className="lg:col-span-5 xl:col-span-4 bg-mecha-light2 flex flex-col justify-between">
-          <div className="w-full flex-grow flex items-center justify-center p-6 md:p-10">
+        <FadeIn className="min-w-0 lg:col-span-5 xl:col-span-4 bg-mecha-light2 flex flex-col justify-between">
+          <div className="min-w-0 w-full flex-grow flex items-center justify-center p-6 md:p-10">
             <ProfilePhotoDeck />
           </div>
 
@@ -88,7 +88,7 @@ export function AboutPage() {
             <span>CALLSIGN: ARGUS</span>
             <span>DEVELOPER DOSSIER</span>
           </div>
-        </div>
+        </FadeIn>
       </section>
 
       {/* ── 2. BIOGRAPHY STATEMENT ───────────────────────────── */}

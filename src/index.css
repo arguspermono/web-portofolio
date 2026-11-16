@@ -7,15 +7,18 @@
   --content-primary: #0B0B0E;
   --content-highlight: #52525B;
   --content-accent: #FFFFFF;
+  --spotlight-color: #52525B;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    background: transparent;
   }
 
   body {
-    @apply text-mecha-black bg-mecha-white font-mono antialiased;
+    @apply text-mecha-black font-mono antialiased;
+    background: transparent;
     font-feature-settings: "kern" 1, "liga" 1;
   }
 
@@ -55,6 +58,16 @@
   ::selection {
     @apply bg-mecha-black text-mecha-white;
   }
+}
+
+html,
+body {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 @layer utilities {
@@ -134,20 +147,46 @@
   }
 
   .blueprint-surface {
-    background-color: var(--content-bg);
-    background-image:
-      linear-gradient(rgb(0 0 0 / 3.5%) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(0 0 0 / 3.5%) 1px, transparent 1px),
-      linear-gradient(rgb(0 0 0 / 1.5%) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(0 0 0 / 1.5%) 1px, transparent 1px);
-    background-size: 24px 24px, 24px 24px, 6px 6px, 6px 6px;
+    background-color: transparent;
   }
 
-  .neo-card {
+  .profile-photo-alpha-mask {
+    mask-type: alpha;
+  }
+
+  .ats-resume-page,
+  .ats-resume-page * {
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+
+  .neo-card,
+  .neo-dialog {
     border: 2px solid var(--content-primary) !important;
-    border-radius: 14px;
-    background-color: #fff;
+    border-radius: 14px !important;
+    background-color: color-mix(in srgb, var(--content-bg) 90%, transparent) !important;
+    background-image: radial-gradient(
+      circle 180px at var(--mouse-x, -200px) var(--mouse-y, -200px),
+      color-mix(in srgb, var(--spotlight-color) 20%, transparent),
+      transparent 100%
+    );
+    backdrop-filter: blur(4px);
     box-shadow: -4px 4px 0 #d4d4d8, -8px 8px 0 #a1a1aa;
+  }
+
+  .ascii-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .ascii-spotlight {
+    background-image: radial-gradient(
+      circle 180px at var(--mouse-x, -200px) var(--mouse-y, -200px),
+      color-mix(in srgb, var(--spotlight-color) 18%, transparent),
+      transparent 100%
+    );
+    backdrop-filter: blur(4px);
   }
 
   .neo-button {
@@ -172,6 +211,37 @@
     border-radius: 16px !important;
     box-shadow: -6px 6px 0 #d4d4d8, -12px 12px 0 #a1a1aa !important;
   }
+}
+
+@media (max-width: 639px) {
+  .profile-photo-deck > [data-stack-position="1"] {
+    transform: translate(5px, -4px) rotate(2deg) !important;
+  }
+
+  .profile-photo-deck > [data-stack-position="2"] {
+    transform: translate(-5px, 4px) rotate(-2deg) !important;
+  }
+
+  .profile-photo-deck > [data-stack-position="3"] {
+    transform: translate(7px, 5px) rotate(3deg) !important;
+  }
+}
+
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+@media print {
+  .cs-layer,
+  .cs-hud {
+    display: none !important;
+  }
+}
+
+[role="button"] {
+  cursor: pointer;
 }
 
 main button {

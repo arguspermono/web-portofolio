@@ -1,103 +1,171 @@
-import { experiences, education } from '../../data/experience';
-import { skills } from '../../data/skills';
 import { certifications } from '../../data/certifications';
+import { education, experiences } from '../../data/experience';
+import { skills } from '../../data/skills';
 
-export function AtsResume() {
+const contactLinks = [
+  {
+    label: import.meta.env.VITE_EMAIL || 'aryabaguspermono@gmail.com',
+    href: `mailto:${import.meta.env.VITE_EMAIL || 'aryabaguspermono@gmail.com'}`,
+  },
+  {
+    label: import.meta.env.VITE_LINKEDIN || 'linkedin.com/in/arya-bagus',
+    href: import.meta.env.VITE_LINKEDIN || 'https://www.linkedin.com/in/arya-bagus/',
+  },
+  {
+    label: import.meta.env.VITE_GITHUB || 'github.com/arguspermono',
+    href: import.meta.env.VITE_GITHUB || 'https://github.com/arguspermono',
+  },
+];
+
+const featuredProjects = [
+  {
+    name: 'MediaPENS',
+    role: 'Backend Developer',
+    detail: 'Developed and maintained backend functionality and data management for a campus media platform.',
+    stack: 'Laravel, PHP, MySQL, Vue.js',
+  },
+  {
+    name: 'ENT Crews Website',
+    role: 'Webmaster / Backend Developer',
+    detail: 'Built an organization profile website presenting ENT activities, creative work, teams, and members.',
+    stack: 'Laravel, PHP, MySQL, React',
+  },
+  {
+    name: 'MemoSpace',
+    role: 'Mobile Developer',
+    detail: 'Developed a Flutter notes app with rich-text editing, OCR text extraction, local storage, and reminders.',
+    stack: 'Flutter, Dart, SQLite, Google ML Kit',
+  },
+];
+
+export function AtsResume({ previewScale = 1 }: { previewScale?: number }) {
+  const orderedExperiences = [...experiences].reverse();
+
   return (
-    <div className="font-[Arial,Helvetica,sans-serif] font-medium text-black bg-white max-w-[210mm] mx-auto text-[11pt] leading-[1.15] p-[0.65in] print:p-0">
+    <article
+      className="ats-resume-page box-border h-[297mm] w-[210mm] shrink-0 overflow-hidden bg-white px-[12mm] py-[10mm] font-[Arial,Helvetica,sans-serif] text-[9pt] font-normal leading-[1.12] text-black"
+      style={{
+        transform: previewScale === 1 ? undefined : `scale(${previewScale})`,
+        transformOrigin: 'top left',
+      }}
+      aria-label="A4 resume"
+    >
       <style type="text/css" media="print">
         {`
-          @page { size: A4 portrait; margin: 0.65in; }
-          /* Extra safeguards for print formatting */
-          h2 { break-after: avoid; page-break-after: avoid; }
-          .avoid-break { break-inside: avoid; page-break-inside: avoid; }
+          @page { size: A4 portrait; margin: 0; }
+          .ats-resume-page { break-after: avoid; page-break-after: avoid; }
+          .ats-resume-section { break-inside: avoid; page-break-inside: avoid; }
         `}
       </style>
-      {/* HEADER */}
-      <div className="text-center mb-[12px] avoid-break">
-        <h1 className="text-[22pt] font-bold uppercase tracking-wider mb-[4px]">Arya Bagus Permono</h1>
-        <p className="text-[11pt] mb-[2px]">Surabaya, Indonesia</p>
-        <p className="text-[11pt]">
-          <a href={`mailto:${import.meta.env.VITE_EMAIL}`} className="text-black no-underline hover:underline">{import.meta.env.VITE_EMAIL}</a> •{' '}
-          <a href={import.meta.env.VITE_LINKEDIN} className="text-black no-underline hover:underline">{import.meta.env.VITE_LINKEDIN}</a> •{' '}
-          <a href={import.meta.env.VITE_GITHUB} className="text-black no-underline hover:underline">{import.meta.env.VITE_GITHUB}</a>
-        </p>
-      </div>
 
-      {/* SUMMARY */}
-      <div className="mb-[12px] avoid-break">
-        <h2 className="text-[13pt] font-bold uppercase border-b-[1.5px] border-black mb-[4px] pb-[2px] break-after-avoid">Professional Summary</h2>
-        <p className="text-justify">
-          I'm a Multimedia Engineering Technology student with experience in web and mobile development, 
-          and a growing interest in data science, machine learning, and artificial intelligence. 
-          Dedicated to building digital experiences through code and creativity.
-        </p>
-      </div>
-
-      {/* EXPERIENCE */}
-      <div className="mb-[12px]">
-        <h2 className="text-[13pt] font-bold uppercase border-b-[1.5px] border-black mb-[4px] pb-[2px] break-after-avoid">Experience</h2>
-        {experiences.map((exp) => (
-          <div key={exp.id} className="mb-[10px] avoid-break">
-            <div className="flex justify-between items-baseline mb-[2px]">
-              <h3 className="font-bold text-[11pt]">{exp.role}</h3>
-              <span className="text-[11pt] whitespace-nowrap">{exp.startDate} - {exp.endDate}</span>
-            </div>
-            <div className="italic mb-[4px]">{exp.company}</div>
-            <ul className="list-disc list-outside ml-4 space-y-[2px]">
-              {exp.responsibilities.map((resp, index) => (
-                <li key={index} className="pl-1">{resp}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      {/* EDUCATION */}
-      <div className="mb-[12px]">
-        <h2 className="text-[13pt] font-bold uppercase border-b-[1.5px] border-black mb-[4px] pb-[2px] break-after-avoid">Education</h2>
-        {education.map((edu) => (
-          <div key={edu.id} className="mb-[10px] avoid-break">
-            <div className="flex justify-between items-baseline mb-[2px]">
-              <h3 className="font-bold text-[11pt]">{edu.degree}</h3>
-              <span className="text-[11pt] whitespace-nowrap">{edu.startDate} - {edu.endDate}</span>
-            </div>
-            <div className="italic mb-[4px]">{edu.institution}</div>
-            <ul className="list-disc list-outside ml-4 space-y-[2px]">
-              {edu.details.map((detail, index) => (
-                <li key={index} className="pl-1">{detail}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      {/* SKILLS */}
-      <div className="mb-[12px] avoid-break">
-        <h2 className="text-[13pt] font-bold uppercase border-b-[1.5px] border-black mb-[4px] pb-[2px] break-after-avoid">Skills</h2>
-        <div className="space-y-[2px]">
-          {skills.map((skillGroup, index) => (
-            <div key={index}>
-              <span className="font-bold">{skillGroup.title}: </span>
-              <span>{skillGroup.skills.join(', ')}</span>
-            </div>
+      <header className="ats-resume-section mb-[4mm] text-center">
+        <h1 className="mb-[1mm] text-[20pt] font-bold uppercase leading-none tracking-wide text-black">
+          Arya Bagus Permono
+        </h1>
+        <p className="mb-[1mm] text-[9pt] leading-tight">Multimedia Engineering Technologist | Surabaya, Indonesia</p>
+        <p className="text-[8pt] leading-tight">
+          {contactLinks.map((contact, index) => (
+            <span key={contact.href}>
+              {index > 0 && ' | '}
+              <a className="break-all text-black no-underline" href={contact.href}>
+                {contact.label}
+              </a>
+            </span>
           ))}
-        </div>
-      </div>
+        </p>
+      </header>
 
-      {/* CERTIFICATIONS */}
-      {certifications.length > 0 && (
-        <div className="avoid-break mb-[12px]">
-          <h2 className="text-[13pt] font-bold uppercase border-b-[1.5px] border-black mb-[4px] pb-[2px] break-after-avoid">Certifications & Awards</h2>
-          <ul className="list-disc list-outside ml-4 space-y-[2px]">
-            {certifications.map((cert) => (
-              <li key={cert.id} className="pl-1">
-                <span className="font-bold">{cert.title}</span> - {cert.organization} ({cert.date})
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+      <section className="ats-resume-section mb-[2.5mm]">
+        <h2 className="mb-[1mm] border-b border-black pb-[0.5mm] text-[10pt] font-bold uppercase leading-tight text-black">
+          Professional Summary
+        </h2>
+        <p className="text-[9pt] leading-[1.12]">
+          Multimedia Engineering Technology student at Politeknik Elektronika Negeri Surabaya with experience in
+          backend development, web platforms, and Flutter applications. Team leader and webmaster at EEPIS News
+          and Network Team, with additional work in 3D multimedia and an interest in data science and applied AI.
+        </p>
+      </section>
+
+      <section className="ats-resume-section mb-[2.5mm]">
+        <h2 className="mb-[1mm] border-b border-black pb-[0.5mm] text-[10pt] font-bold uppercase leading-tight text-black">
+          Experience
+        </h2>
+        {orderedExperiences.map((experience) => (
+          <div key={experience.id} className="mb-[1.5mm] last:mb-0">
+            <div className="flex items-baseline justify-between gap-3">
+              <h3 className="text-[9pt] font-bold leading-tight text-black">{experience.role}</h3>
+              <span className="shrink-0 text-[8pt] leading-tight">
+                {experience.startDate} – {experience.endDate}
+              </span>
+            </div>
+            <p className="mb-[0.5mm] text-[8pt] italic leading-tight">{experience.company}</p>
+            <ul className="list-disc pl-[4mm] text-[8pt] leading-[1.1]">
+              {experience.responsibilities.map((responsibility) => (
+                <li key={responsibility} className="pl-[0.5mm]">{responsibility}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <section className="ats-resume-section mb-[2.5mm]">
+        <h2 className="mb-[1mm] border-b border-black pb-[0.5mm] text-[10pt] font-bold uppercase leading-tight text-black">
+          Selected Projects
+        </h2>
+        {featuredProjects.map((project) => (
+          <div key={project.name} className="mb-[1mm] last:mb-0">
+            <p className="text-[8pt] leading-tight">
+              <strong>{project.name}</strong> | {project.role} — {project.detail}
+            </p>
+            <p className="text-[7.5pt] leading-tight text-neutral-700">Technologies: {project.stack}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="ats-resume-section mb-[2.5mm]">
+        <h2 className="mb-[1mm] border-b border-black pb-[0.5mm] text-[10pt] font-bold uppercase leading-tight text-black">
+          Education
+        </h2>
+        {education.map((item) => (
+          <div key={item.institution} className="mb-[1.5mm] last:mb-0">
+            <div className="flex items-baseline justify-between gap-3">
+              <h3 className="text-[9pt] font-bold leading-tight text-black">{item.degree}</h3>
+              <span className="shrink-0 text-[8pt] leading-tight">
+                {item.startDate} – {item.endDate}
+              </span>
+            </div>
+            <p className="text-[8pt] italic leading-tight">{item.institution}</p>
+            <p className="text-[7.5pt] leading-tight">{item.details.join(' • ')}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="ats-resume-section mb-[2.5mm]">
+        <h2 className="mb-[1mm] border-b border-black pb-[0.5mm] text-[10pt] font-bold uppercase leading-tight text-black">
+          Skills
+        </h2>
+        <p className="text-[8pt] leading-[1.12]">
+          {skills.map((category, index) => (
+            <span key={category.title}>
+              {index > 0 && ' | '}
+              <strong>{category.title}:</strong> {category.skills.join(', ')}
+            </span>
+          ))}
+        </p>
+      </section>
+
+      <section className="ats-resume-section">
+        <h2 className="mb-[1mm] border-b border-black pb-[0.5mm] text-[10pt] font-bold uppercase leading-tight text-black">
+          Certifications
+        </h2>
+        <ul className="list-disc pl-[4mm] text-[7.5pt] leading-[1.1]">
+          {certifications.slice(0, 6).map((certification) => (
+            <li key={certification.id} className="pl-[0.5mm]">
+              {certification.title} — {certification.organization} ({certification.date})
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
   );
 }

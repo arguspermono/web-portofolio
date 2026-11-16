@@ -3,9 +3,10 @@ import { cn } from '../../utils/cn';
 
 interface ThemeToggleProps {
   className?: string;
+  compact?: boolean;
 }
 
-export function ThemeToggle({ className }: ThemeToggleProps) {
+export function ThemeToggle({ className, compact = false }: ThemeToggleProps) {
   const { theme, tokens, cycleTheme } = useTheme();
 
   return (
@@ -13,7 +14,8 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       type="button"
       onClick={cycleTheme}
       className={cn(
-        'inline-flex w-[132px] items-center justify-between gap-2.5 border px-2.5 py-1.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+        'inline-flex items-center border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+        compact ? 'h-9 w-9 justify-center p-0' : 'h-12 w-[132px] justify-between gap-2.5 px-2.5 py-1.5',
         className
       )}
       style={{
@@ -25,14 +27,14 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       title={`Current Gundam theme: ${tokens.name}. Click to switch palette.`}
       aria-label={`Switch Gundam theme. Current theme: ${tokens.name}`}
     >
-      <span
-        className="flex h-9 w-9 shrink-0 items-center justify-center"
-        style={{ backgroundColor: tokens.activeNav, border: `1px solid ${tokens.accent}66` }}
-      >
+      <span className={cn(
+        'flex shrink-0 items-center justify-center',
+        compact ? 'h-5 w-5' : 'h-8 w-8 sm:h-9 sm:w-9'
+      )}>
         {theme === 'default' ? (
           <svg
             viewBox="0 0 24 24"
-            className="h-6 w-6"
+            className={compact ? 'h-5 w-5' : 'h-5 w-5 sm:h-6 sm:w-6'}
             fill="none"
             stroke="white"
             strokeWidth="1.7"
@@ -47,13 +49,15 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
             src={theme === 'rx78' ? '/assets/img/logo/theme/esfs.png' : '/assets/img/logo/theme/zeon.png'}
             alt=""
             aria-hidden="true"
-            className="h-7 w-7 object-contain"
+            className={compact ? 'h-5 w-5 object-contain' : 'h-8 w-8 object-contain sm:h-9 sm:w-9'}
           />
         )}
       </span>
-      <span className="w-[70px] whitespace-nowrap text-center font-mono text-[9px] font-bold tracking-wider">
-        {tokens.code}
-      </span>
+      {!compact && (
+        <span className="w-[70px] whitespace-nowrap text-center font-mono text-[9px] font-bold tracking-wider">
+          {tokens.code}
+        </span>
+      )}
     </button>
   );
 }

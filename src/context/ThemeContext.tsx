@@ -71,7 +71,7 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     contentSubtleBg: '#EAF0F7',
     contentBorder: '#CBD5E1',
     contentPrimary: '#1B365D',
-    contentHighlight: '#F59E0B',
+    contentHighlight: '#FFCB3D',
     contentText: '#0F172A',
     logoVariant: 'light',
   },
@@ -96,7 +96,7 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     contentSubtleBg: '#FEF2E2',
     contentBorder: '#FECACA',
     contentPrimary: '#771616',
-    contentHighlight: '#D4AF37',
+    contentHighlight: '#FFCB3D',
     contentText: '#18181B',
     logoVariant: 'light',
   },
@@ -146,6 +146,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty('--content-primary', tokens.contentPrimary);
     root.style.setProperty('--content-highlight', tokens.contentHighlight);
     root.style.setProperty('--content-accent', tokens.accent);
+    root.style.setProperty('--spotlight-color', tokens.contentHighlight);
     root.setAttribute('data-theme', theme);
   }, [theme, tokens]);
 

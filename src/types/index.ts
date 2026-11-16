@@ -7,6 +7,7 @@ export interface Project {
   technologies: string[];
   category: string;
   imageUrl: string;
+  previewImages?: string[];
   githubUrl?: string;
   liveUrl?: string | string[];
   keyFeatures: string[];

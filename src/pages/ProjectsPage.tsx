@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Badge } from '../components/ui/Badge';
 import { ModulePanelHeader } from '../components/ui/ModulePanelHeader';
-import { projects } from '../data/projects';
+import { getProjectPreviewImages, projects } from '../data/projects';
 import type { Project } from '../types';
 import { cn } from '../utils/cn';
+import { ProjectPreviewGallery } from '../components/ui/ProjectPreviewGallery';
 import { FaExternalLinkAlt, FaGithub, FaEye, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+  const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
 
   const categories = ['ALL', ...Array.from(new Set(projects.map((p) => p.category.toUpperCase())))];
 
@@ -87,32 +89,34 @@ export function ProjectsPage() {
           return (
             <FadeIn
               key={project.id}
-              className="neo-card m-4 flex flex-col justify-between group transition-colors"
+              className="neo-card m-4 flex flex-col justify-between group transition-colors overflow-hidden"
+              onMouseEnter={() => setHoveredProjectId(project.id)}
+              onMouseLeave={() => setHoveredProjectId(null)}
             >
               <div>
                 {/* Image Showcase — Adaptive for Mobile vs Web */}
                 <div
                   onClick={() => setActiveModalProject(project)}
-                  className="h-64 sm:h-72 w-full bg-mecha-light2 relative overflow-hidden block border-b border-mecha-light1 cursor-pointer"
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      setActiveModalProject(project);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Open quick preview for ${project.title}`}
+                  className="h-64 sm:h-72 w-full bg-mecha-light2 relative overflow-hidden block border-b border-mecha-light1 cursor-pointer rounded-t-[12px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--content-primary)]"
                 >
                   {project.imageUrl ? (
-                    <div className="w-full h-full flex items-center justify-center p-3">
-                      {isMobile ? (
-                        /* Mobile Mockup: full height, centered, zero cropping */
-                        <img
-                          src={project.imageUrl}
-                          alt={project.title}
-                          className="h-full w-auto max-w-full object-contain mx-auto shadow-md border border-neutral-300"
-                        />
-                      ) : (
-                        /* Landscape: full width */
-                        <img
-                          src={project.imageUrl}
-                          alt={project.title}
-                          className="w-full h-full object-cover"
-                        />
-                      )}
-                    </div>
+                    <ProjectPreviewGallery
+                      images={getProjectPreviewImages(project)}
+                      title={project.title}
+                      fit={isMobile ? 'contain' : 'cover'}
+                      isHovered={hoveredProjectId === project.id}
+                      className={isMobile ? 'p-3' : ''}
+                      imageClassName={isMobile ? 'shadow-md' : ''}
+                    />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center font-mono text-xs text-neutral-400 uppercase tracking-widest">
                       PREVIEW UNAVAILABLE
@@ -183,8 +187,9 @@ export function ProjectsPage() {
                 <div className="flex items-center gap-4 text-neutral-500">
                   <button
                     onClick={() => setActiveModalProject(project)}
-                    className="hover:text-black transition-colors flex items-center gap-1"
+                    className="flex min-h-10 min-w-10 items-center justify-center hover:text-black transition-colors"
                     title="Quick Preview"
+                    aria-label={`Quick preview for ${project.title}`}
                   >
                     <FaEye />
                   </button>
@@ -193,8 +198,9 @@ export function ProjectsPage() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-black transition-colors"
+                      className="flex min-h-10 min-w-10 items-center justify-center hover:text-black transition-colors"
                       title="GitHub"
+                      aria-label={`GitHub repository for ${project.title}`}
                     >
                       <FaGithub className="text-base" />
                     </a>
@@ -204,8 +210,9 @@ export function ProjectsPage() {
                       href={typeof project.liveUrl === 'string' ? project.liveUrl : project.liveUrl[0]}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-black transition-colors"
+                      className="flex min-h-10 min-w-10 items-center justify-center hover:text-black transition-colors"
                       title="Live System"
+                      aria-label={`Live project ${project.title}`}
                     >
                       <FaExternalLinkAlt className="text-sm" />
                     </a>
@@ -259,19 +266,14 @@ export function ProjectsPage() {
             {/* Modal Image Viewport */}
             <div className="bg-neutral-100 p-4 md:p-6 flex items-center justify-center max-h-[480px] overflow-hidden border-b border-neutral-200">
               {activeModalProject.imageUrl ? (
-                (activeModalProject.category.toLowerCase().includes('mobile') || activeModalProject.slug === 'memospace') ? (
-                  <img
-                    src={activeModalProject.imageUrl}
-                    alt={activeModalProject.title}
-                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto shadow-xl border border-neutral-300"
-                  />
-                ) : (
-                  <img
-                    src={activeModalProject.imageUrl}
-                    alt={activeModalProject.title}
-                    className="max-h-[420px] w-auto max-w-full object-contain mx-auto shadow-md"
-                  />
-                )
+                <ProjectPreviewGallery
+                  images={getProjectPreviewImages(activeModalProject)}
+                  title={activeModalProject.title}
+                  fit="contain"
+                  autoAdvanceOnHover={false}
+                  className="h-[min(420px,60vh)] w-full"
+                  imageClassName="mx-auto"
+                />
               ) : (
                 <div className="font-mono text-xs text-neutral-400 uppercase tracking-widest py-16">
                   PREVIEW NOT AVAILABLE

@@ -10,6 +10,11 @@ export const projects: Project[] = [
     technologies: ['Vue.js', 'Tailwind CSS', 'Laravel', 'PHP', 'MySQL', 'Git'],
     category: 'Web Development',
     imageUrl: '/assets/img/projects/mediapens/mediapens-1.png',
+    previewImages: [
+      '/assets/img/projects/mediapens/mediapens-2.png',
+      '/assets/img/projects/mediapens/mediapens-3.png',
+      '/assets/img/projects/mediapens/mediapens-4.png',
+    ],
     githubUrl: 'https://github.com/Webmaster-ENT/backend-mediapens',
     liveUrl: 'https://media.ent.pens.ac.id/',
     keyFeatures: [
@@ -28,6 +33,10 @@ export const projects: Project[] = [
     technologies: ['React.js', 'Tailwind CSS', 'Laravel', 'PHP', 'MySQL', 'Git'],
     category: 'Web Development',
     imageUrl: '/assets/img/projects/entcrews/entcrews-1.png',
+    previewImages: [
+      '/assets/img/projects/entcrews/entcrews-2.png',
+      '/assets/img/projects/entcrews/entcrews-3.png',
+    ],
     githubUrl: 'https://github.com/Webmaster-ENT/ent-web-laravel',
     liveUrl: 'https://ent.pens.ac.id/',
     keyFeatures: [
@@ -46,6 +55,11 @@ export const projects: Project[] = [
     technologies: ['Laravel Blade', 'Tailwind CSS', 'DaisyUI', 'Laravel', 'PHP', 'FFmpeg', 'Git'],
     category: 'Multimedia / Video Platform',
     imageUrl: '/assets/img/projects/webcut/webcut-1.png',
+    previewImages: [
+      '/assets/img/projects/webcut/webcut-2.png',
+      '/assets/img/projects/webcut/webcut-3.png',
+      '/assets/img/projects/webcut/webcut-4.png',
+    ],
     githubUrl: 'https://github.com/arguspermono/web-webcut',
     keyFeatures: [
       'Video upload and streaming functionality.',
@@ -64,6 +78,13 @@ export const projects: Project[] = [
     technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
     category: 'Web Development / Tourism',
     imageUrl: '/assets/img/projects/jejaknusa/jejaknusa-1.png',
+    previewImages: [
+      '/assets/img/projects/jejaknusa/jejaknusa-2.png',
+      '/assets/img/projects/jejaknusa/jejaknusa-3.png',
+      '/assets/img/projects/jejaknusa/jejaknusa-4.png',
+      '/assets/img/projects/jejaknusa/jejaknusa-5.png',
+      '/assets/img/projects/jejaknusa/jejaknusa-6.png',
+    ],
     githubUrl: 'https://github.com/arguspermono/frontend-web-jejaknusa',
     liveUrl: 'https://arguspermono.github.io/frontend-web-jejaknusa',
     keyFeatures: [
@@ -83,6 +104,12 @@ export const projects: Project[] = [
     technologies: ['Flutter', 'Dart', 'SQLite', 'Google ML Kit', 'Flutter Quill', 'Local Notifications'],
     category: 'Mobile Development / Productivity',
     imageUrl: '/assets/img/projects/memospace/memospace-1.jpeg',
+    previewImages: [
+      '/assets/img/projects/memospace/memospace-2.jpeg',
+      '/assets/img/projects/memospace/memospace-3.jpeg',
+      '/assets/img/projects/memospace/memospace-4.jpeg',
+      '/assets/img/projects/memospace/memospace-5.jpeg',
+    ],
     githubUrl: 'https://github.com/arguspermono/mobile-memospace',
     liveUrl: 'https://drive.google.com/drive/folders/1PYicmwHc0WzkiS4oNRK1h5dnIIWhCo8z?usp=drive_link',
     keyFeatures: [
@@ -102,6 +129,13 @@ export const projects: Project[] = [
     technologies: ['Blender', 'Mixamo'],
     category: '3D / Animation / Multimedia',
     imageUrl: '/assets/img/projects/waktujaga/waktujaga-1.png',
+    previewImages: [
+      '/assets/img/projects/waktujaga/waktujaga-2.png',
+      '/assets/img/projects/waktujaga/waktujaga-3.png',
+      '/assets/img/projects/waktujaga/waktujaga-4.png',
+      '/assets/img/projects/waktujaga/waktujaga-5.png',
+      '/assets/img/projects/waktujaga/waktujaga-6.png',
+    ],
     liveUrl: 'https://youtu.be/kMyN6wCc6BM?si=cT_9r6DOmQgaaoct',
     keyFeatures: [
       'Designed and developed Dodi, one of the main characters, including his distinctive red-haired appearance.',
@@ -120,6 +154,12 @@ export const projects: Project[] = [
     technologies: ['Unity', 'Blender'],
     category: 'VR',
     imageUrl: '/assets/img/projects/craftlab/craftlab-1.png',
+    previewImages: [
+      '/assets/img/projects/craftlab/craftlab-2.png',
+      '/assets/img/projects/craftlab/craftlab-3.png',
+      '/assets/img/projects/craftlab/craftlab-4.png',
+      '/assets/img/projects/craftlab/craftlab-5.png',
+    ],
     liveUrl: [
       'https://daniswara99.met.student.pens.ac.id/vr/index.html',
       'https://arguspermono.github.io/vr-craftlab-simulator/'
@@ -138,6 +178,10 @@ export const projects: Project[] = [
     technologies: ['PHP', 'Laravel', 'MySQL', 'Git', 'Tailwind CSS', 'DaisyUI', 'Bootstrap', 'JavaScript'],
     category: 'Web Development',
     imageUrl: '/assets/img/projects/entgalleries/entgalleries-1.png',
+    previewImages: [
+      '/assets/img/projects/entgalleries/entgalleries-2.png',
+      '/assets/img/projects/entgalleries/entgalleries-3.png',
+    ],
     liveUrl: '',
     keyFeatures: [
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.',
@@ -145,3 +189,7 @@ export const projects: Project[] = [
     ]
   }
 ];
+
+export function getProjectPreviewImages(project: Project): string[] {
+  return Array.from(new Set([project.imageUrl, ...(project.previewImages ?? [])].filter(Boolean)));
+}

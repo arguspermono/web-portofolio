@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { cn } from "../../utils/cn";
 import { ArgusLogo } from "../ui/ArgusLogo";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaUser, FaFolderOpen, FaAward, FaFileAlt } from "react-icons/fa";
+import type { IconType } from "react-icons";
 import { AudioPlayer } from "../ui/AudioPlayer";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { useTheme } from "../../context/ThemeContext";
@@ -13,6 +12,7 @@ interface NavItem {
   to: string;
   serial: string;
   isActive: (pathname: string) => boolean;
+  icon: IconType;
 }
 
 const navItems: NavItem[] = [
@@ -22,6 +22,7 @@ const navItems: NavItem[] = [
     to: "/about",
     serial: "01",
     isActive: (pathname) => pathname === "/" || pathname === "/about",
+    icon: FaUser,
   },
   {
     id: "projects",
@@ -29,6 +30,7 @@ const navItems: NavItem[] = [
     to: "/projects",
     serial: "02",
     isActive: (pathname) => pathname.startsWith("/projects"),
+    icon: FaFolderOpen,
   },
   {
     id: "certificates",
@@ -36,14 +38,25 @@ const navItems: NavItem[] = [
     to: "/certificates",
     serial: "03",
     isActive: (pathname) => pathname === "/certificates" || pathname === "/achievements",
+    icon: FaAward,
   },
 ];
 
 export function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
-  const { tokens } = useTheme();
+  const { theme, tokens } = useTheme();
+  const mobileNavItems: NavItem[] = [
+    ...navItems,
+    {
+      id: "resume",
+      name: "RESUME",
+      to: "/resume",
+      serial: "04",
+      isActive: (pathname) => pathname === "/resume",
+      icon: FaFileAlt,
+    },
+  ];
 
   const sidebarStyle = {
     backgroundColor: tokens.sidebar,
@@ -66,117 +79,92 @@ export function Sidebar() {
   const accentIndicatorStyle = {
     backgroundColor: tokens.accent,
   };
+  const resumeDesktopStyle = theme === "default"
+    ? {
+        backgroundColor: "#FFFFFF",
+        borderColor: "#FFFFFF",
+        color: "#111827",
+      }
+    : {
+        backgroundColor: "#FFCB3D",
+        borderColor: "#FFCB3D",
+        color: "#111827",
+      };
 
   return (
     <>
-      {/* --- Mobile Top Bar ---------------------------------------- */}
+      {/* --- Mobile Header ------------------------------------------ */}
       <header
-        className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between px-5 lg:hidden print:hidden border-b"
+        className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-between gap-2 px-3 sm:px-5 lg:hidden print:hidden border-b"
         style={{ ...sidebarStyle, borderBottomColor: tokens.accent + "33" }}
       >
-        <Link to="/" onClick={() => setIsOpen(false)}>
+        <Link to="/" className="min-w-0 shrink">
           <ArgusLogo size="sm" showSubtitle={false} />
         </Link>
 
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <AudioPlayer />
-          <button
-            className="flex flex-col justify-center items-center gap-[5px] w-9 h-9 border focus:outline-none"
-            style={{ borderColor: tokens.accent + "44" }}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle Navigation"
-          >
-            <div
-              className={cn("h-px w-5 transition-all duration-300", isOpen ? "rotate-45 translate-y-[6px]" : "")}
-              style={{ backgroundColor: tokens.sidebarText }}
-            />
-            <div
-              className={cn("h-px w-5 transition-all duration-300", isOpen ? "opacity-0" : "")}
-              style={{ backgroundColor: tokens.sidebarText }}
-            />
-            <div
-              className={cn("h-px w-5 transition-all duration-300", isOpen ? "-rotate-45 -translate-y-[6px]" : "")}
-              style={{ backgroundColor: tokens.sidebarText }}
-            />
-          </button>
+        <div className="flex shrink-0 items-center gap-1.5">
+          <ThemeToggle compact />
+          <AudioPlayer compact />
         </div>
       </header>
 
-      {/* --- Mobile Slide-Over Drawer ------------------------------ */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 flex flex-col pt-14 lg:hidden transition-transform duration-300 ease-in-out print:hidden overflow-y-auto",
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        )}
-        style={sidebarStyle}
+      {/* --- Mobile Bottom Tab Bar ---------------------------------- */}
+      <nav
+        aria-label="Primary navigation"
+        className="fixed inset-x-3 bottom-3 z-50 lg:hidden print:hidden"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
-        <div className="px-6 py-4 border-b font-mono text-xs tracking-widest uppercase opacity-40"
-          style={{ borderColor: tokens.accent + "33" }}>
-          NAVIGATION // DIRECT
-        </div>
-
-        <nav className="flex flex-col px-6 pt-4 gap-1">
-          {navItems.map((item) => {
+        <div
+          className="mx-auto grid max-w-lg grid-cols-4 gap-1 rounded-2xl border p-1.5 shadow-xl backdrop-blur-md"
+          style={{
+            backgroundColor: tokens.sidebar,
+            borderColor: tokens.accent + "44",
+            boxShadow: `0 12px 32px ${tokens.sidebar}66`,
+          }}
+        >
+          {mobileNavItems.map((item) => {
             const active = item.isActive(currentPath);
+            const isHighlightedResume = item.id === "resume" && theme !== "default";
+            const isMonochromeResume = item.id === "resume" && theme === "default";
+            const Icon = item.icon;
+
             return (
               <Link
                 key={item.id}
                 to={item.to}
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-4 py-5 border-b font-display font-bold text-2xl uppercase tracking-[0.15em] transition-colors"
+                aria-label={item.name}
+                aria-current={active ? "page" : undefined}
+                className="relative flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 transition-colors"
                 style={{
-                  borderColor: tokens.accent + "22",
-                  color: active ? tokens.sidebarText : tokens.sidebarText + "77",
+                  backgroundColor: isMonochromeResume
+                    ? "#FFFFFF"
+                    : active
+                    ? isHighlightedResume
+                      ? "#FFCB3D"
+                      : tokens.activeNav
+                    : "transparent",
+                  color: isHighlightedResume || isMonochromeResume
+                    ? "#111827"
+                    : active
+                      ? tokens.sidebarText
+                      : tokens.sidebarText + "99",
                 }}
               >
-                <span className="font-mono text-xs opacity-50">{item.serial}</span>
-                {item.name}
                 {active && (
-                  <span className="ml-auto font-mono text-xs" style={{ color: tokens.accent }}>●</span>
+                  <span
+                    className="absolute inset-x-3 top-0 h-0.5 rounded-full"
+                    style={{ backgroundColor: isHighlightedResume || (item.id === "resume" && theme === "default") ? "#111827" : tokens.accent }}
+                  />
                 )}
+                <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span className="max-w-full truncate font-mono text-[8px] font-bold tracking-[0.06em] sm:text-[9px]">
+                  {item.name}
+                </span>
               </Link>
             );
           })}
-
-          <Link
-            to="/resume"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-4 py-5 border-b font-display font-bold text-2xl uppercase tracking-[0.15em] transition-colors"
-            style={{
-              borderColor: tokens.accent + "22",
-              color: currentPath === "/resume" ? tokens.sidebarText : tokens.sidebarText + "77",
-            }}
-          >
-            <span className="font-mono text-xs opacity-50">04</span>
-            RESUME
-            {currentPath === "/resume" && (
-              <span className="ml-auto font-mono text-xs" style={{ color: tokens.accent }}>●</span>
-            )}
-          </Link>
-        </nav>
-
-        <div className="mt-auto px-6 pb-10 pt-6 border-t flex items-center justify-between"
-          style={{ borderColor: tokens.accent + "22" }}>
-          <div className="flex gap-5">
-            <a href={import.meta.env.VITE_GITHUB || "https://github.com/arguspermono"} target="_blank" rel="noopener noreferrer"
-              className="text-xl transition-opacity opacity-50 hover:opacity-100" style={{ color: tokens.sidebarText }}>
-              <FaGithub />
-            </a>
-            <a href={import.meta.env.VITE_LINKEDIN || "https://www.linkedin.com/in/arya-bagus/"} target="_blank" rel="noopener noreferrer"
-              className="text-xl transition-opacity opacity-50 hover:opacity-100" style={{ color: tokens.sidebarText }}>
-              <FaLinkedin />
-            </a>
-            <a href={`mailto:${import.meta.env.VITE_EMAIL || "aryabaguspermono@gmail.com"}`}
-              className="text-xl transition-opacity opacity-50 hover:opacity-100" style={{ color: tokens.sidebarText }}>
-              <FaEnvelope />
-            </a>
-          </div>
-          <span className="font-mono text-[10px] tracking-widest uppercase opacity-40" style={{ color: tokens.sidebarText }}>
-            VER.2026
-          </span>
         </div>
-      </div>
+      </nav>
 
       {/* --- Desktop Fixed Sidebar --------------------------------- */}
       <aside
@@ -245,23 +233,7 @@ export function Sidebar() {
             <Link
               to="/resume"
               className="flex items-center justify-between w-full border px-4 py-3.5 font-display font-bold text-xs tracking-[0.2em] uppercase transition-all duration-200 relative group"
-              style={
-                currentPath === "/resume"
-                  ? { backgroundColor: tokens.accent, color: tokens.sidebar, borderColor: tokens.accent }
-                  : { backgroundColor: tokens.activeNav, color: tokens.sidebarText + "BB", borderColor: tokens.accent + "33" }
-              }
-              onMouseEnter={(e) => {
-                if (currentPath !== "/resume") {
-                  (e.currentTarget as HTMLAnchorElement).style.borderColor = tokens.accent;
-                  (e.currentTarget as HTMLAnchorElement).style.color = tokens.sidebarText;
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (currentPath !== "/resume") {
-                  (e.currentTarget as HTMLAnchorElement).style.borderColor = tokens.accent + "33";
-                  (e.currentTarget as HTMLAnchorElement).style.color = tokens.sidebarText + "BB";
-                }
-              }}
+              style={resumeDesktopStyle}
             >
               <span className="flex items-center gap-3">
                 <span className="font-mono text-[10px] opacity-50">04</span>
@@ -281,7 +253,7 @@ export function Sidebar() {
               href={import.meta.env.VITE_GITHUB || "https://github.com/arguspermono"}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-base transition-opacity opacity-40 hover:opacity-100"
+              className="flex min-h-10 min-w-10 items-center justify-center text-base transition-opacity opacity-40 hover:opacity-100"
               style={{ color: tokens.sidebarText }}
               title="GitHub"
             >
@@ -291,7 +263,7 @@ export function Sidebar() {
               href={import.meta.env.VITE_LINKEDIN || "https://www.linkedin.com/in/arya-bagus/"}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-base transition-opacity opacity-40 hover:opacity-100"
+              className="flex min-h-10 min-w-10 items-center justify-center text-base transition-opacity opacity-40 hover:opacity-100"
               style={{ color: tokens.sidebarText }}
               title="LinkedIn"
             >
@@ -299,7 +271,7 @@ export function Sidebar() {
             </a>
             <a
               href={`mailto:${import.meta.env.VITE_EMAIL || "aryabaguspermono@gmail.com"}`}
-              className="text-base transition-opacity opacity-40 hover:opacity-100"
+              className="flex min-h-10 min-w-10 items-center justify-center text-base transition-opacity opacity-40 hover:opacity-100"
               style={{ color: tokens.sidebarText }}
               title="Email"
             >

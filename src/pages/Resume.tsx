@@ -3,16 +3,35 @@ import { ModulePanelHeader } from '../components/ui/ModulePanelHeader';
 import { Button } from '../components/ui/Button';
 import { FaPrint } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
+import { useEffect, useRef, useState } from 'react';
 
 export function Resume() {
   const { tokens } = useTheme();
+  const previewContainerRef = useRef<HTMLDivElement>(null);
+  const [previewScale, setPreviewScale] = useState(1);
+
+  useEffect(() => {
+    const container = previewContainerRef.current;
+    if (!container) return;
+
+    const updateScale = () => {
+      const pageWidth = (210 / 25.4) * 96;
+      setPreviewScale(Math.min(1, container.clientWidth / pageWidth));
+    };
+
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handlePrint = () => {
     window.print();
   };
 
   return (
-    <div className="blueprint-surface text-mecha-black min-h-screen flex flex-col">
+    <div className="blueprint-surface text-mecha-black min-h-screen print:min-h-0 flex flex-col">
       {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
       <div className="print:hidden">
         <ModulePanelHeader
@@ -48,27 +67,22 @@ export function Resume() {
       </div>
 
       {/* ── 2. RESUME PREVIEW CANVAS ─────────────────────────── */}
-      <div className="print:hidden p-4 sm:p-8 md:p-12 bg-neutral-100 flex justify-center flex-grow">
-        <div className="neo-card w-full max-w-[215mm] text-black p-4 sm:p-8 relative">
-          {/* Subtle Corner Markers */}
+      <div className="print:hidden flex flex-grow justify-center overflow-hidden bg-neutral-100 p-4 sm:p-8 md:p-12">
+        <div ref={previewContainerRef} className="w-full">
           <div
-            className="absolute top-2 left-2 w-3 h-3 border-t border-l pointer-events-none"
-            style={{ borderColor: tokens.contentHighlight }}
-          />
-          <div
-            className="absolute top-2 right-2 w-3 h-3 border-t border-r pointer-events-none"
-            style={{ borderColor: tokens.contentHighlight }}
-          />
-          <div className="absolute bottom-2 left-2 w-3 h-2 border-b border-l border-neutral-400 pointer-events-none" />
-          <div className="absolute bottom-2 right-2 w-3 h-2 border-b border-r border-neutral-400 pointer-events-none" />
-
-          {/* Render ATS Resume */}
-          <AtsResume />
+            className="mx-auto"
+            style={{
+              width: `${210 * previewScale}mm`,
+              height: `${297 * previewScale}mm`,
+            }}
+          >
+            <AtsResume previewScale={previewScale} />
+          </div>
         </div>
       </div>
 
       {/* ── 3. PRINT ONLY VIEW ───────────────────────────────── */}
-      <div className="hidden print:block w-full bg-white print:bg-white text-black min-h-screen">
+      <div className="hidden print:block w-full print:w-[210mm] bg-white print:bg-white text-black">
         <AtsResume />
       </div>
     </div>

@@ -213,20 +213,6 @@ body::-webkit-scrollbar {
   }
 }
 
-@media (max-width: 639px) {
-  .profile-photo-deck > [data-stack-position="1"] {
-    transform: translate(5px, -4px) rotate(2deg) !important;
-  }
-
-  .profile-photo-deck > [data-stack-position="2"] {
-    transform: translate(-5px, 4px) rotate(-2deg) !important;
-  }
-
-  .profile-photo-deck > [data-stack-position="3"] {
-    transform: translate(7px, 5px) rotate(3deg) !important;
-  }
-}
-
 button,
 a,
 [role="button"] {

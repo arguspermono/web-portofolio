@@ -1,6 +1,13 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
-export type GundamTheme = 'default' | 'rx78' | 'sinanju';
+export type GundamTheme =
+  | 'default'
+  | 'efsf'
+  | 'neoZeon'
+  | 'mafty'
+  | 'celestialBeing'
+  | 'tekkadan'
+  | 'gjallarhorn';
 
 export interface ThemeTokens {
   id: GundamTheme;
@@ -51,10 +58,10 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     logoVariant: 'light',
   },
 
-  // ── Theme 1: RX-78-2 Federation ────────────────────────────────────────
+  // ── Theme 1: EFSF ────────────────────────────────────────
   // Dominance order: Putih -> Biru -> Merah -> Kuning
-  rx78: {
-    id: 'rx78',
+  efsf: {
+    id: 'efsf',
     name: 'RX-78-2 GUNDAM',
     code: 'E.F.S.F.',
     designation: 'WHITE DEVIL',
@@ -76,10 +83,10 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     logoVariant: 'light',
   },
 
-  // ── Theme 2: Sinanju / Zeon ────────────────────────────────────────────
+  // ── Theme 2: Neo Zeon ────────────────────────────────────────────
   // Dominance order: Merah -> Hitam -> Kuning/Emas
-  sinanju: {
-    id: 'sinanju',
+  neoZeon: {
+    id: 'neoZeon',
     name: 'MSN-06S SINANJU',
     code: 'NEO ZEON',
     designation: 'RED COMET REBORN',
@@ -100,9 +107,113 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     contentText: '#18181B',
     logoVariant: 'light',
   },
+
+  // -- Theme 3: Mafty -----------------------------------------------------
+  mafty: {
+    id: 'mafty',
+    name: 'MAFTY',
+    code: 'MAFTY',
+    designation: 'MANHUNT MOVEMENT',
+    palette: ['#F58220', '#F8FAFC', '#171717'],
+    sidebar: '#171717',
+    sidebarText: '#F8FAFC',
+    sidebarBorder: '#3F3F46',
+    activeNav: '#262626',
+    activeNavBorder: '#F58220',
+    accent: '#F58220',
+    accentAlt: '#F8FAFC',
+    accentHighlight: '#D76D12',
+    contentBg: '#F8F8F7',
+    contentSubtleBg: '#F1F1EF',
+    contentBorder: '#D8D8D5',
+    contentPrimary: '#171717',
+    contentHighlight: '#D87416',
+    contentText: '#1A1A1A',
+    logoVariant: 'light',
+  },
+
+  // -- Theme 4: Celestial Being ------------------------------------------
+  celestialBeing: {
+    id: 'celestialBeing',
+    name: 'CELESTIAL BEING',
+    code: 'CELESTIAL BEING',
+    designation: 'GUNDAM MEISTERS',
+    palette: ['#EBCB32', '#4F5D95', '#F8F9FC', '#20233A'],
+    sidebar: '#20233A',
+    sidebarText: '#F8F9FC',
+    sidebarBorder: '#40496C',
+    activeNav: '#343A5A',
+    activeNavBorder: '#EBCB32',
+    accent: '#EBCB32',
+    accentAlt: '#4F5D95',
+    accentHighlight: '#DAAC24',
+    contentBg: '#F6F7FB',
+    contentSubtleBg: '#EFF1F9',
+    contentBorder: '#C9CEE0',
+    contentPrimary: '#26335E',
+    contentHighlight: '#C6A62A',
+    contentText: '#20233A',
+    logoVariant: 'light',
+  },
+
+  // -- Theme 5: Tekkadan --------------------------------------------------
+  tekkadan: {
+    id: 'tekkadan',
+    name: 'TEKKADAN',
+    code: 'TEKKADAN',
+    designation: 'IRON-BLOODED ORPHANS',
+    palette: ['#E50922', '#171717', '#F7F7F7'],
+    sidebar: '#171717',
+    sidebarText: '#F7F7F7',
+    sidebarBorder: '#3F3F46',
+    activeNav: '#2A2A2A',
+    activeNavBorder: '#E50922',
+    accent: '#E50922',
+    accentAlt: '#F7F7F7',
+    accentHighlight: '#BD0C20',
+    contentBg: '#F7F7F7',
+    contentSubtleBg: '#EEEEEE',
+    contentBorder: '#D4D4D4',
+    contentPrimary: '#171717',
+    contentHighlight: '#D70F27',
+    contentText: '#202020',
+    logoVariant: 'light',
+  },
+
+  // -- Theme 6: Gjallarhorn ----------------------------------------------
+  gjallarhorn: {
+    id: 'gjallarhorn',
+    name: 'GJALLARHORN',
+    code: 'GJALLARHORN',
+    designation: 'INNER SPHERE',
+    palette: ['#F5F3ED', '#243248', '#A7373F', '#C5A565'],
+    sidebar: '#1E2A3D',
+    sidebarText: '#F9F6EE',
+    sidebarBorder: '#465267',
+    activeNav: '#293A53',
+    activeNavBorder: '#C5A565',
+    accent: '#C5A565',
+    accentAlt: '#9F3039',
+    accentHighlight: '#D0B46F',
+    contentBg: '#FAF8F2',
+    contentSubtleBg: '#F1EFE8',
+    contentBorder: '#D8D2C5',
+    contentPrimary: '#243248',
+    contentHighlight: '#A77D34',
+    contentText: '#253044',
+    logoVariant: 'light',
+  },
 };
 
-export const THEME_ORDER: GundamTheme[] = ['default', 'rx78', 'sinanju'];
+export const THEME_ORDER: GundamTheme[] = [
+  'default',
+  'efsf',
+  'neoZeon',
+  'mafty',
+  'celestialBeing',
+  'tekkadan',
+  'gjallarhorn',
+];
 
 interface ThemeContextValue {
   theme: GundamTheme;

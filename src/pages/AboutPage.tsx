@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { FadeIn } from '../components/ui/FadeIn';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
@@ -8,11 +9,14 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaBriefcase, FaCheck 
 import { Link } from 'react-router-dom';
 import { cn } from '../utils/cn';
 import { RoleTicker } from '../components/ui/RoleTicker';
-import { ProfilePhotoDeck } from '../components/ui/ProfilePhotoDeck';
+import { AsciiProfilePortrait } from '../components/ui/AsciiProfilePortrait';
+import { useTheme } from '../context/ThemeContext';
 
 export function AboutPage() {
   const [activeTab, setActiveTab] = useState<'experience' | 'education'>('experience');
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const { tokens } = useTheme();
 
   const handleCopyEmail = () => {
     const email = import.meta.env.VITE_EMAIL || 'aryabaguspermono@gmail.com';
@@ -23,72 +27,120 @@ export function AboutPage() {
 
   return (
     <div className="blueprint-surface text-mecha-black min-h-screen">
-      {/* ── 1. UNIFIED CLEAN HERO & DOSSIER HEADER ─────────────── */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 border-b border-mecha-light1">
-        {/* Left Column: Introduction & Identity */}
-        <FadeIn className="ascii-spotlight min-w-0 lg:col-span-7 xl:col-span-8 p-6 sm:p-10 md:p-14 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-mecha-light1 bg-white/90">
-          <div>
-            {/* Minimalist Module Indicator */}
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className="w-2 h-2 theme-accent-bg inline-block" />
-              <span className="font-mono text-xs tracking-widest theme-accent-text uppercase font-medium">
-                MODULE.001 // ABOUT
-              </span>
+      {/* ── 1. EDITORIAL IDENTITY HERO ─────────────────────────── */}
+      <section className="relative isolate min-h-[calc(100svh-3.5rem)] overflow-hidden border-b border-mecha-light1 bg-white/90">
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div className="absolute inset-y-0 left-1/3 border-l border-mecha-light1/70" />
+          <div className="absolute inset-y-0 right-1/3 border-l border-mecha-light1/70" />
+          <div
+            className="absolute left-1/2 top-1/2 h-[min(80vw,42rem)] w-[min(80vw,42rem)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08] blur-3xl"
+            style={{ backgroundColor: tokens.contentHighlight }}
+          />
+        </div>
+
+        <div className="relative mx-auto grid min-h-[inherit] max-w-[1600px] grid-cols-1 items-center gap-8 px-5 py-8 sm:px-8 lg:min-h-[calc(100svh-7rem)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)_minmax(0,0.9fr)] lg:gap-6 lg:px-8 xl:gap-10 xl:px-12">
+          <motion.div
+            className="order-3 min-w-0 lg:order-1"
+            initial={reduceMotion ? false : { opacity: 0, x: -18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.1, ease: 'easeOut' }}
+          >
+            <FadeIn className="ascii-spotlight flex h-full flex-col justify-center border-l-2 border-mecha-light1 bg-white/70 py-5 pl-5 pr-2 sm:pl-7 lg:py-8">
+              <div className="mb-8 flex items-center gap-2.5">
+                <span className="h-2 w-2 theme-accent-bg" />
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.22em] theme-accent-text sm:text-xs">
+                  MODULE.001 // ABOUT
+                </span>
+              </div>
+
+              <div className="mb-4">
+                <RoleTicker />
+              </div>
+
+              <p className="max-w-sm font-sans text-sm leading-relaxed text-neutral-700 sm:text-base">
+                Multimedia Engineering Technology student at Politeknik Elektronika Negeri Surabaya. Specializing in full-stack web and mobile application engineering, 3D multimedia systems, and applied artificial intelligence solutions.
+              </p>
+
+              <div className="mt-8 space-y-3 border-t border-mecha-light1 pt-5 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-600 sm:text-[10px]">
+                <span className="flex items-center gap-2">
+                  <FaBriefcase className="shrink-0 theme-accent-text" />
+                  STATUS: AVAILABLE FOR WORK
+                </span>
+                <span className="flex items-center gap-2">
+                  <FaMapMarkerAlt className="shrink-0 theme-accent-text" />
+                  BASE: SURABAYA, ID
+                </span>
+              </div>
+            </FadeIn>
+          </motion.div>
+
+          <motion.div
+            className="order-2 mx-auto w-full min-w-0 max-w-[22rem] sm:max-w-lg lg:order-2"
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.94, y: 18 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            whileHover={reduceMotion ? undefined : { y: -4 }}
+            transition={{ duration: 0.75, delay: 0.12, ease: 'easeOut' }}
+          >
+            <div className="relative px-2 sm:px-5 lg:px-0">
+              <div className="absolute left-2 top-[18%] z-10 bg-mecha-black px-2 py-1 font-mono text-[8px] uppercase tracking-[0.2em] text-white sm:text-[9px]">
+                SUBJECT // 001
+              </div>
+              <AsciiProfilePortrait />
+              <div className="mt-4 flex items-center justify-between border-t border-mecha-light1 pt-3 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
+                <span>CALLSIGN: ARGUS</span>
+                <span>ASCII MATRIX / ACTIVE</span>
+              </div>
             </div>
+          </motion.div>
 
-            <h1 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[0.95] theme-accent-text uppercase mb-4">
-              ARYA BAGUS<br />
-              <span>PERMONO</span>
-            </h1>
+          <motion.div
+            className="order-1 min-w-0 lg:order-3"
+            initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.22, ease: 'easeOut' }}
+          >
+            <div className="flex h-full flex-col justify-center py-2 lg:py-8">
+              <div className="mb-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.22em] text-neutral-500 sm:text-[10px]">
+                <span style={{ color: tokens.contentHighlight }}>01 / 04</span>
+                <span className="h-px flex-1 bg-mecha-light1" />
+                <span>IDENTITY</span>
+              </div>
 
-            <div className="mb-6">
-              <RoleTicker />
+              <h1
+                className="mb-6 font-display font-black uppercase leading-[0.82] tracking-[-0.06em] theme-accent-text"
+                style={{ fontSize: 'clamp(3.2rem, 5vw, 6.2rem)' }}
+              >
+                ARYA
+                <span className="block" style={{ color: tokens.contentHighlight }}>BAGUS</span>
+                <span className="block">PERMONO</span>
+              </h1>
+
+              <p className="mb-7 max-w-xs font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-neutral-500 sm:text-xs">
+                MULTIMEDIA ENGINEER
+                <br />
+                DESIGNING DIGITAL EXPERIENCES
+              </p>
+
+              <div className="flex flex-wrap gap-2.5">
+                <Link to="/projects">
+                  <Button variant="primary" size="md">
+                    EXPLORE PROJECTS →
+                  </Button>
+                </Link>
+                <Link to="/certificates">
+                  <Button variant="secondary" size="md">
+                    CERTIFICATES
+                  </Button>
+                </Link>
+                <Link to="/resume">
+                  <Button variant="secondary" size="md">
+                    RESUME (CV)
+                  </Button>
+                </Link>
+              </div>
             </div>
-
-            <p className="max-w-2xl text-base md:text-lg leading-relaxed text-neutral-800 font-sans font-normal mb-8">
-              Multimedia Engineering Technology student at Politeknik Elektronika Negeri Surabaya. Specializing in full-stack web and mobile application engineering, 3D multimedia systems, and applied artificial intelligence solutions.
-            </p>
-
-            <div className="flex flex-wrap gap-3">
-              <Link to="/projects">
-                <Button variant="primary" size="md">
-                  EXPLORE PROJECTS →
-                </Button>
-              </Link>
-              <Link to="/certificates">
-                <Button variant="secondary" size="md">
-                  CERTIFICATES
-                </Button>
-              </Link>
-              <Link to="/resume">
-                <Button variant="secondary" size="md">
-                  RESUME (CV)
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="border-t border-mecha-light1 pt-6 mt-10 flex flex-wrap gap-6 font-mono text-xs tracking-wider text-neutral-600 uppercase">
-            <span className="flex items-center gap-2">
-              <FaBriefcase className="theme-accent-text" /> STATUS: AVAILABLE FOR WORK
-            </span>
-            <span className="flex items-center gap-2">
-              <FaMapMarkerAlt className="theme-accent-text" /> BASE: SURABAYA, ID
-            </span>
-          </div>
-        </FadeIn>
-
-        {/* Right Column: Interactive Portrait Photo Stack */}
-        <FadeIn className="min-w-0 lg:col-span-5 xl:col-span-4 bg-mecha-light2 flex flex-col justify-between">
-          <div className="min-w-0 w-full flex-grow flex items-center justify-center p-6 md:p-10">
-            <ProfilePhotoDeck />
-          </div>
-
-          <div className="border-t border-mecha-light1 bg-mecha-white px-6 py-3 font-mono text-xs tracking-widest text-neutral-600 uppercase flex justify-between items-center">
-            <span>CALLSIGN: ARGUS</span>
-            <span>DEVELOPER DOSSIER</span>
-          </div>
-        </FadeIn>
+          </motion.div>
+        </div>
       </section>
 
       {/* ── 2. BIOGRAPHY STATEMENT ───────────────────────────── */}

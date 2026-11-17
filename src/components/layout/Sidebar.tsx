@@ -79,16 +79,23 @@ export function Sidebar() {
   const accentIndicatorStyle = {
     backgroundColor: tokens.accent,
   };
+  const isYellowResumeTheme = theme === "efsf" || theme === "neoZeon";
   const resumeDesktopStyle = theme === "default"
     ? {
         backgroundColor: "#FFFFFF",
         borderColor: "#FFFFFF",
         color: "#111827",
       }
-    : {
+    : isYellowResumeTheme
+    ? {
         backgroundColor: "#FFCB3D",
         borderColor: "#FFCB3D",
         color: "#111827",
+      }
+    : {
+        backgroundColor: tokens.activeNav,
+        borderColor: tokens.activeNavBorder,
+        color: tokens.sidebarText,
       };
 
   return (
@@ -124,7 +131,7 @@ export function Sidebar() {
         >
           {mobileNavItems.map((item) => {
             const active = item.isActive(currentPath);
-            const isHighlightedResume = item.id === "resume" && theme !== "default";
+            const isHighlightedResume = item.id === "resume" && isYellowResumeTheme;
             const isMonochromeResume = item.id === "resume" && theme === "default";
             const Icon = item.icon;
 
@@ -288,4 +295,5 @@ export function Sidebar() {
       </aside>
     </>
   );
-}
+}
+

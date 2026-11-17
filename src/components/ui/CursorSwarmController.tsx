@@ -15,6 +15,8 @@ interface CursorSwarmOptions {
   root: HTMLElement;
   cursors: number;
   palette: string[];
+  targets: string;
+  frames: boolean;
   deconstruct: boolean;
   startPosition: string;
   speed: number;
@@ -24,6 +26,9 @@ interface CursorSwarmOptions {
   typeDuration: number;
   hud: boolean;
   labels: boolean;
+  marquee: boolean;
+  guides: boolean;
+  sparks: boolean;
   copyPaste: number;
   relocation: boolean;
   zIndex: number;
@@ -93,8 +98,10 @@ export function CursorSwarmController() {
 
       swarmRef.current = new CursorSwarm({
         root,
-        cursors: 4,
+        cursors: 2,
         palette: paletteRef.current,
+        targets: 'h1, h2, h3, p, a, button, img, video, article, .neo-card, [data-swarm]',
+        frames: true,
         deconstruct: true,
         startPosition: 'corners',
         speed: 0.9,
@@ -104,7 +111,10 @@ export function CursorSwarmController() {
         typeDuration: 1.1,
         hud: false,
         labels: true,
-        copyPaste: 0.2,
+        marquee: false,
+        guides: false,
+        sparks: false,
+        copyPaste: 0,
         relocation: false,
         zIndex: 49,
         respectReducedMotion: true,

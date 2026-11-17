@@ -52,6 +52,10 @@ Inspired by two reference portfolios provided by the user:
    - Clean in-app lightbox with arrow key navigation for certificate documents.
 6. **1-Click Copy Interaction**:
    - Instant email copy with visual feedback badge.
+7. **Editorial Portfolio Layout**:
+   - Recompose the About hero as a balanced editorial layout with the ASCII profile portrait centered between identity and introduction panels.
+   - Preserve all existing routes, portfolio sections, content, and interactions; update presentation rather than removing modules.
+   - Use the existing Framer Motion library for restrained hero entrance/hover motion and respect reduced-motion preferences.
 
 ---
 
@@ -79,6 +83,19 @@ Inspired by two reference portfolios provided by the user:
     - Dominance order: Putih (White - primary content) → Biru (Federation Blue - sidebar/accents) → Merah (Signal Red - secondary markers) → Kuning (Yellow - active highlights).
   - **Theme-2 (Sinanju / Zeon)**:
     - Dominance order: Merah (Sinanju Crimson - primary/sidebar) → Hitam (Zeon Black - content accents/details) → Kuning/Emas (Gold/Yellow - elite metallic trim).
+  - **Theme-3 (Mafty)**:
+    - Dominance order: Mafty Orange (`#F58220`) → White (`#F8FAFC`) → Black (`#171717`), matching the requested orange/white/black direction and the existing gold Mafty emblem.
+  - **Theme-4 (Celestial Being / Gundam 00)**:
+    - Dominance order: Emblem Gold (`#EBCB32`) → Insignia Blue (`#4F5D95`) → White (`#F8F9FC`) → Deep Navy (`#20233A`), matching the logo's wings and globe.
+  - **Theme-5 (Tekkadan)**:
+    - Dominance order: Tekkadan Red (`#E50922`) → Black (`#171717`) → White (`#F7F7F7`), matching the existing red insignia.
+  - **Theme-6 (Gjallarhorn)**:
+    - Dominance order: Warm White (`#F5F3ED`) → Officer Navy (`#243248`) → Crimson (`#A7373F`) → Gold (`#C5A565`).
+    - No Gjallarhorn logo asset is currently present in `public/assets/img/logo/theme`; retain its current palette until a matching logo is added.
+  - Keep the existing Monochrome, E.F.S.F., and Neo Zeon palettes intact and include every theme in the persistent cycle.
+  - Highlight Resume in yellow only for E.F.S.F. and Neo Zeon; use each added faction's own palette for its Resume navigation state.
+  - Prevent theme toggle labels from overflowing their button; size the desktop toggle for the longest faction label while keeping the compact mobile toggle unchanged.
+  - Use `CELESTIAL BEING` as the Celestial Being theme's displayed code label.
   - Instant theme transition with persistent state in `localStorage`.
 
 ## 6. Project Gallery & Navigation Refinements
@@ -97,8 +114,11 @@ Inspired by two reference portfolios provided by the user:
 - **Theme Highlight Color**:
   - Use `#FFCB3D` for the content highlight color in the E.F.S.F. and Neo Zeon themes.
 - **Profile Photo Deck**:
-  - Keep the available profile photos ordered from `bagus-1.png` through `bagus-4.png`.
-  - Clip the photo deck's dotted overlay to each image's transparent silhouette so the effect follows the subject's body.
+  - Use `bagus-1.png` as the single primary About-page portrait instead of cycling through the profile-photo deck.
+  - Render the portrait as a responsive, wider ASCII character image, preserving the transparent subject silhouette and portrait proportions.
+  - Animate ASCII glyphs gathering into the recognizable portrait when it enters the viewport and scattering when it leaves; show it fully assembled for reduced-motion preferences.
+  - While visible, animate a restrained subset of glyphs as changing digits so the portrait stays alive without redrawing continuously at full frame rate.
+  - Use the active theme's content and highlight colors for the ASCII portrait.
 - **Responsive Layout & Mobile Navigation**:
   - Improve layouts for narrow mobile screens and preserve comfortable spacing around fixed navigation.
   - Hide the viewport's vertical and horizontal scrollbar visuals while preserving normal scrolling.
@@ -120,5 +140,6 @@ Inspired by two reference portfolios provided by the user:
 - **Scroll-Driven Portfolio Presentation**:
   - Integrate the upstream `ZhengLinLei/cursor-swarm.js` library into the existing portfolio content; do not add a separate demo or mock website section.
   - Let the library build and deconstruct actual text, frames, controls, and media in response to scroll, using a restrained theme-aware cursor palette.
+  - Reduce cursor count and limit build detection to meaningful headings, copy, controls, links, and media; disable nonessential guide/spark effects to reduce scroll-time lag.
   - Scope the effect to the routed main content, preserve the native pointer and clickable controls, and restore DOM state on route changes/unmount.
   - Respect reduced-motion preferences, reveal all content and hide swarm overlays during printing, and use the exact licensed upstream source rather than a similarly named npm package from another project.

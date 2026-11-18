@@ -28,7 +28,7 @@ export function ThemeToggle({ className, compact = false }: ThemeToggleProps) {
       type="button"
       onClick={cycleTheme}
       className={cn(
-        'inline-flex items-center border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+        'editorial-control inline-flex items-center',
         compact ? 'h-9 w-9 justify-center p-0' : 'h-12 w-[190px] max-w-full justify-between gap-2 px-2.5 py-1.5',
         className
       )}

@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 
 const roles = [
   'MULTIMEDIA ENGINEERING TECHNOLOGIST',
   'FULL-STACK WEB & MOBILE DEVELOPER',
   '3D & INTERACTIVE MULTIMEDIA ARTIST',
-  'TEAM LEADER // EEPIS NEWS & NETWORK TEAM',
 ];
 
 export function RoleTicker() {
   const { tokens } = useTheme();
+  const reduceMotion = useReducedMotion();
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    if (reduceMotion) {
+      setRoleIndex(0);
+      setDisplayText(roles[0]);
+      setIsDeleting(false);
+      return;
+    }
+
     const currentRole = roles[roleIndex];
     let timeout: ReturnType<typeof setTimeout>;
 
@@ -39,11 +47,11 @@ export function RoleTicker() {
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, roleIndex]);
+  }, [displayText, isDeleting, reduceMotion, roleIndex]);
 
   return (
     <div
-      className="inline-flex w-fit max-w-full flex-wrap items-center gap-1 border px-2 py-1 font-mono text-[9px] tracking-wider uppercase text-white sm:gap-2 sm:px-3 sm:text-xs"
+      className="inline-flex w-fit max-w-full flex-wrap items-center gap-1 border px-2 py-1 font-mono text-[clamp(0.5rem,2.4vw,0.65rem)] tracking-[0.08em] uppercase text-white sm:gap-2 sm:px-3 sm:text-xs sm:tracking-wider"
       style={{
         backgroundColor: tokens.contentPrimary,
         borderColor: tokens.contentPrimary,
@@ -52,7 +60,7 @@ export function RoleTicker() {
       <span className="font-bold" style={{ color: '#FFCB3D' }}>&gt;</span>
       <span className="min-w-0 flex-1 whitespace-normal break-words font-semibold">{displayText}</span>
       <span
-        className="inline-block w-2 h-3.5 animate-pulse"
+        className="inline-block w-2 h-3.5 motion-safe:animate-pulse"
         style={{ backgroundColor: '#FFCB3D' }}
       />
     </div>

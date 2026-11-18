@@ -12,14 +12,14 @@ export const Section = forwardRef<HTMLElement, SectionProps>(
       <section
         ref={ref}
         className={cn(
-          'py-16 md:py-24',
+          'editorial-section py-[var(--editorial-section-space)]',
           borderBottom && 'border-b border-mecha-light1',
           className
         )}
         {...props}
       >
         {container ? (
-          <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+          <div className="editorial-container">
             {children}
           </div>
         ) : (

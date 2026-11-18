@@ -16,6 +16,8 @@ export interface ThemeTokens {
   designation: string;
   // Colors ordered by dominance:
   palette: string[];
+  wordmarkPrimary: string;
+  wordmarkSecondary: string;
   sidebar: string;
   sidebarText: string;
   sidebarBorder: string;
@@ -41,6 +43,8 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     code: 'MONOCHROME',
     designation: 'PROTOTYPE UNIT',
     palette: ['#FFFFFF', '#0B0B0E', '#71717A'],
+    wordmarkPrimary: '#0B0B0E',
+    wordmarkSecondary: '#71717A',
     sidebar: '#0B0B0E',
     sidebarText: '#FFFFFF',
     sidebarBorder: '#27272A',
@@ -66,6 +70,8 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     code: 'E.F.S.F.',
     designation: 'WHITE DEVIL',
     palette: ['#FFFFFF', '#1B365D', '#DC2626', '#F59E0B'],
+    wordmarkPrimary: '#1B365D',
+    wordmarkSecondary: '#F59E0B',
     sidebar: '#122340',
     sidebarText: '#F8FAFC',
     sidebarBorder: '#1E3A8A',
@@ -91,6 +97,8 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     code: 'NEO ZEON',
     designation: 'RED COMET REBORN',
     palette: ['#991B1B', '#111113', '#D4AF37'],
+    wordmarkPrimary: '#991B1B',
+    wordmarkSecondary: '#D4AF37',
     sidebar: '#771616',
     sidebarText: '#FEF3C7',
     sidebarBorder: '#991B1B',
@@ -115,6 +123,8 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     code: 'MAFTY',
     designation: 'MANHUNT MOVEMENT',
     palette: ['#F58220', '#F8FAFC', '#171717'],
+    wordmarkPrimary: '#F58220',
+    wordmarkSecondary: '#171717',
     sidebar: '#171717',
     sidebarText: '#F8FAFC',
     sidebarBorder: '#3F3F46',
@@ -139,6 +149,8 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     code: 'CELESTIAL BEING',
     designation: 'GUNDAM MEISTERS',
     palette: ['#EBCB32', '#4F5D95', '#F8F9FC', '#20233A'],
+    wordmarkPrimary: '#EBCB32',
+    wordmarkSecondary: '#4F5D95',
     sidebar: '#20233A',
     sidebarText: '#F8F9FC',
     sidebarBorder: '#40496C',
@@ -163,6 +175,8 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     code: 'TEKKADAN',
     designation: 'IRON-BLOODED ORPHANS',
     palette: ['#E50922', '#171717', '#F7F7F7'],
+    wordmarkPrimary: '#E50922',
+    wordmarkSecondary: '#171717',
     sidebar: '#171717',
     sidebarText: '#F7F7F7',
     sidebarBorder: '#3F3F46',
@@ -187,6 +201,8 @@ export const GUNDAM_THEMES: Record<GundamTheme, ThemeTokens> = {
     code: 'GJALLARHORN',
     designation: 'INNER SPHERE',
     palette: ['#F5F3ED', '#243248', '#A7373F', '#C5A565'],
+    wordmarkPrimary: '#243248',
+    wordmarkSecondary: '#C5A565',
     sidebar: '#1E2A3D',
     sidebarText: '#F9F6EE',
     sidebarBorder: '#465267',
@@ -253,6 +269,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty('--accent-alt', tokens.accentAlt);
     root.style.setProperty('--accent-highlight', tokens.accentHighlight);
     root.style.setProperty('--content-bg', tokens.contentBg);
+    root.style.setProperty('--content-subtle-bg', tokens.contentSubtleBg);
+    root.style.setProperty('--content-border', tokens.contentBorder);
     root.style.setProperty('--content-text', tokens.contentText);
     root.style.setProperty('--content-primary', tokens.contentPrimary);
     root.style.setProperty('--content-highlight', tokens.contentHighlight);

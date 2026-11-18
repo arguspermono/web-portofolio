@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { cn } from '../../utils/cn';
+import { PixelDissolveImage } from './PixelDissolveImage';
 
 interface ProjectPreviewGalleryProps {
   images: string[];
@@ -10,6 +11,7 @@ interface ProjectPreviewGalleryProps {
   autoAdvanceOnHover?: boolean;
   showIndicators?: boolean;
   isHovered?: boolean;
+  pixelDissolve?: boolean;
 }
 
 export function ProjectPreviewGallery({
@@ -21,6 +23,7 @@ export function ProjectPreviewGallery({
   autoAdvanceOnHover = true,
   showIndicators = true,
   isHovered: isHoveredExternally,
+  pixelDissolve = false,
 }: ProjectPreviewGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -53,16 +56,24 @@ export function ProjectPreviewGallery({
       onMouseLeave={() => setIsHovered(false)}
     >
       {images.length > 0 ? (
-        <img
-          key={images[activeIndex]}
-          src={images[activeIndex]}
-          alt={`${title} preview ${activeIndex + 1}`}
-          className={cn(
-            'h-full w-full transition-opacity duration-500',
-            fit === 'contain' ? 'object-contain' : 'object-cover',
-            imageClassName
-          )}
-        />
+        pixelDissolve ? (
+          <PixelDissolveImage
+            src={images[activeIndex]}
+            alt={`${title} preview ${activeIndex + 1}`}
+            fit={fit}
+            imageClassName={imageClassName}
+          />
+        ) : (
+          <img
+            src={images[activeIndex]}
+            alt={`${title} preview ${activeIndex + 1}`}
+            className={cn(
+              'h-full w-full transition-opacity duration-500',
+              fit === 'contain' ? 'object-contain' : 'object-cover',
+              imageClassName
+            )}
+          />
+        )
       ) : (
         <div className="flex h-full w-full items-center justify-center font-mono text-xs uppercase tracking-widest text-neutral-400">
           Preview unavailable

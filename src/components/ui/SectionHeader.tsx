@@ -15,42 +15,31 @@ export function SectionHeader({ number, label, title, className, dark = false, c
   const { tokens } = useTheme();
 
   return (
-    <FadeIn className={cn("mb-12 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6", className)}>
-      <div>
-        <div className="flex items-center gap-4 mb-6">
-          <div
-            className={cn(
-            "font-mono text-xs tracking-widest uppercase",
-            dark ? "text-mecha-light1" : "theme-accent-text"
-            )}
-            style={!dark ? { color: tokens.contentPrimary } : undefined}
+    <FadeIn className={cn('editorial-section-header relative z-10 mb-10 flex flex-col justify-between gap-6 md:mb-14 md:flex-row md:items-end', className)}>
+      <div className="min-w-0">
+        <div className="mb-4 flex items-center gap-3 sm:mb-5 sm:gap-4">
+          <span
+            className="editorial-index"
+            style={{ color: dark ? tokens.accent : tokens.contentPrimary }}
           >
             {number}
-          </div>
-          <div className={cn(
-            "w-12 h-px",
-            dark ? "bg-mecha-dark3" : "bg-mecha-light1"
-          )}></div>
-          <h2 className={cn(
-            "text-sm font-mono tracking-widest m-0",
-            dark ? "text-mecha-light1" : "theme-accent-text"
-          )}>
+          </span>
+          <span className={cn('h-px w-8 sm:w-12', dark ? 'bg-mecha-dark3' : 'bg-mecha-light1')} />
+          <span className={cn('font-mono text-[10px] tracking-[0.2em] uppercase sm:text-xs', dark ? 'text-mecha-light1' : 'theme-accent-text')}>
             // {label}
-          </h2>
+          </span>
         </div>
         {title && (
-          <h3 className={cn(
-            "text-3xl md:text-4xl font-extrabold tracking-tight",
-            dark ? "" : "theme-accent-text"
-          )}
+          <h2
+            className="m-0 max-w-4xl font-display text-3xl font-bold leading-[0.98] tracking-[-0.035em] uppercase sm:text-4xl md:text-5xl"
             style={{ color: dark ? tokens.accent : tokens.contentPrimary }}
           >
             {title}
-          </h3>
+          </h2>
         )}
       </div>
       {children && (
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           {children}
         </div>
       )}

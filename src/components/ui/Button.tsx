@@ -15,7 +15,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'neo-button inline-flex items-center justify-center font-bold tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--content-primary)] disabled:opacity-50 disabled:pointer-events-none',
+          'editorial-control inline-flex items-center justify-center font-sans font-bold tracking-wide disabled:opacity-50 disabled:pointer-events-none',
           {
             'theme-button-primary border': variant === 'primary',
             'theme-button-secondary border': variant === 'secondary',

@@ -14,7 +14,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       <div
         ref={ref}
         className={cn(
-          'inline-flex items-center px-2.5 py-1 text-[10px] sm:text-xs font-mono font-medium tracking-widest uppercase border-2 rounded-[8px]',
+          'inline-flex items-center border px-2.5 py-1 text-[10px] font-mono font-medium uppercase tracking-[0.12em] sm:text-xs',
           {
             'theme-accent-soft': variant === 'default',
             'theme-accent-bg font-semibold': variant === 'accent',

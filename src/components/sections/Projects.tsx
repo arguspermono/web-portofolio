@@ -61,7 +61,7 @@ export function Projects({ sectionIndex: _i = 2 }: SectionComponentProps) {
           <FadeIn
             key={project.id}
             delay={0.1 * (index + 1)}
-            className="flex-none w-[85vw] sm:w-[400px] lg:w-[440px] snap-start m-3 rounded-2xl border border-mecha-dark3 bg-mecha-black overflow-hidden flex flex-col"
+            className="flex-none w-[85vw] sm:w-[400px] lg:w-[440px] snap-start m-3 border border-mecha-dark3 bg-mecha-black overflow-hidden flex flex-col"
             onMouseEnter={() => setHoveredProjectId(project.id)}
             onMouseLeave={() => setHoveredProjectId(null)}
           >

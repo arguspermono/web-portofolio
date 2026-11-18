@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils/cn';
+import { useTheme } from '../../context/ThemeContext';
 
 interface AudioPlayerProps {
   compact?: boolean;
 }
 
 export function AudioPlayer({ compact = false }: AudioPlayerProps) {
+  const { tokens } = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
@@ -94,36 +96,34 @@ export function AudioPlayer({ compact = false }: AudioPlayerProps) {
 
   return (
     <button
+      type="button"
       onClick={toggleSound}
+      aria-pressed={isPlaying}
       className={cn(
-        'group flex items-center gap-2 border transition-all text-xs font-mono uppercase tracking-wider select-none',
+        'editorial-control group flex items-center gap-2 text-xs font-mono uppercase tracking-wider select-none',
         compact ? 'h-9 w-9 justify-center p-0' : 'h-12 px-2.5 py-1.5',
-        isPlaying
-          ? 'border-white bg-white text-black'
-          : 'border-neutral-800 bg-neutral-900/60 text-neutral-400 hover:border-neutral-600 hover:text-white'
       )}
+      style={{
+        borderColor: tokens.accent + '66',
+        backgroundColor: isPlaying ? tokens.accent : tokens.sidebar,
+        color: isPlaying ? tokens.sidebar : tokens.sidebarText,
+      }}
       title={isPlaying ? 'Click to pause ambient sound' : 'Click to play ambient lo-fi sound'}
       aria-label={isPlaying ? 'Pause ambient sound' : 'Play ambient sound'}
     >
       {/* 3-Bar Equalizer Waveform */}
       <div className="flex items-end gap-[3px] h-3 w-3">
         <span
-          className={cn(
-            'w-[2px] transition-all duration-300',
-            isPlaying ? 'bg-black animate-pulse h-3' : 'bg-neutral-500 h-1'
-          )}
+          className={cn('w-[2px] transition-all duration-300', isPlaying ? 'h-3 motion-safe:animate-pulse' : 'h-1')}
+          style={{ backgroundColor: isPlaying ? tokens.sidebar : tokens.sidebarText }}
         />
         <span
-          className={cn(
-            'w-[2px] transition-all duration-300',
-            isPlaying ? 'bg-black animate-pulse delay-75 h-2' : 'bg-neutral-500 h-2'
-          )}
+          className={cn('w-[2px] h-2 transition-all duration-300', isPlaying && 'motion-safe:animate-pulse delay-75')}
+          style={{ backgroundColor: isPlaying ? tokens.sidebar : tokens.sidebarText }}
         />
         <span
-          className={cn(
-            'w-[2px] transition-all duration-300',
-            isPlaying ? 'bg-black animate-pulse delay-150 h-3' : 'bg-neutral-500 h-1.5'
-          )}
+          className={cn('w-[2px] transition-all duration-300', isPlaying ? 'h-3 motion-safe:animate-pulse delay-150' : 'h-1.5')}
+          style={{ backgroundColor: isPlaying ? tokens.sidebar : tokens.sidebarText }}
         />
       </div>
 

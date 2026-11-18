@@ -54,83 +54,86 @@ export function CertificatesPage() {
       />
 
       {/* ── 2. FILTER & SEARCH ───────────────────────────────── */}
-      <div className="border-b border-mecha-light1 bg-mecha-light2 px-6 md:px-12 py-3.5 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-        {/* Organization Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-1.5">
-          {organizations.map((org) => {
-            const isActive = selectedOrg === org;
-            return (
-              <button
-                key={org}
-                onClick={() => setSelectedOrg(org)}
-                className={cn(
-                  'px-3 py-1.5 font-mono text-xs tracking-wider uppercase transition-colors border',
-                  isActive
-                    ? 'theme-accent-bg font-bold'
-                    : 'bg-white text-neutral-700 border-mecha-light1 theme-accent-hover'
-                )}
-              >
-                {org}
-              </button>
-            );
-          })}
-        </div>
+      <div className="border-b border-mecha-light1 bg-mecha-light2">
+        <div className="editorial-container py-3.5">
+          <div className="flex flex-col items-stretch justify-between gap-4 lg:flex-row lg:items-center">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {organizations.map((org) => {
+                const isActive = selectedOrg === org;
+                return (
+                  <button
+                    key={org}
+                    onClick={() => setSelectedOrg(org)}
+                    className={cn(
+                      'border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors',
+                      isActive
+                        ? 'theme-accent-bg font-bold'
+                        : 'border-mecha-light1 bg-white text-neutral-700 theme-accent-hover'
+                    )}
+                  >
+                    {org}
+                  </button>
+                );
+              })}
+            </div>
 
-        {/* Search Input */}
-        <div className="relative min-w-[240px]">
-          <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 text-xs" />
-          <input
-            type="text"
-            placeholder="SEARCH CERTIFICATES..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white border border-mecha-light1 pl-9 pr-4 py-2 font-mono text-xs tracking-wider uppercase text-mecha-black placeholder-neutral-400 focus:outline-none theme-focus-accent transition-colors"
-          />
+            <div className="relative min-w-[240px]">
+              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400" />
+              <input
+                type="text"
+                placeholder="SEARCH CERTIFICATES..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full border border-mecha-light1 bg-white py-2 pl-9 pr-4 font-mono text-xs uppercase tracking-wider text-mecha-black placeholder-neutral-400 transition-colors focus:outline-none theme-focus-accent"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* ── 3. CERTIFICATES GRID ─────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 divide-y md:divide-y-0 border-b border-mecha-light1 bg-transparent">
-        {filteredCerts.map((cert) => (
-          <FadeIn
-            key={cert.id}
-            className="neo-card m-4 p-6 sm:p-8 flex flex-col justify-between transition-colors group relative cursor-pointer"
-            onClick={() => setActiveModalCert(cert)}
-            ariaLabel={`Open certificate preview for ${cert.title}`}
-          >
-            <div>
-              <div className="flex items-center justify-between font-mono text-xs tracking-wider text-neutral-500 uppercase pb-2 mb-3 border-b border-mecha-light1">
-                <span>{cert.organization}</span>
-                <span className="flex items-center gap-1.5 text-neutral-800 font-semibold">
-                  <FaAward className="text-neutral-900 text-xs" />
-                  VERIFIED
-                </span>
+      <div className="border-b border-mecha-light1">
+        <div className="editorial-container grid grid-cols-1 gap-5 py-[var(--editorial-section-space)] md:grid-cols-2 xl:grid-cols-3">
+          {filteredCerts.map((cert) => (
+            <FadeIn
+              key={cert.id}
+              className="neo-card group relative flex cursor-pointer flex-col justify-between p-6 transition-colors sm:p-8"
+              onClick={() => setActiveModalCert(cert)}
+              ariaLabel={`Open certificate preview for ${cert.title}`}
+            >
+              <div>
+                <div className="mb-3 flex items-center justify-between border-b border-mecha-light1 pb-2 font-mono text-xs uppercase tracking-wider text-neutral-500">
+                  <span>{cert.organization}</span>
+                  <span className="flex items-center gap-1.5 font-semibold text-neutral-800">
+                    <FaAward className="text-xs text-neutral-900" />
+                    VERIFIED
+                  </span>
+                </div>
+
+                <h3 className="mb-3 font-display text-lg font-bold uppercase leading-snug tracking-tight theme-accent-text transition-colors group-hover:text-[var(--content-highlight)] sm:text-xl">
+                  {cert.title}
+                </h3>
+
+                <div className="mb-6 font-mono text-xs uppercase tracking-wider text-neutral-600">
+                  DATE: {cert.date}
+                </div>
               </div>
 
-              <h3 className="font-display font-bold text-lg sm:text-xl tracking-tight theme-accent-text uppercase mb-3 leading-snug group-hover:text-[var(--content-highlight)] transition-colors">
-                {cert.title}
-              </h3>
-
-              <div className="font-mono text-xs tracking-wider text-neutral-600 uppercase mb-6">
-                DATE: {cert.date}
-              </div>
-            </div>
-
-            {/* Bottom Interactive Action */}
-            <div className="pt-4 mt-auto border-t border-mecha-light1 flex items-center justify-between">
-              <span className="font-mono text-[11px] tracking-wider text-neutral-500 uppercase flex items-center gap-1.5 group-hover:text-black transition-colors font-semibold">
-                <FaEye className="text-xs" />
-                <span>INTERACTIVE PREVIEW</span>
-              </span>
-
-              {cert.imageUrl && (
-                <span className="font-mono text-xs text-neutral-400 group-hover:translate-x-1 transition-transform">
-                  →
+              <div className="mt-auto flex items-center justify-between border-t border-mecha-light1 pt-4">
+                <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-500 transition-colors group-hover:text-black">
+                  <FaEye className="text-xs" />
+                  <span>INTERACTIVE PREVIEW</span>
                 </span>
-              )}
-            </div>
-          </FadeIn>
-        ))}
+
+                {cert.imageUrl && (
+                  <span className="font-mono text-xs text-neutral-400 transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                )}
+              </div>
+            </FadeIn>
+          ))}
+        </div>
       </div>
 
       {/* ── 4. INTERACTIVE DOCUMENT PREVIEW MODAL ────────────── */}
@@ -187,7 +190,7 @@ export function CertificatesPage() {
                 <img
                   src={activeModalCert.imageUrl}
                   alt={activeModalCert.title}
-                  className="max-h-[560px] w-auto max-w-full object-contain mx-auto border border-neutral-700 shadow-lg"
+                  className="max-h-[560px] w-auto max-w-full object-contain mx-auto border border-neutral-700"
                 />
               )}
             </div>

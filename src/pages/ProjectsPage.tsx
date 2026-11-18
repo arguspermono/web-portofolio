@@ -55,41 +55,44 @@ export function ProjectsPage() {
       />
 
       {/* ── 2. CATEGORY FILTER ───────────────────────────────── */}
-      <div className="border-b border-mecha-light1 bg-mecha-light2 px-6 md:px-12 py-3.5 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-1.5">
-          {categories.map((cat) => {
-            const isActive = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={cn(
-                  'px-3 py-1.5 font-mono text-xs tracking-wider uppercase transition-colors border',
-                  isActive
-                    ? 'theme-accent-bg font-bold'
-                    : 'bg-white text-neutral-700 border-mecha-light1 theme-accent-hover'
-                )}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
+      <div className="editorial-container">
+        <div className="my-6 flex flex-wrap items-center justify-between gap-4 border border-[var(--content-border)] bg-[var(--content-subtle-bg)] p-3">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {categories.map((cat) => {
+              const isActive = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  aria-pressed={isActive}
+                  className={cn(
+                    'min-h-9 px-3 font-mono text-[10px] tracking-[0.12em] uppercase transition-colors',
+                    isActive
+                      ? 'theme-accent-bg font-bold'
+                      : 'bg-[var(--content-bg)] text-[var(--content-text)] theme-accent-hover'
+                  )}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
 
-        <div className="font-mono text-xs tracking-wider text-neutral-500 uppercase">
-          {filteredProjects.length} PROJECTS
+          <div className="font-mono text-[10px] tracking-[0.12em] text-neutral-500 uppercase">
+            {filteredProjects.length} PROJECTS
+          </div>
         </div>
       </div>
 
       {/* ── 3. PROJECTS GRID ─────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 divide-y md:divide-y-0 border-b border-mecha-light1 bg-transparent">
+      <div className="editorial-container grid grid-cols-1 gap-5 pb-[var(--editorial-section-space)] md:grid-cols-2 xl:grid-cols-3">
         {filteredProjects.map((project) => {
           const isMobile = project.category.toLowerCase().includes('mobile') || project.slug === 'memospace';
 
           return (
             <FadeIn
               key={project.id}
-              className="neo-card m-4 flex flex-col justify-between group transition-colors overflow-hidden"
+              className="editorial-data-card group flex flex-col justify-between transition-colors"
               onMouseEnter={() => setHoveredProjectId(project.id)}
               onMouseLeave={() => setHoveredProjectId(null)}
             >
@@ -106,7 +109,7 @@ export function ProjectsPage() {
                   role="button"
                   tabIndex={0}
                   aria-label={`Open quick preview for ${project.title}`}
-                  className="h-64 sm:h-72 w-full bg-mecha-light2 relative overflow-hidden block border-b border-mecha-light1 cursor-pointer rounded-t-[12px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--content-primary)]"
+                  className="relative block h-64 w-full cursor-pointer overflow-hidden border-b border-[var(--content-border)] bg-[var(--content-subtle-bg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[var(--content-primary)] sm:h-72"
                 >
                   {project.imageUrl ? (
                     <ProjectPreviewGallery
@@ -114,8 +117,8 @@ export function ProjectsPage() {
                       title={project.title}
                       fit={isMobile ? 'contain' : 'cover'}
                       isHovered={hoveredProjectId === project.id}
+                      pixelDissolve
                       className={isMobile ? 'p-3' : ''}
-                      imageClassName={isMobile ? 'shadow-md' : ''}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center font-mono text-xs text-neutral-400 uppercase tracking-widest">
@@ -128,7 +131,7 @@ export function ProjectsPage() {
 
                   {/* Category Pill */}
                   <div className="absolute top-3 left-3 z-10">
-                    <span className="font-mono text-[10px] tracking-widest uppercase bg-white/95 text-neutral-800 border border-neutral-300 px-2 py-0.5 shadow-sm">
+                    <span className="border border-[var(--content-border)] bg-[var(--content-bg)] px-2 py-0.5 font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--content-text)]">
                       {project.category}
                     </span>
                   </div>
@@ -159,9 +162,9 @@ export function ProjectsPage() {
                   </p>
 
                   {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-1.5 mb-2">
+                  <div className="mb-2 flex flex-wrap gap-1.5">
                     {project.technologies.slice(0, 5).map((tech) => (
-                      <Badge key={tech} className="bg-mecha-light2 text-neutral-800 border-mecha-light1 text-[11px]">
+                      <Badge key={tech} className="border-[var(--content-border)] bg-[var(--content-subtle-bg)] text-[var(--content-text)] text-[11px]">
                         {tech}
                       </Badge>
                     ))}
@@ -175,10 +178,10 @@ export function ProjectsPage() {
               </div>
 
               {/* Action Footer */}
-              <div className="p-6 pt-4 border-t border-mecha-light1 flex items-center justify-between font-mono text-xs tracking-wider uppercase bg-mecha-light2/30">
+              <div className="flex items-center justify-between border-t border-[var(--content-border)] bg-[var(--content-subtle-bg)] p-6 pt-4 font-mono text-xs tracking-wider uppercase">
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="text-mecha-black hover:text-neutral-600 font-semibold transition-colors flex items-center gap-1.5"
+                  className="flex items-center gap-1.5 font-semibold text-[var(--content-primary)] transition-colors hover:text-[var(--content-highlight)]"
                 >
                   <span>SPECIFICATION</span>
                   <span>→</span>

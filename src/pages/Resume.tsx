@@ -31,7 +31,7 @@ export function Resume() {
   };
 
   return (
-    <div className="blueprint-surface text-mecha-black min-h-screen print:min-h-0 flex flex-col">
+    <div className="blueprint-surface resume-page-shell text-mecha-black min-h-screen print:min-h-0 flex flex-col">
       {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
       <div className="print:hidden">
         <ModulePanelHeader

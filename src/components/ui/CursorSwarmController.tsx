@@ -100,7 +100,7 @@ export function CursorSwarmController() {
         root,
         cursors: 2,
         palette: paletteRef.current,
-        targets: 'h1, h2, h3, p, a, button, img, video, article, .neo-card, [data-swarm]',
+        targets: 'h1:not(.hero-wordmark), h2, h3, p, a, button, img, video, article, .neo-card, [data-swarm]',
         frames: true,
         deconstruct: true,
         startPosition: 'corners',
@@ -162,16 +162,11 @@ export function CursorSwarmController() {
       swarmRef.current?.destroy();
       swarmRef.current = null;
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     swarmRef.current?.setPalette(palette);
   }, [paletteKey, palette]);
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => swarmRef.current?.refresh());
-    return () => window.cancelAnimationFrame(frame);
-  }, [pathname]);
 
   return null;
 }

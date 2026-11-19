@@ -131,7 +131,6 @@ export function About({ sectionIndex: _i = 1 }: SectionComponentProps) {
             delay={0.1 * (index + 1)}
             className="border border-mecha-light1 p-6 relative"
           >
-            <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-light1" />
             <div className="font-mono text-[10px] tracking-widest uppercase mb-1 text-mecha-dark3">
               {edu.startDate} — {edu.endDate}
             </div>
@@ -162,7 +161,6 @@ export function About({ sectionIndex: _i = 1 }: SectionComponentProps) {
             delay={0.1 * (index + 1)}
             className="border border-mecha-light1 p-6 relative"
           >
-            <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-light1" />
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase mb-1 text-mecha-dark3">
               MODULE {String(index + 1).padStart(2, '0')}
             </div>
@@ -191,7 +189,6 @@ export function About({ sectionIndex: _i = 1 }: SectionComponentProps) {
         </div>
         <div className="md:col-span-8">
           <FadeIn delay={0.2} className="border border-mecha-light1 relative">
-            <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-light1" />
             <div className="border-b border-mecha-light1 px-6 py-3">
               <span className="font-mono text-[10px] tracking-[0.25em] text-mecha-dark3 uppercase">
                 TRANSMISSION CHANNELS

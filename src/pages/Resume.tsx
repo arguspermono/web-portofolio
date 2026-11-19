@@ -35,7 +35,6 @@ export function Resume() {
       {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
       <div className="print:hidden">
         <ModulePanelHeader
-          moduleNumber="MODULE.004 //"
           title="RESUME"
           description="OFFICIAL CURRICULUM VITAE PREPARED FOR ATS (APPLICANT TRACKING SYSTEMS), INDUSTRY AUDIT, AND FORMAL PRINT DOCUMENTATION."
           theme="light"

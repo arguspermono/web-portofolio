@@ -89,8 +89,6 @@ export function Projects({ sectionIndex: _i = 2 }: SectionComponentProps) {
               <div className="absolute top-3 left-3 font-mono text-[9px] tracking-[0.2em] text-mecha-dark3 uppercase">
                 PROJ.{String(index + 1).padStart(2, '0')}
               </div>
-              {/* Corner */}
-              <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-dark3" />
             </Link>
 
             {/* Card content */}

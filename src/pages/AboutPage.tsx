@@ -43,10 +43,7 @@ export function AboutPage() {
       >
         <div className="editorial-container relative z-10 mx-auto flex w-full max-w-[1600px] flex-1 flex-col py-4 sm:py-6">
           <div className="flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px]">
-            <div className="flex items-center gap-2.5">
-              <span className="h-2 w-2 theme-accent-bg" aria-hidden="true" />
-              <span className="font-semibold theme-accent-text">MODULE.001 // ABOUT</span>
-            </div>
+            <div className="flex items-center gap-2.5"></div>
           </div>
 
           <div className="intro-hero-stage relative flex min-h-[clamp(22rem,63svh,47rem)] flex-1 items-end justify-center">
@@ -244,10 +241,10 @@ export function AboutPage() {
       {/* ── 6. TECHNICAL SKILLS ──────────────────────────────── */}
       <section id="toolkit" className="toolkit-section editorial-section relative isolate overflow-hidden border-b border-mecha-light1">
         <div className="editorial-container relative z-10 py-[var(--editorial-section-space)]">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-5 border-b border-[var(--content-border)] pb-5">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-5 pb-5">
             <SectionHeader number="06" label="TECHNICAL PRACTICE" title="TOOLKIT" className="mb-5 md:mb-0" />
             <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500 sm:text-[10px]">
-              {skills.length} DISCIPLINES <span className="px-2 text-[var(--content-highlight)]">//</span>
+              {skills.length} DISCIPLINES<span className="px-2 text-[var(--content-highlight)]">/</span>
               {toolkitSkillCount} TOOLS IN ROTATION
             </p>
           </div>
@@ -285,7 +282,7 @@ export function AboutPage() {
                 className="group border-t border-mecha-black py-5 transition-colors hover:border-[var(--content-highlight)] sm:py-6"
               >
                 <div className="mb-8 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
-                  <span>CREDENTIAL // {String(index + 1).padStart(2, '0')}</span>
+                  <span>CREDENTIAL {String(index + 1).padStart(2, '0')}</span>
                   <span>{certification.date}</span>
                 </div>
                 <h3 className="mb-3 font-display text-lg font-bold uppercase leading-tight tracking-tight text-[var(--content-primary)] transition-colors group-hover:text-[var(--content-highlight)]">
@@ -331,7 +328,7 @@ export function AboutPage() {
               >
                 <span>
                   <span className="mb-1 block font-mono text-xs uppercase tracking-widest text-neutral-500 group-hover:text-neutral-400">
-                    PRIMARY EMAIL <span className="hidden sm:inline">// CLICK TO COPY</span>
+                    PRIMARY EMAIL <span className="hidden sm:inline"></span>
                   </span>
                   <span className="flex items-center gap-3 font-display text-base font-bold uppercase tracking-wide sm:text-lg">
                     <FaEnvelope className="theme-hover-icon transition-colors" />

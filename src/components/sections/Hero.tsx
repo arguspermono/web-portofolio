@@ -60,9 +60,6 @@ export function Hero() {
 
         {/* Right — photo panel */}
         <div className="lg:col-span-5 relative overflow-hidden min-h-[50vh] lg:min-h-0">
-          {/* Corner accents */}
-          <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-mecha-black opacity-40 z-10" />
-          <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-mecha-black opacity-40 z-10" />
 
           {/* Module label overlay */}
           <div className="absolute top-4 right-4 z-10 font-mono text-[9px] tracking-[0.2em] text-mecha-black opacity-40 uppercase">

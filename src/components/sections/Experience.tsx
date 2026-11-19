@@ -16,9 +16,6 @@ export function Experience({ theme = 'dark', sectionIndex = 4 }: SectionComponen
       className={isDark ? "bg-mecha-black text-mecha-white border-b border-mecha-dark3 relative overflow-hidden" : "bg-mecha-white text-mecha-black border-b border-mecha-light1 relative overflow-hidden"}
     >
       {/* Decorative mechanical elements for dark section */}
-      {isDark && (
-        <div className="absolute top-0 right-0 w-64 h-64 border-l border-b border-mecha-dark3 opacity-20 pointer-events-none"></div>
-      )}
 
       <SectionHeader number={numberStr} label="EXPERIENCE" title="Career Journey." dark={isDark} />
 

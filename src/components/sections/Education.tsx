@@ -13,9 +13,6 @@ export function Education({ theme = 'light', sectionIndex = 5 }: SectionComponen
       id="education" 
       className={isDark ? "bg-mecha-black text-mecha-white border-b border-mecha-dark3 relative overflow-hidden" : "bg-mecha-white border-b border-mecha-light1"}
     >
-      {isDark && (
-        <div className="absolute top-0 right-0 w-64 h-64 border-l border-b border-mecha-dark3 opacity-20 pointer-events-none"></div>
-      )}
       
       <SectionHeader number={numberStr} label="EDUCATION" title="Academic Background." dark={isDark} />
 
@@ -26,8 +23,6 @@ export function Education({ theme = 'light', sectionIndex = 5 }: SectionComponen
             delay={0.1 * (index + 1)}
             className={`border p-6 relative group ${isDark ? 'border-mecha-dark3 bg-mecha-dark1' : 'border-mecha-light1 bg-mecha-white'}`}
           >
-            {/* Subtle technical corner */}
-            <div className={`absolute top-0 right-0 w-2 h-2 border-l border-b ${isDark ? 'border-mecha-dark3 bg-mecha-dark2' : 'border-mecha-light1 bg-mecha-light2'}`}></div>
             
             <div className={`font-mono text-[10px] tracking-widest uppercase mb-1 ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
               {edu.startDate} — {edu.endDate}

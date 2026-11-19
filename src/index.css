@@ -518,15 +518,6 @@ body::-webkit-scrollbar {
     text-wrap: balance;
   }
 
-  /* Panel line corners — top-right clip */
-  .corner-tr::after {
-    content: '';
-    @apply absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-light1;
-  }
-  .corner-tr-dark::after {
-    content: '';
-    @apply absolute top-0 right-0 w-3 h-3 border-l border-b border-mecha-dark3;
-  }
 
   /* Module label style */
   .module-label {

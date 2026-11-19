@@ -17,16 +17,15 @@ export function SectionHeader({ number, label, title, className, dark = false, c
   return (
     <FadeIn className={cn('editorial-section-header relative z-10 mb-10 flex flex-col justify-between gap-6 md:mb-14 md:flex-row md:items-end', className)}>
       <div className="min-w-0">
-        <div className="mb-4 flex items-center gap-3 sm:mb-5 sm:gap-4">
+        <div className="mb-4 flex items-center gap-2 sm:mb-5">
           <span
             className="editorial-index"
             style={{ color: dark ? tokens.accent : tokens.contentPrimary }}
           >
             {number}
           </span>
-          <span className={cn('h-px w-8 sm:w-12', dark ? 'bg-mecha-dark3' : 'bg-mecha-light1')} />
-          <span className={cn('font-mono text-[10px] tracking-[0.2em] uppercase sm:text-xs', dark ? 'text-mecha-light1' : 'theme-accent-text')}>
-            // {label}
+          <span className={cn('font-mono text-[10px] tracking-[0.2em] uppercase sm:text-xs font-semibold', dark ? 'text-mecha-light1' : 'theme-accent-text')}>
+            {label}
           </span>
         </div>
         {title && (

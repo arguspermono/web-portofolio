@@ -10,6 +10,7 @@ const pageLinks = [
   { label: 'ABOUT', to: '/#intro', isActive: (path: string) => path === '/' || path === '/about' },
   { label: 'PROJECTS', to: '/projects', isActive: (path: string) => path.startsWith('/projects') },
   { label: 'CERTIFICATES', to: '/certificates', isActive: (path: string) => path === '/certificates' },
+  { label: 'RESUME', to: '/resume', isActive: (path: string) => path === '/resume' },
 ];
 
 const mobileNavLinks = [
@@ -119,16 +120,6 @@ export function Header() {
                 </Link>
               );
             })}
-            <Link
-              to="/resume"
-              aria-current={pathname === '/resume' ? 'page' : undefined}
-              className="site-nav-link site-nav-resume"
-              style={pathname === '/resume' ? resumeStyle : undefined}
-            >
-              <span className="mr-2 font-mono text-[8px] opacity-55">04</span>
-              RESUME
-              <span className="ml-3 font-mono" aria-hidden="true">↗</span>
-            </Link>
           </nav>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">

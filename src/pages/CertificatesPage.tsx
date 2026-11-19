@@ -47,7 +47,6 @@ export function CertificatesPage() {
     <div className="blueprint-surface text-mecha-black min-h-screen flex flex-col">
       {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
       <ModulePanelHeader
-        moduleNumber="MODULE.003 //"
         title="CERTIFICATES"
         description="VERIFIED ACCREDITATIONS & CREDENTIALS IN CLOUD COMPUTING, ARTIFICIAL INTELLIGENCE, DATA SCIENCE, AND SOFTWARE ENGINEERING."
         theme="light"

@@ -99,7 +99,6 @@ export function ProjectDetail() {
               </div>
             )}
 
-            <div className="absolute top-0 right-0 w-4 h-4 border-l border-b border-neutral-500" />
           </div>
         </div>
       </div>

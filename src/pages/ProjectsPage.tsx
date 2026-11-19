@@ -48,7 +48,6 @@ export function ProjectsPage() {
     <div className="blueprint-surface text-mecha-black min-h-screen flex flex-col">
       {/* ── 1. MODULE PANEL HEADER ───────────────────────────── */}
       <ModulePanelHeader
-        moduleNumber="MODULE.002 //"
         title="PROJECTS"
         description="SELECTED PRODUCTION PROJECTS IN WEB PLATFORMS, MOBILE SOFTWARE, 3D MULTIMEDIA, AND EXPERIMENTAL SYSTEMS."
         theme="light"
@@ -125,9 +124,6 @@ export function ProjectsPage() {
                       PREVIEW UNAVAILABLE
                     </div>
                   )}
-
-                  {/* Corner Accent */}
-                  <div className="absolute top-0 right-0 w-3 h-3 border-l border-b border-neutral-400 z-10" />
 
                   {/* Category Pill */}
                   <div className="absolute top-3 left-3 z-10">

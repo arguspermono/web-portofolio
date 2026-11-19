@@ -16,9 +16,6 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
       borderBottom={false} 
       className={isDark ? "bg-mecha-black text-mecha-white relative overflow-hidden" : "bg-mecha-light2 relative overflow-hidden"}
     >
-      {isDark && (
-        <div className="absolute top-0 right-0 w-64 h-64 border-l border-b border-mecha-dark3 opacity-20 pointer-events-none"></div>
-      )}
 
       <SectionHeader number={numberStr} label="CONTACT" title="Let's connect." dark={isDark} />
       <div className="grid md:grid-cols-12 gap-12 relative z-10">
@@ -35,7 +32,6 @@ export function Contact({ theme = 'light', sectionIndex = 7 }: SectionComponentP
         {/* Right — links */}
         <div className="md:col-span-7 flex items-center">
           <FadeIn direction="left" delay={0.3} className={`w-full border p-8 relative space-y-6 ${isDark ? 'border-mecha-dark3 bg-mecha-dark1' : 'border-mecha-light1 bg-mecha-white'}`}>
-            <div className={`absolute top-0 right-0 w-2 h-2 border-l border-b ${isDark ? 'border-mecha-dark3 bg-mecha-dark2' : 'border-mecha-light1 bg-mecha-light2'}`}></div>
             <div className={`font-mono text-[10px] tracking-widest uppercase mb-4 ${isDark ? 'text-mecha-light1' : 'text-mecha-dark3'}`}>
               TRANSMISSION CHANNELS
             </div>

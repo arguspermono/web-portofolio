@@ -26,7 +26,7 @@ Inspired by two reference portfolios provided by the user:
 
 - **Logo Transition**: Change logo from wordmark to pure name initials: **"AB"** (Arya Bagus).
 - **Typography**: Proper, high-craft editorial typeface with balanced letter-spacing, sharp geometric alignment, and crisp vector rendering.
-- **Placement**: Mobile top header and desktop fixed sidebar, linking to `/`.
+- **Placement**: Responsive top sticky navbar (`Header.tsx`) and mobile bottom navigation, linking to `/#intro`.
 
 ---
 
@@ -39,7 +39,7 @@ Inspired by two reference portfolios provided by the user:
      - `3D & CREATIVE INTERACTIVE CODER`
    - Styled in crisp monochrome badge with blinking cursor.
 2. **Interactive Ambient Audio Player (Toggle)**:
-   - Minimalist audio player in Sidebar footer / top bar with animated equalizer bars and volume/mute control.
+   - Minimalist audio player in the top sticky navbar with animated 3-bar equalizer and ambient sound synthesizer.
    - Non-intrusive, starts paused by default with clear visual state.
 3. **Scroll Reading Progress Bar**:
    - Thin 1px monochrome progress bar at the top of the viewport indicating page scroll depth.
@@ -62,7 +62,7 @@ Inspired by two reference portfolios provided by the user:
 ## 4. Logo Assets & Browser Identity Integration
 
 - **Image Asset Sourcing**: Logo assets stored in `public/assets/img/logo/logo-b.png`:
-  - `logo-w.png`: White/light monogram logo used for dark themes and dark sidebar backgrounds.
+  - `logo-w.png`: White/light monogram logo used for dark themes and dark navbar backgrounds.
   - `logo-b.png`: Black/dark monogram logo used for light themes and browser favicon.
 - **Browser Favicon & Title**:
   - Favicon configured with `assets/img/logo/logo-b.png` for crisp visibility on browser tabs.
@@ -70,33 +70,66 @@ Inspired by two reference portfolios provided by the user:
 
 ---
 
-## 5. Layout Color Normalization & Gundam Theme Engine
+## 5. Layout Architecture & Gundam Theme Engine
 
 - **Layout Structure**:
-  - **Sidebar (Left)**: Dark mecha background (`#0B0B0E`) with high-contrast technical typography, navigation serial indicators, and quick action controls.
-  - **Content Area (Right)**: Crisp pure white background (`#FFFFFF`) with dark text (`#0B0B0E`) across all pages (About, Projects, Certificates, Resume) for maximum readability and clean modern aesthetic.
-  - **Projects Page Fix**: Normalize Projects page background from black to clean white background with crisp border panel lines, replacing dark cards with clean white cards with dark typography.
-- **Gundam Color Palette Switcher Engine**:
-  - Interactive switcher button positioned in the sidebar to toggle theme palettes instantly:
-  - **Theme-0 (Default Monochrome)**: Pure technical black, neutral whites, subtle technical grays.
-  - **Theme-1 (RX-78-2 Federation)**:
-    - Dominance order: Putih (White - primary content) → Biru (Federation Blue - sidebar/accents) → Merah (Signal Red - secondary markers) → Kuning (Yellow - active highlights).
-  - **Theme-2 (Sinanju / Zeon)**:
-    - Dominance order: Merah (Sinanju Crimson - primary/sidebar) → Hitam (Zeon Black - content accents/details) → Kuning/Emas (Gold/Yellow - elite metallic trim).
-  - **Theme-3 (Mafty)**:
-    - Dominance order: Mafty Orange (`#F58220`) → White (`#F8FAFC`) → Black (`#171717`), matching the requested orange/white/black direction and the existing gold Mafty emblem.
-  - **Theme-4 (Celestial Being / Gundam 00)**:
-    - Dominance order: Emblem Gold (`#EBCB32`) → Insignia Blue (`#4F5D95`) → White (`#F8F9FC`) → Deep Navy (`#20233A`), matching the logo's wings and globe.
-  - **Theme-5 (Tekkadan)**:
-    - Dominance order: Tekkadan Red (`#E50922`) → Black (`#171717`) → White (`#F7F7F7`), matching the existing red insignia.
-  - **Theme-6 (Gjallarhorn)**:
-    - Dominance order: Warm White (`#F5F3ED`) → Officer Navy (`#243248`) → Crimson (`#A7373F`) → Gold (`#C5A565`).
-    - No Gjallarhorn logo asset is currently present in `public/assets/img/logo/theme`; retain its current palette until a matching logo is added.
-  - Keep the existing Monochrome, E.F.S.F., and Neo Zeon palettes intact and include every theme in the persistent cycle.
-  - Highlight Resume in yellow only for E.F.S.F. and Neo Zeon; use each added faction's own palette for its Resume navigation state.
-  - Prevent theme toggle labels from overflowing their button; size the desktop toggle for the longest faction label while keeping the compact mobile toggle unchanged.
-  - Use `CELESTIAL BEING` as the Celestial Being theme's displayed code label.
-  - Instant theme transition with persistent state in `localStorage`.
+  - **Sticky Top Navbar (No Sidebar)**: Replaces any legacy fixed left sidebar with a clean responsive sticky top header. Uses the active theme's dark/faction background token (`--sidebar-bg`) with crisp contrasting typography (`--sidebar-text`), numeric serials (`01`, `02`, `03`, `04`), quick controls (`ThemeToggle` & `AudioPlayer`), and a mobile bottom navigation bar.
+  - **Full-Width Content Area**: Crisp pure light/white background (`--content-bg`) with dark text (`--content-text` / `#0B0B0E`) across all pages (About, Projects, Certificates, Resume) for maximum readability and full-width editorial flow.
+  - **Clean Panel & Card Borders (Zero Corner Accents)**: All cards and section headers use clean 1px panel borders (`--content-border` / `border-mecha-light1`). All decorative corner boxes/siku-siku accents have been completely removed across all components.
+  - **Section Header Numbering**: Section headers display clean numeric index and labels without extra separator lines or double slashes (e.g. `02 BACKGROUND`, `03 SELECTED WORK`, `04 DEVELOPMENT NOTES`).
+  - **Projects Page Normalization**: Clean light background with crisp 1px bordered project cards, role/category metadata, uncropped media galleries, and clean typography.
+
+- **Definitive Gundam Theme Color Palettes (Theme Engine)**:
+  Interactive 1-click switcher button in the top navbar toggles between 7 permanent faction palettes with instant CSS token synchronization (`--sidebar-bg`, `--sidebar-text`, `--accent-primary`, `--content-bg`, `--content-border`, `--content-text`, `--content-primary`) and `localStorage` persistence (`argus_gundam_theme`):
+
+  1. **Theme-0: Default Monochrome (`default`)**
+     - **Designation**: `PROTOTYPE UNIT` | **Code**: `MONOCHROME`
+     - **Wordmark**: ARYA `#0B0B0E` (Pure Black) | BAGUS `#71717A` (Technical Gray)
+     - **Navbar/Chrome**: Surface `#0B0B0E` | Text `#FFFFFF` | Border `#27272A` | Active Nav `#18181B`
+     - **Content Surface**: Bg `#F4F4F5` | Border `#D4D4D8` | Text `#0B0B0E` | Accent `#FFFFFF`
+     - **Insignia**: Minimalist Vector Moon / Prototype Icon
+
+  2. **Theme-1: RX-78-2 Federation (`efsf`)**
+     - **Designation**: `WHITE DEVIL` | **Code**: `E.F.S.F.`
+     - **Wordmark**: ARYA `#1B365D` (Federation Blue) | BAGUS `#F59E0B` (V-Fin Yellow)
+     - **Navbar/Chrome**: Surface `#122340` (Deep Blue) | Text `#F8FAFC` | Border `#1E3A8A` | Active Nav `#1E3A8A`
+     - **Content Surface**: Bg `#F1F5F9` | Border `#CBD5E1` | Text `#0F172A` | Accent `#F59E0B` (Yellow) | AccentAlt `#DC2626` (Signal Red) | Highlight `#FFCB3D`
+     - **Insignia Asset**: `public/assets/img/logo/theme/esfs.png`
+
+  3. **Theme-2: Sinanju / Neo Zeon (`neoZeon`)**
+     - **Designation**: `RED COMET REBORN` | **Code**: `NEO ZEON`
+     - **Wordmark**: ARYA `#991B1B` (Sinanju Crimson) | BAGUS `#D4AF37` (Sleeves Gold)
+     - **Navbar/Chrome**: Surface `#771616` (Deep Crimson) | Text `#FEF3C7` | Border `#991B1B` | Active Nav `#991B1B`
+     - **Content Surface**: Bg `#FFF7ED` | Border `#FECACA` | Text `#18181B` | Accent `#D4AF37` (Gold) | AccentAlt `#111113` (Matte Black) | Highlight `#FFCB3D`
+     - **Insignia Asset**: `public/assets/img/logo/theme/zeon.png`
+
+  4. **Theme-3: Mafty (`mafty`)**
+     - **Designation**: `MANHUNT MOVEMENT` | **Code**: `MAFTY`
+     - **Wordmark**: ARYA `#F58220` (Mafty Orange) | BAGUS `#171717` (Tactical Black)
+     - **Navbar/Chrome**: Surface `#171717` (Matte Black) | Text `#F8FAFC` | Border `#3F3F46` | Active Nav `#262626`
+     - **Content Surface**: Bg `#F8F8F7` | Border `#D8D8D5` | Text `#1A1A1A` | Accent `#F58220` (Orange) | Highlight `#D87416`
+     - **Insignia Asset**: `public/assets/img/logo/theme/mafty.png`
+
+  5. **Theme-4: Celestial Being (`celestialBeing`)**
+     - **Designation**: `GUNDAM MEISTERS` | **Code**: `CELESTIAL BEING`
+     - **Wordmark**: ARYA `#EBCB32` (Emblem Gold) | BAGUS `#4F5D95` (Insignia Blue)
+     - **Navbar/Chrome**: Surface `#20233A` (Deep Navy) | Text `#F8F9FC` | Border `#40496C` | Active Nav `#343A5A`
+     - **Content Surface**: Bg `#F6F7FB` | Border `#C9CEE0` | Text `#20233A` | Accent `#EBCB32` (Gold) | AccentAlt `#4F5D95` | Highlight `#C6A62A`
+     - **Insignia Asset**: `public/assets/img/logo/theme/celestial_being.png`
+
+  6. **Theme-5: Tekkadan (`tekkadan`)**
+     - **Designation**: `IRON-BLOODED ORPHANS` | **Code**: `TEKKADAN`
+     - **Wordmark**: ARYA `#E50922` (Tekkadan Red) | BAGUS `#171717` (Carbon Black)
+     - **Navbar/Chrome**: Surface `#171717` (Carbon Black) | Text `#F7F7F7` | Border `#3F3F46` | Active Nav `#2A2A2A`
+     - **Content Surface**: Bg `#F7F7F7` | Border `#D4D4D4` | Text `#202020` | Accent `#E50922` (Red) | Highlight `#D70F27`
+     - **Insignia Asset**: `public/assets/img/logo/theme/tekkadan.png`
+
+  7. **Theme-6: Gjallarhorn (`gjallarhorn`)**
+     - **Designation**: `INNER SPHERE` | **Code**: `GJALLARHORN`
+     - **Wordmark**: ARYA `#243248` (Officer Navy) | BAGUS `#C5A565` (Gjallarhorn Gold)
+     - **Navbar/Chrome**: Surface `#1E2A3D` (Officer Navy) | Text `#F9F6EE` | Border `#465267` | Active Nav `#293A53`
+     - **Content Surface**: Bg `#FAF8F2` | Border `#D8D2C5` | Text `#253044` | Accent `#C5A565` (Gold) | AccentAlt `#9F3039` | Highlight `#A77D34`
+     - **Insignia Asset**: `public/assets/img/logo/theme/gjallarhorn.png`
 
 ## 6. Project Gallery & Navigation Refinements
 
@@ -220,7 +253,7 @@ Evolve the existing routed portfolio into one cohesive, narrative-led editorial 
 - Keep route navigation, Resume, theme/audio controls, and About section anchors available without retaining a desktop sidebar or bottom tab bar.
 - Make Cursor Swarm respond promptly while scrolling; it must not continue a stale/delayed build after the visitor has moved into another section.
 - Remove the diagonal divider lines around the portrait composition.
-- Keep `MODULE.001 // ABOUT` visible when navigating to the Introduction anchor.
+- Keep `MODULE-01 // ABOUT` visible when navigating to the Introduction anchor.
 - Reframe the existing ASCII portrait to show the full upper body, with a smoother silhouette and no abrupt cut-off at the head or body edges.
 - Make the name `ARYA BAGUS` a dominant, large-scale hero wordmark; reduce copy and metadata to the left and right of the portrait.
 - Implement a visible, reversible pixel transition at the top and bottom viewport edges, following scroll position rather than playing as a one-time entrance.

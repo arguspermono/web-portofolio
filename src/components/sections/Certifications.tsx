@@ -23,9 +23,6 @@ export function Certifications({ theme = 'dark', sectionIndex = 6 }: SectionComp
       className={isDark ? "bg-mecha-black text-mecha-white relative overflow-hidden border-b border-mecha-dark3" : "bg-mecha-white text-mecha-black relative overflow-hidden border-b border-mecha-light1"}
     >
       {/* Decorative mechanical elements for dark section */}
-      {isDark && (
-        <div className="absolute top-0 right-0 w-64 h-64 border-l border-b border-mecha-dark3 opacity-20 pointer-events-none"></div>
-      )}
       
       <SectionHeader number={numberStr} label="CERTIFICATIONS" title="Learning & Achievements." dark={isDark}>
         <div className="flex gap-2">
@@ -54,8 +51,6 @@ export function Certifications({ theme = 'dark', sectionIndex = 6 }: SectionComp
                   <div className={`font-mono text-[10px] tracking-widest ${isDark ? 'text-mecha-dark3' : 'text-mecha-dark3'}`}>IMG.UNAVAILABLE</div>
                 )}
                 
-                {/* Subtle corner detail */}
-                <div className={`absolute top-0 right-0 w-3 h-3 border-l border-b transition-colors ${isDark ? 'border-mecha-dark3 group-hover:border-mecha-light1' : 'border-mecha-light1 group-hover:border-mecha-dark3'}`}></div>
               </div>
               
               {/* Content */}

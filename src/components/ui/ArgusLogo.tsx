@@ -68,7 +68,7 @@ export function ArgusLogo({
               cls.sub
             )}
           >
-            MULTIMEDIA ENGINEER // PENS
+            MULTIMEDIA ENGINEERING TECHNOLOGY
           </span>
         )}
       </div>
